@@ -120,5 +120,11 @@ eval $(starship init bash)
 alias reup="clear && docker-compose up --build"
 alias devup="clear && docker-compose -f docker-compose.dev.yml up --build"
 alias cleawr="clear"
+alias lazygit="lazygit-gm"
 export PATH="~/.cargo/bin:$PATH"
 export OPENAI_API_KEY="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"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
