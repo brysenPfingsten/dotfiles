@@ -5,6 +5,7 @@ return { -- Highlight, edit, and navigate code
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = {
+      'latex',
       'racket',
       'c',
       'lua',
