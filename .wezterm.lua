@@ -12,16 +12,9 @@ return {
     { key = "w", mods = "CTRL|SHIFT", action = wezterm.action { CloseCurrentTab = { confirm = true } } },
     { key = "Enter", mods = "CTRL|SHIFT", action = "ToggleFullScreen" },
     { key = "h", mods = "CTRL|SHIFT", action = wezterm.action { SplitHorizontal = { domain = "CurrentPaneDomain" } } },
-    { key = "v", mods = "CTRL|SHIFT", action = wezterm.action { SplitVertical = { domain = "CurrentPaneDomain" } } },
+    { key = "\\", mods = "CTRL|SHIFT", action = wezterm.action { SplitVertical = { domain = "CurrentPaneDomain" } } },
   },
   enable_kitty_graphics = true,
-
-  window_padding = {
-    left = 5,
-    right = 5,
-    top = 5,
-    bottom = 5,
-  },
 
   scrollback_lines = 5000,
 }

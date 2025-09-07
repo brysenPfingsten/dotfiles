@@ -128,3 +128,6 @@ export OPENAI_API_KEY="sk-proj-SO4BMj1gf73m_DylO91ur9nXZzR7rAJ2-w1z09k11FOqB8x1F
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+
+# Created by `pipx` on 2025-09-01 22:57:40
+export PATH="$PATH:/home/pfingsbr/.local/bin"
