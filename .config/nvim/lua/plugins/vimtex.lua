@@ -8,6 +8,7 @@ return {
 
     -- Compiler: latexmk (continuous)
     vim.g.vimtex_compiler_method = "latexmk"
+    vim.g.vimtex_compiler_latexmk_engines = { ['_'] = '-lualatex' }
     vim.g.vimtex_compiler_latexmk = {
       build_dir = "build",       -- put aux/pdf in ./build
       aux_dir = "build",
@@ -15,7 +16,7 @@ return {
       callback = 1,              -- let vimtex notify viewer on updates
       executable = "latexmk",
       options = {
-        "-pdf",                  -- or "-pdflua" / "-xelatex"
+        -- "-xelatex",                  -- or "-pdflua" / "-xelatex"
         "-interaction=nonstopmode",
         "-synctex=1",
         "-file-line-error",
