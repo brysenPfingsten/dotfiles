@@ -117,7 +117,7 @@ return {
     require('mason-lspconfig').setup {
       ensure_installed = { -- lspconfig names that Mason *does* provide
         'ts_ls', 'pylsp', 'html', 'cssls', 'tailwindcss', 'dockerls', 'sqlls',
-        'terraformls', 'jsonls', 'yamlls', 'lua_ls',
+        'terraformls', 'jsonls', 'yamlls', 'lua_ls', "clangd",
       },
       automatic_installation = true,
     }
