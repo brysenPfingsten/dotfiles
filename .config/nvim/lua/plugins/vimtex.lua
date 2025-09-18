@@ -6,24 +6,25 @@ return {
     -- 'zathura', 'sioyek', 'skim', 'okular', 'general', 'sumatrapdf'
     vim.g.vimtex_view_method = "zathura"  -- macOS: "skim"; Windows: "sumatrapdf"
 
-    -- Compiler: latexmk (continuous)
     vim.g.vimtex_compiler_method = "latexmk"
-    vim.g.vimtex_compiler_latexmk_engines = { ['_'] = '-lualatex' }
+
+    vim.g.vimtex_compiler_method = "latexmk"
+
+
     vim.g.vimtex_compiler_latexmk = {
-      build_dir = "build",       -- put aux/pdf in ./build
+      build_dir = "build",
       aux_dir = "build",
-      continuous = 1,            -- -pvc
-      callback = 1,              -- let vimtex notify viewer on updates
+      continuous = 1,
+      callback = 1,
       executable = "latexmk",
       options = {
-        -- "-xelatex",                  -- or "-pdflua" / "-xelatex"
+        "-xelatex",                  -- or "-xelatex"
+        "-shell-escape",            -- needed for minted
         "-interaction=nonstopmode",
         "-synctex=1",
         "-file-line-error",
-        "-shell-escape",
       },
     }
-
     -- Let vimtex communicate with nvim via neovim-remote (needed for inverse search)
     vim.g.vimtex_compiler_progname = "nvr"
 
