@@ -1,1 +1,0 @@
-/home/pfingsbr/.config/nix

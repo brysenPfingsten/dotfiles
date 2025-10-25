@@ -1,0 +1,77 @@
+{
+  // Which modules to show and where
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["workspaces", "mpris"],
+  "modules-center": ["clock"],
+  "modules-right": ["clock#date", "battery", "network", "custom/htop"],
+
+  // ----- MPRIS (now playing + controls) -----
+  "mpris": {
+    // follows the active player via playerctld by default
+    "format": "{status_icon} {title} — {artist}",
+    "status-icons": {
+      "playing": "",
+      "paused": "",
+      "stopped": "■"
+    },
+    "max-length": 40,
+    "tooltip": true,
+    "tooltip-format": "{player} {position:%M:%S}/{length:%M:%S}",
+    // controls
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+
+  // ----- Time (12-hour HH:MM) + calendar popup on hover -----
+  "clock": {
+    "format": "{:%I:%M %p}",          // 12-hour with leading zero
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "right",
+      "on-scroll": 1,                  // scroll to change months
+      "on-click-right": "mode",        // right-click cycles view
+      "format": {
+        "months": "<span><b>{}</b></span>",
+        "weekdays": "<span>{}</span>",
+        "today": "<span><b><u>{}</u></b></span>"
+      }
+    }
+  },
+
+  // ----- Date (Mon/Day) as a separate small module -----
+  "clock#date": {
+    "format": "{:%d-%b}",
+    "tooltip": false
+  },
+
+  // ----- Battery percentage -----
+  "battery": {
+    "format": "{capacity}% ",
+    "format-charging": "{capacity}% ",
+    "tooltip": true
+  },
+
+  // ----- Wi-Fi icon that opens impala in a popup terminal -----
+  // Requires iwd + impala installed. Clicking the icon runs impala.
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": "",
+    "format-disconnected": "",
+    "tooltip": true,
+    "on-click": "kitty --class=popup-term -e impala"
+  },
+
+  // ----- htop launcher -----
+  "custom/htop": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Open htop",
+    "on-click": "kitty --class=popup-term -e htop",
+    "interval": 0
+  }
+}
+
