@@ -93,46 +93,11 @@
         "type": "github"
       }
     },
-    "racket-formatter-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1753916969,
-        "narHash": "sha256-/oLq5WPpK/OO3ED7PBKTMCjDxTBy8+ZjoL/WPPC1zlU=",
-        "owner": "sorawee",
-        "repo": "fmt",
-        "rev": "002818ec08ad6e5e01f79e6209b69203581d6adc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sorawee",
-        "repo": "fmt",
-        "type": "github"
-      }
-    },
-    "racket-langserver-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1757370151,
-        "narHash": "sha256-GfGrAxZ6e7xIJTdBjW7Rd+dJwb1uNCF1lgSr6cmrkus=",
-        "owner": "jeapostrophe",
-        "repo": "racket-langserver",
-        "rev": "a9297eddaa3f4b7689e4d1594bf5a3e44cfaaa9a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jeapostrophe",
-        "repo": "racket-langserver",
-        "rev": "a9297eddaa3f4b7689e4d1594bf5a3e44cfaaa9a",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "LazyVim": "LazyVim",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
-        "racket-formatter-src": "racket-formatter-src",
-        "racket-langserver-src": "racket-langserver-src"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {

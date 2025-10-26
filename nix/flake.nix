@@ -11,14 +11,6 @@
       url = "github:matadaniel/LazyVim-module";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    racket-langserver-src = {
-      url = "github:jeapostrophe/racket-langserver?rev=a9297eddaa3f4b7689e4d1594bf5a3e44cfaaa9a";
-      flake = false;
-    };
-    racket-formatter-src = {
-      url = "github:sorawee/fmt";
-      flake = false;
-    };
   };
 
   outputs = inputs @ {
@@ -26,14 +18,9 @@
     nixpkgs,
     home-manager,
     LazyVim,
-    racket-langserver-src,
-    racket-formatter-src,
     ...
   }: let
     system = "x86_64-linux";
-
-    racketLSOverlay = import ./overlays/racket-langserver.nix {src = racket-langserver-src;};
-    racketFMTOverlay = import ./overlays/racket-formatter.nix {src = racket-formatter-src;};
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -42,7 +29,6 @@
       modules = [
         ./hosts/bronzo/configuration.nix
 
-        {nixpkgs.overlays = [racketLSOverlay racketFMTOverlay];}
         {nixpkgs.config.allowUnfree = true;}
 
         home-manager.nixosModules.home-manager

@@ -21,8 +21,8 @@
     nixd
     alejandra # Nix
     racket
-    racket-langserver # Racket
-    raco-fmt
+    # racket-langserver # Racket
+    # raco-fmt
     lua-language-server
     stylua # Lua
     python3 # Python
