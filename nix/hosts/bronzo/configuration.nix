@@ -45,9 +45,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  boot.kernelParams = ["usbcore.autosuspend=-1"];
+
   services = {
     # Enable the X11 windowing system.
     xserver.enable = true;
+
+    seatd.enable = true;
 
     # Fprintd
     fprintd.enable = true;
@@ -141,7 +145,7 @@
   users.users.pfingsbr = {
     isNormalUser = true;
     description = "Brysen";
-    extraGroups = ["networkmanager" "wheel" "docker" "video"];
+    extraGroups = ["networkmanager" "wheel" "docker" "video" "input"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -163,7 +167,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    texlive.combined.scheme-full
+    #texlive.combined.scheme-full
     xits-math
 
     fuzzel

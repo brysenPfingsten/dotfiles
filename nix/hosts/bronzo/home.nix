@@ -52,6 +52,10 @@
     chromium
     wasistlos
 
+    # GUIs
+    spotify
+    pavucontrol
+
     # PDFs
     papers
     zathura
@@ -63,6 +67,7 @@
     starship
     impala
     bluetui
+    btop
 
     # File manager stuff
     nautilus
@@ -148,6 +153,11 @@
       "application/pdf" = ["papers.desktop"];
     };
   };
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-wlr
+  ];
 
   xdg.configFile = {
     # Neovim
@@ -162,6 +172,8 @@
     # Waybar
     "waybar/config.jsonc".source = ../../modules/waybar/config.jsonc;
     "waybar/style.css".source = ../../modules/waybar/style.css;
+    # Electron
+    "electron-flags.conf".source = ../../modules/electron-flags.conf;
   };
 
   home.file = {

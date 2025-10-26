@@ -4,7 +4,7 @@
   "position": "top",
   "modules-left": ["workspaces", "mpris"],
   "modules-center": ["clock"],
-  "modules-right": ["clock#date", "battery", "network", "custom/htop"],
+  "modules-right": ["clock#date", "battery", "network", "bluetooth", "custom/btop"],
 
   // ----- MPRIS (now playing + controls) -----
   "mpris": {
@@ -27,7 +27,7 @@
 
   // ----- Time (12-hour HH:MM) + calendar popup on hover -----
   "clock": {
-    "format": "{:%I:%M %p}",          // 12-hour with leading zero
+    "format": "{:%I:%M %p}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
@@ -52,26 +52,31 @@
   "battery": {
     "format": "{capacity}% ",
     "format-charging": "{capacity}% ",
-    "tooltip": true
+    "tooltip": true,
+    "hide-if-empty": true
   },
 
   // ----- Wi-Fi icon that opens impala in a popup terminal -----
-  // Requires iwd + impala installed. Clicking the icon runs impala.
   "network": {
     "format-wifi": "",
     "format-ethernet": "",
     "format-disconnected": "",
-    "tooltip": true,
     "on-click": "kitty --class=popup-term -e impala"
   },
 
   // ----- htop launcher -----
-  "custom/htop": {
+  "custom/btop": {
     "format": "",
-    "tooltip": true,
-    "tooltip-format": "Open htop",
-    "on-click": "kitty --class=popup-term -e htop",
-    "interval": 0
+    "on-click": "kitty --class=popup-term -e btop"
+  },
+
+  // ------Bluetooth---------
+  "bluetooth": {
+    "format-connected": "󰂱  {device_alias}",
+    "format-connected-battery": "󰂱  {device_alias} {device_battery_percentage}%",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "on-click": "kitty --class=popup-term -e bluetui"
   }
 }
 
