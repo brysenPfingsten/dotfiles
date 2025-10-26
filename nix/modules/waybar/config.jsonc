@@ -3,7 +3,8 @@
   "layer": "top",
   "position": "top",
   "fixed-center": true,
-  "spacing": 6, 
+  "spacing": 6,
+
   "modules-left": ["mpris"],
   "modules-center": ["clock"],
   "modules-right": [
@@ -12,13 +13,12 @@
     "bluetooth",
     "wireplumber",
     "custom/btop",
-    "power"
+    "custom/power"
   ],
 
   // ----- MPRIS (now playing + controls) -----
-
-
-    "format": "{status_icon} {title} - {artist} {position:%M:%S}/{length:%M:%S}",
+  "mpris": {
+    "format": "{status_icon} {title} - {artist}",
     "status-icons": {
       "playing": "",
       "paused": "",
@@ -27,14 +27,12 @@
     "truncate-hours": true,
     "max-length": 60,
     "tooltip": true,
-    "tooltip-format": "{player} {position:%M:%S}/{length:%M:%S}",
-
+    "tooltip-format": "{player} {length:%M:%S}",
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
     "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous",
-
-    "on-click-middle": "sh -c 'd=$(playerctl metadata mpris:desktop-entry 2>/dev/null) && [ -n \"$d\" ] && gtk-launch \"$d\"'"
+    "on-scroll-down": "playerctl previous"
+    // "on-click-middle": "sh -c 'd=$(playerctl metadata mpris:desktop-entry 2>/dev/null) && [ -n \"$d\" ] && gtk-launch \"$d\"'"
   },
 
   // ----- Time (12-hour HH:MM) + calendar popup on hover -----
@@ -55,19 +53,15 @@
   },
 
   // ----- Battery percentage -----
-    "battery": {
-        "states": {
-            "good": 75,
-            "warning": 35,
-            "critical": 20
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "hide-if-empty": true
-    },
+  "battery": {
+    "states": { "good": 75, "warning": 35, "critical": 20 },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "hide-if-empty": true
+  },
 
   // ----- Wi-Fi icon that opens impala in a popup terminal -----
   "network": {
@@ -77,7 +71,7 @@
     "on-click": "kitty --class=popup-term -e impala"
   },
 
-  // ----- htop launcher -----
+  // ----- btop launcher -----
   "custom/btop": {
     "format": "",
     "on-click": "kitty --class=popup-term -e btop",
@@ -93,6 +87,7 @@
     "on-click": "kitty --class=popup-term -e bluetui"
   },
 
+  // ------Volume (PipeWire)---------
   "wireplumber": {
     "format": "{icon} {volume}%",
     "format-muted": "󰖁  muted",
@@ -103,10 +98,11 @@
     "tooltip-format": "{node_name} ({volume}%)"
   },
 
+  // ------Power menu---------
   "custom/power": {
     "format": "⏻",
     "tooltip": "Power menu",
-    "on-click": "~/.config/waybar/scripts/power-menu.sh",
+    "on-click": "$HOME/.config/waybar/scripts/power-menu.sh",
     "interval": 0
   }
 }
