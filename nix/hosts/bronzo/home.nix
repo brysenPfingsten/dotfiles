@@ -95,6 +95,7 @@
       overseer-nvim
       vimtex
       nvim-ufo
+      onedark-nvim
     ];
     waybar = {
       enable = true;

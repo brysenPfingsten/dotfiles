@@ -361,8 +361,11 @@ window-rule {
     // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
+window-rule {
+    match app-id=r#"^(kitty|nvim|alacritty)"#
+    draw-border-with-background false
+}
+// For tuis in the waybar
 window-rule {
     match app-id=r#"^popup-term$"#
     open-floating true
