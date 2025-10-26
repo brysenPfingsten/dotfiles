@@ -2,38 +2,50 @@
   // Which modules to show and where
   "layer": "top",
   "position": "top",
-  "modules-left": ["workspaces", "mpris"],
+  "fixed-center": true,
+  "spacing": 6, 
+  "modules-left": ["mpris"],
   "modules-center": ["clock"],
-  "modules-right": ["clock#date", "battery", "network", "bluetooth", "custom/btop"],
+  "modules-right": [
+    "battery",
+    "network",
+    "bluetooth",
+    "wireplumber",
+    "custom/btop",
+    "power"
+  ],
 
   // ----- MPRIS (now playing + controls) -----
-  "mpris": {
-    // follows the active player via playerctld by default
-    "format": "{status_icon} {title} — {artist}",
+
+
+    "format": "{status_icon} {title} - {artist} {position:%M:%S}/{length:%M:%S}",
     "status-icons": {
       "playing": "",
       "paused": "",
       "stopped": "■"
     },
-    "max-length": 40,
+    "truncate-hours": true,
+    "max-length": 60,
     "tooltip": true,
     "tooltip-format": "{player} {position:%M:%S}/{length:%M:%S}",
-    // controls
+
     "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl stop",
+    "on-click-right": "playerctl next",
     "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous"
+    "on-scroll-down": "playerctl previous",
+
+    "on-click-middle": "sh -c 'd=$(playerctl metadata mpris:desktop-entry 2>/dev/null) && [ -n \"$d\" ] && gtk-launch \"$d\"'"
   },
 
   // ----- Time (12-hour HH:MM) + calendar popup on hover -----
   "clock": {
-    "format": "{:%I:%M %p}",
+    "format": "{:%I:%M %p  %d %b}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "month",
       "weeks-pos": "right",
-      "on-scroll": 1,                  // scroll to change months
-      "on-click-right": "mode",        // right-click cycles view
+      "on-scroll": 1,
+      "on-click-right": "mode",
       "format": {
         "months": "<span><b>{}</b></span>",
         "weekdays": "<span>{}</span>",
@@ -42,19 +54,20 @@
     }
   },
 
-  // ----- Date (Mon/Day) as a separate small module -----
-  "clock#date": {
-    "format": "{:%d-%b}",
-    "tooltip": false
-  },
-
   // ----- Battery percentage -----
-  "battery": {
-    "format": "{capacity}% ",
-    "format-charging": "{capacity}% ",
-    "tooltip": true,
-    "hide-if-empty": true
-  },
+    "battery": {
+        "states": {
+            "good": 75,
+            "warning": 35,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "hide-if-empty": true
+    },
 
   // ----- Wi-Fi icon that opens impala in a popup terminal -----
   "network": {
@@ -67,7 +80,8 @@
   // ----- htop launcher -----
   "custom/btop": {
     "format": "",
-    "on-click": "kitty --class=popup-term -e btop"
+    "on-click": "kitty --class=popup-term -e btop",
+    "interval": 0
   },
 
   // ------Bluetooth---------
@@ -77,6 +91,23 @@
     "format-off": "󰂲",
     "format-on": "󰂯",
     "on-click": "kitty --class=popup-term -e bluetui"
+  },
+
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁  muted",
+    "format-icons": ["", "", "  "],
+    "on-click": "kitty --class=popup-term -e wiremix",
+    "scroll-step": 2,
+    "tooltip": true,
+    "tooltip-format": "{node_name} ({volume}%)"
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": "Power menu",
+    "on-click": "~/.config/waybar/scripts/power-menu.sh",
+    "interval": 0
   }
 }
 

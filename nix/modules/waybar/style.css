@@ -23,7 +23,9 @@ window#waybar {
 #battery,
 #network,
 #bluetooth,
+#wireplumber,
 #custom-btop,
+#power,
 #mpris {
   padding: 0 8px;
 }

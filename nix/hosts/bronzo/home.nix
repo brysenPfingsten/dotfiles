@@ -47,6 +47,7 @@
     ripgrep
     fd
     bat
+    playerctl
 
     # Web Apps
     chromium
@@ -55,6 +56,7 @@
     # GUIs
     spotify
     pavucontrol
+    rofi
 
     # PDFs
     papers
@@ -68,6 +70,7 @@
     impala
     bluetui
     btop
+    wiremix
 
     # File manager stuff
     nautilus
@@ -158,7 +161,13 @@
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-wlr
   ];
-
+  xdg.desktopEntries.spotify = {
+    name = "Spotify (Wayland)";
+    exec = "${pkgs.spotify}/bin/spotify --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland";
+    icon = "spotify";
+    terminal = false;
+    categories = ["Audio" "Music"];
+  };
   xdg.configFile = {
     # Neovim
     "nvim/lua/config/options.lua".source = ../../neovim/lua/config/options.lua;
@@ -172,6 +181,7 @@
     # Waybar
     "waybar/config.jsonc".source = ../../modules/waybar/config.jsonc;
     "waybar/style.css".source = ../../modules/waybar/style.css;
+    "waybar/scripts/power-menu.sh".source = ../../modules/waybar/scripts/power-menu.sh;
     # Electron
     "electron-flags.conf".source = ../../modules/electron-flags.conf;
   };
