@@ -26,8 +26,6 @@
     },
     "truncate-hours": true,
     "max-length": 60,
-    "tooltip": true,
-    "tooltip-format": "{player} {length:%M:%S}",
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next",
     "on-scroll-up": "playerctl next",
