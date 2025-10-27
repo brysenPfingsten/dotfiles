@@ -48,6 +48,7 @@
     fd
     bat
     playerctl
+    fastfetch
 
     # Web Apps
     chromium
