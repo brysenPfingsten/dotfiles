@@ -191,6 +191,9 @@
     "waybar/scripts/power-menu.sh".source = ../../modules/waybar/scripts/power-menu.sh;
     # Electron
     "electron-flags.conf".source = ../../modules/electron-flags.conf;
+    # Kitty
+    "kitty/current-theme.conf".source = ../../modules/kitty/current-theme.conf;
+    "kitty/kitty.conf".source = ../../modules/kitty/kitty.conf;
   };
 
   home.file = {
