@@ -97,6 +97,8 @@
       vimtex
       nvim-ufo
       onedark-nvim
+      luasnip
+      friendly-snippets
     ];
     waybar = {
       enable = true;
@@ -181,6 +183,10 @@
     "nvim/lua/config/keymaps.lua".source = ../../neovim/lua/config/keymaps.lua;
     "nvim/lua/plugins" = {
       source = ../../neovim/lua/plugins;
+      recursive = true;
+    };
+    "nvim/snippets" = {
+      source = ../../neovim/snippets;
       recursive = true;
     };
     # Niri
