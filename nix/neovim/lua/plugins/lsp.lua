@@ -1,25 +1,31 @@
 return {
+	-- JDTLS runtime (needed for Java extras)
+	{
+		"mfussenegger/nvim-jdtls",
+		ft = "java", -- lazy-load on Java files
+	},
+
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPost", "BufNewFile" }, -- make sure setup runs on files
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			local lspconfig = require("lspconfig")
 			local util = require("lspconfig.util")
 
 			-- optional integrations (don’t error if missing)
-			-- local has_wk, wk = pcall(require, "which-key")
-			-- local has_telescope, telescope_builtin = pcall(require, "telescope.builtin")
-			-- local has_illuminate, illuminate = pcall(require, "illuminate")
-			--
-			-- -- helper: prefer telescope pickers when available
-			-- local function picker_or(buf_fn, picker_fn)
-			--   if has_telescope then
-			--     return picker_fn
-			--   else
-			--     return buf_fn
-			--   end
-			-- end
-			--
+			local has_wk, wk = pcall(require, "which-key")
+			local has_telescope, telescope_builtin = pcall(require, "telescope.builtin")
+			local has_illuminate, illuminate = pcall(require, "illuminate")
+
+			-- helper: prefer telescope pickers when available
+			local function picker_or(buf_fn, picker_fn)
+				if has_telescope then
+					return picker_fn
+				else
+					return buf_fn
+				end
+			end
+
 			local function as_path(x)
 				return (type(x) == "number") and vim.api.nvim_buf_get_name(x) or x
 			end
@@ -66,7 +72,6 @@ return {
 				bmap("n", "<leader>cC", function()
 					if vim.lsp.codelens then
 						vim.lsp.codelens.refresh()
-						-- display() exists on some versions; guard it
 						if vim.lsp.codelens.display then
 							vim.lsp.codelens.display()
 						end
@@ -74,13 +79,10 @@ return {
 				end, "Refresh & Display Codelens")
 				bmap("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
 				bmap("n", "<leader>cA", function()
-					vim.lsp.buf.code_action({
-						context = { only = { "source" }, diagnostics = {} },
-						apply = true,
-					})
+					vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} }, apply = true })
 				end, "Source Action")
 
-				-- “Rename File” (best-effort: not all servers support willRenameFiles)
+				-- “Rename File”
 				bmap("n", "<leader>cR", function()
 					local old = vim.api.nvim_buf_get_name(0)
 					if old == "" then
@@ -92,17 +94,13 @@ return {
 						return
 					end
 
-					-- Send willRenameFiles if any client supports it
-					local params = {
-						files = { { oldUri = vim.uri_from_fname(old), newUri = vim.uri_from_fname(new) } },
-					}
+					local params =
+						{ files = { { oldUri = vim.uri_from_fname(old), newUri = vim.uri_from_fname(new) } } }
 					local have_support = false
 					for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
-						if
-							c.server_capabilities.workspace
-							and c.server_capabilities.workspace.fileOperations
-							and c.server_capabilities.workspace.fileOperations.willRename
-						then
+						local w = c.server_capabilities.workspace
+						local f = w and w.fileOperations
+						if f and f.willRename then
 							have_support = true
 							c.request("workspace/willRenameFiles", params, function(err, res)
 								if not err and res then
@@ -112,7 +110,6 @@ return {
 						end
 					end
 
-					-- Do the actual rename
 					vim.fn.mkdir(vim.fn.fnamemodify(new, ":h"), "p")
 					local ok, msg = os.rename(old, new)
 					if not ok then
@@ -120,14 +117,12 @@ return {
 						return
 					end
 
-					-- Edit new file and remove old buffer
 					local view = vim.fn.winsaveview()
 					vim.api.nvim_buf_set_name(0, new)
 					vim.cmd("silent keepalt write")
 					vim.cmd("silent! bwipeout " .. vim.fn.fnameescape(old))
 					vim.fn.winrestview(view)
 
-					-- Notify servers about didRename if they didn’t do willRename
 					if not have_support then
 						for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
 							c.notify("workspace/didRenameFiles", params)
@@ -191,7 +186,6 @@ return {
 				-- Lsp Info
 				bmap("n", "<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
 
-				-- which-key labels
 				if has_wk then
 					wk.add({
 						{ "<leader>c", group = "Code" },
@@ -222,43 +216,110 @@ return {
 				end
 			end
 
-			lspconfig.racket_langserver.setup({
+			-- Existing servers …
+			require("lspconfig").racket_langserver.setup({
 				cmd = { "racket", "--lib", "racket-langserver" },
 				filetypes = { "racket", "scheme" },
 				root_dir = racket_root_dir,
+				on_attach = on_attach,
 			})
 
-			-- Nix
 			lspconfig.nixd.setup({
 				cmd = { "nixd" },
 				settings = { nixd = { formatting = { command = { "alejandra" } } } },
+				on_attach = on_attach,
 			})
 
-			-- C/C++
-			lspconfig.clangd.setup({
-				cmd = { "clangd" },
-			})
+			lspconfig.clangd.setup({ cmd = { "clangd" }, on_attach = on_attach })
 
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
 				settings = {
 					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							checkThirdParty = false,
-							library = {
-								vim.env.VIMRUNTIME,
-								"${3rd}/luv/library",
-							},
-						},
+						runtime = { version = "LuaJIT" },
+						diagnostics = { globals = { "vim" } },
+						workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" } },
 						telemetry = { enable = false },
 					},
 				},
+			})
+
+			-- =========================
+			-- Java (JDTLS via nvim-jdtls)
+			-- =========================
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "java",
+				callback = function()
+					local jdtls = require("jdtls")
+					local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
+					local root_dir = require("jdtls.setup").find_root(root_markers)
+					if not root_dir or root_dir == "" then
+						return
+					end
+
+					local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+					local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspaces/" .. project_name
+
+					-- On NixOS with pkgs.jdtls, the 'jdtls' wrapper is on PATH.
+					local cmd = { "jdtls", "-data", workspace_dir }
+
+					local java_on_attach = function(client, bufnr)
+						on_attach(client, bufnr) -- your generic maps
+						jdtls.setup_dap({ hotcodereplace = "auto" })
+						jdtls.setup.add_commands()
+
+						-- Java-specific goodies
+						local bmap = function(mode, lhs, rhs, desc)
+							vim.keymap.set(
+								mode,
+								lhs,
+								rhs,
+								{ buffer = bufnr, noremap = true, silent = true, desc = desc }
+							)
+						end
+						bmap("n", "<leader>co", jdtls.organize_imports, "Organize Imports")
+						bmap("n", "<leader>ct", jdtls.test_class, "Test Class")
+						bmap("n", "<leader>cm", jdtls.test_nearest_method, "Test Method")
+						bmap("v", "<leader>ce", function()
+							jdtls.extract_variable(true)
+						end, "Extract Variable")
+						bmap("v", "<leader>cM", function()
+							jdtls.extract_method(true)
+						end, "Extract Method")
+
+						if has_wk then
+							wk.add({
+								{ "<leader>co", desc = "Organize Imports", mode = "n" },
+								{ "<leader>ct", desc = "Test Class", mode = "n" },
+								{ "<leader>cm", desc = "Test Method", mode = "n" },
+								{ "<leader>ce", desc = "Extract Variable", mode = "v" },
+								{ "<leader>cM", desc = "Extract Method", mode = "v" },
+							})
+						end
+					end
+
+					local config = {
+						cmd = cmd,
+						root_dir = root_dir,
+						on_attach = java_on_attach,
+						settings = {
+							java = {
+								signatureHelp = { enabled = true },
+								eclipse = { downloadSources = true },
+								configuration = { updateBuildConfiguration = "interactive" },
+								maven = { downloadSources = true },
+								references = { includeDecompiledSources = true },
+								format = { enabled = true },
+								contentProvider = { preferred = "fernflower" },
+							},
+						},
+						init_options = {
+							bundles = {}, -- add debug/test bundles later if you want
+						},
+					}
+
+					jdtls.start_or_attach(config)
+				end,
 			})
 		end,
 	},

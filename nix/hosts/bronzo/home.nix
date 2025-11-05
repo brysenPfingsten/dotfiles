@@ -29,6 +29,12 @@
     nodejs # Javascript
     rust-analyzer # Rust
     z3 # SAT
+    # Java
+    jdt-language-server
+    jdk21
+    maven
+    # Graphviz
+    graphviz-nox
 
     # Development
     tree-sitter
@@ -58,6 +64,7 @@
     spotify
     pavucontrol
     rofi
+    vlc
 
     # PDFs
     papers
@@ -99,6 +106,7 @@
       onedark-nvim
       luasnip
       friendly-snippets
+      nvim-jdtls
     ];
     waybar = {
       enable = true;
