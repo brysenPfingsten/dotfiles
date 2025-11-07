@@ -13,6 +13,7 @@
     "bluetooth",
     "wireplumber",
     "custom/btop",
+    "custom/docker",
     "custom/power"
   ],
 
@@ -67,6 +68,12 @@
     "format-ethernet": "",
     "format-disconnected": "",
     "on-click": "kitty --class=popup-term -e impala"
+  },
+
+  "custom/docker": {
+    "format": "",
+    "on-click": "kitty --class=popup-term -e lazydocker",
+    "interval": 0
   },
 
   // ----- btop launcher -----

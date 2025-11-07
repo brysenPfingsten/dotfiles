@@ -25,6 +25,7 @@ window#waybar {
 #bluetooth,
 #wireplumber,
 #custom-btop,
+#custom-docker,
 #custom-power,
 #mpris {
   padding: 0 8px;

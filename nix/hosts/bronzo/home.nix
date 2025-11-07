@@ -126,6 +126,10 @@
       enable = true;
       gitCredentialHelper.enable = true;
     };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+    };
   };
   # Waybar as a user service bound to Niri
   systemd.user.services.waybar = {
@@ -141,23 +145,6 @@
     };
     Install = {
       WantedBy = ["niri.service"];
-    };
-  };
-
-  systemd.user.services.swaybg = {
-    Unit = {
-      Description = "swaybg wallpaper";
-      PartOf = ["graphical-session.target"];
-      After = ["graphical-session.target"];
-      # Optional: only start if the socket exists (we're in a Wayland session)
-    };
-    Service = {
-      # Absolute path + correct args (-m fill)
-      ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i %h/Pictures/planet.jpg";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
     };
   };
 
@@ -178,13 +165,6 @@
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-wlr
   ];
-  xdg.desktopEntries.spotify = {
-    name = "Spotify (Wayland)";
-    exec = "${pkgs.spotify}/bin/spotify --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland";
-    icon = "spotify";
-    terminal = false;
-    categories = ["Audio" "Music"];
-  };
   xdg.configFile = {
     # Neovim
     "nvim/lua/config/options.lua".source = ../../neovim/lua/config/options.lua;

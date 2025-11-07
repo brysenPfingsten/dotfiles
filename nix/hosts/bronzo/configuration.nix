@@ -49,7 +49,14 @@
 
   services = {
     # Enable the X11 windowing system.
-    xserver.enable = true;
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+        options = "caps:swapescape";
+      };
+    };
 
     seatd.enable = true;
 
@@ -58,17 +65,15 @@
     fprintd.tod.enable = true;
     fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
-    # Swap Caps Lock and Escape
-    xserver.xkb.options = "caps:swapescape";
-
     # Enable the GNOME Desktop Environment.
-    displayManager.gdm.enable = false;
-    desktopManager.gnome.enable = false;
-
-    # Configure keymap in X11
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
+    # displayManager.gdm.enable = true;
+    # desktopManager.gnome.enable = true;
+    displayManager.ly = {
+      enable = true;
+      x11Support = false;
+      # settings = {
+      #   animation = "gameoflife";
+      # };
     };
 
     # Enable CUPS to print documents.
@@ -80,17 +85,6 @@
 
     # Power Management
     tlp.enable = true;
-
-    # Greet me please
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.niri}/bin/niri-session";
-          user = "pfingsbr";
-        };
-      };
-    };
   };
 
   systemd.services.fprintd = {
@@ -132,16 +126,11 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pfingsbr = {
     isNormalUser = true;
     description = "Brysen";
@@ -151,7 +140,6 @@
     ];
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   virtualisation.docker = {
