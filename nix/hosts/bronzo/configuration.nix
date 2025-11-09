@@ -74,7 +74,8 @@
       settings = {
         animation = "gameoflife";
         gameoflife_entropy_interval = 10;
-        gameoflife_fg = "0x000000FF";
+        gameoflife_fg = "0x010000FF";
+        fg = "0x010000FF";
         gameoflife_frame_delay = 6;
         gameoflife_initial_density = 0.4;
         bigclock = "en";
@@ -171,6 +172,12 @@
     gcc
     cmake
     gnumake
+    spotify
+    (writeShellScriptBin "spotify" ''
+      exec ${pkgs.spotify}/bin/spotify \
+        --enable-features=UseOzonePlatform \
+        --ozone-platform=wayland "$@"
+    '')
   ];
 
   system.stateVersion = "25.05";

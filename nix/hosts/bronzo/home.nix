@@ -72,7 +72,6 @@
     wasistlos
 
     # GUIs
-    spotify
     pavucontrol
     rofi
     vlc
@@ -121,6 +120,7 @@
       neotest
       neotest-python
       rustaceanvim
+      crates-nvim
     ];
     waybar = {
       enable = true;
@@ -143,6 +143,7 @@
     zoxide = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
     };
   };
   # Waybar as a user service bound to Niri
