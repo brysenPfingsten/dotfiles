@@ -7,7 +7,6 @@
 }: {
   imports = [
     inputs.LazyVim.homeManagerModules.default
-    ../../modules/starship.nix
   ];
   home = {
     username = "pfingsbr";
@@ -181,32 +180,28 @@
     pkgs.xdg-desktop-portal-wlr
   ];
   xdg.configFile = {
-    # Neovim
-    "nvim/lua/config/options.lua".source = ../../neovim/lua/config/options.lua;
-    "nvim/lua/config/keymaps.lua".source = ../../neovim/lua/config/keymaps.lua;
-    "nvim/lua/plugins" = {
-      source = ../../neovim/lua/plugins;
+    "nvim" = {
+      source = ../../../neovim;
       recursive = true;
     };
-    "nvim/snippets" = {
-      source = ../../neovim/snippets;
+
+    "niri/config.kdl".source = ../../../niri/config.kdl;
+
+    "waybar" = {
+      source = ../../../waybar;
       recursive = true;
     };
-    # Niri
-    "niri/config.kdl".source = ../../modules/niri/config.kdl;
-    # Waybar
-    "waybar/config.jsonc".source = ../../modules/waybar/config.jsonc;
-    "waybar/style.css".source = ../../modules/waybar/style.css;
-    "waybar/scripts/power-menu.sh".source = ../../modules/waybar/scripts/power-menu.sh;
-    # Electron
-    "electron-flags.conf".source = ../../modules/electron-flags.conf;
-    # Kitty
-    "kitty/current-theme.conf".source = ../../modules/kitty/current-theme.conf;
-    "kitty/kitty.conf".source = ../../modules/kitty/kitty.conf;
+
+    "electron-flags.conf".source = ../../../electron/electron-flags.conf;
+
+    "kitty" = {
+      source = ../../../kitty;
+      recursive = true;
+    };
   };
 
   home.file = {
-    ".bashrc".source = ../../modules/terminal/bashrc;
+    ".bashrc".source = ../../../bash/bashrc;
   };
 
   # Tie swaybg to the niri session
