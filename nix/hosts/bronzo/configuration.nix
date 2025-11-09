@@ -71,9 +71,16 @@
     displayManager.ly = {
       enable = true;
       x11Support = false;
-      # settings = {
-      #   animation = "gameoflife";
-      # };
+      settings = {
+        animation = "gameoflife";
+        gameoflife_entropy_interval = 10;
+        gameoflife_fg = "0x000000FF";
+        gameoflife_frame_delay = 6;
+        gameoflife_initial_density = 0.4;
+        bigclock = "en";
+        bigclock_12hr = true;
+        clear_password = true;
+      };
     };
 
     # Enable CUPS to print documents.

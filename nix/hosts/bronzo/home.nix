@@ -17,24 +17,35 @@
 
   home.packages = with pkgs; [
     # Languages, Language Servers and Formatters
-    clang-tools # C
+    # C
+    clang-tools
+    # Nix
     nixd
-    alejandra # Nix
+    alejandra
+    # Racket
     racket
     # racket-langserver # Racket
     # raco-fmt
     lua-language-server
-    stylua # Lua
-    python3 # Python
-    nodejs # Javascript
-    rust-analyzer # Rust
-    z3 # SAT
-    # Java
-    jdt-language-server
-    jdk21
-    maven
-    # Graphviz
-    graphviz-nox
+    # Lua
+    stylua
+    # Python
+    python3
+    python313Packages.pytest_7
+    pyright
+    ruff
+    black
+    # Javascript
+    nodejs
+    # Rust
+    rust-analyzer
+    rustc
+    cargo
+    clippy
+    rustfmt
+    pkg-config
+    # SAT
+    z3
 
     # Development
     tree-sitter
@@ -107,6 +118,9 @@
       luasnip
       friendly-snippets
       nvim-jdtls
+      neotest
+      neotest-python
+      rustaceanvim
     ];
     waybar = {
       enable = true;

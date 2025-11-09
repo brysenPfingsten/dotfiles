@@ -30,7 +30,7 @@ output "eDP-1" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080"
+    mode "1920x1080@165"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1
@@ -38,6 +38,13 @@ output "eDP-1" {
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
     transform "normal"
 
+    position x=1280 y=0
+}
+
+output "DP-3" {
+    mode "1920x1080@165.003"
+    scale 1
+    transform "normal"
     position x=1280 y=0
 }
 
@@ -198,8 +205,8 @@ binds {
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
     Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+J     { move-window-down; }
-    Mod+Ctrl+K     { move-window-up; }
+    Mod+Ctrl+J     { move-workspace-down; }
+    Mod+Ctrl+K     { move-workspace-up; }
     Mod+Ctrl+L     { move-column-right; }
 
     Mod+Home { focus-column-first; }

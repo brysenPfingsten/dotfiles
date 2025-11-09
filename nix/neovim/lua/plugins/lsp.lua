@@ -12,10 +12,34 @@ return {
 			local lspconfig = require("lspconfig")
 			local util = require("lspconfig.util")
 
-			-- optional integrations (don’t error if missing)
 			local has_wk, wk = pcall(require, "which-key")
 			local has_telescope, telescope_builtin = pcall(require, "telescope.builtin")
 			local has_illuminate, illuminate = pcall(require, "illuminate")
+
+			vim.diagnostic.config({
+				virtual_text = { prefix = "●" },
+				signs = false,
+				underline = true,
+			})
+
+			local function enable_inlay_hints(bufnr)
+				local ih = vim.lsp.inlay_hint
+				if type(ih) == "table" and ih.enable then
+					ih.enable(true, { bufnr = bufnr })
+				elseif type(ih) == "function" then
+					ih(bufnr, true)
+				end
+			end
+			local function toggle_inlay_hints(bufnr)
+				local ih = vim.lsp.inlay_hint
+				if type(ih) == "table" and ih.is_enabled then
+					ih.enable(not ih.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+				elseif type(ih) == "function" then
+					-- naive toggle for older API
+					ih(bufnr, not (vim.b[bufnr].inlay_hints_enabled or false))
+					vim.b[bufnr].inlay_hints_enabled = not (vim.b[bufnr].inlay_hints_enabled or false)
+				end
+			end
 
 			-- helper: prefer telescope pickers when available
 			local function picker_or(buf_fn, picker_fn)
@@ -42,6 +66,11 @@ return {
 					vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr, desc = desc })
 				end
 
+				enable_inlay_hints(bufnr)
+				bmap("n", "<leader>uh", function()
+					toggle_inlay_hints(bufnr)
+				end, "Toggle Inlay Hints")
+
 				-- ====== LSP core ======
 				bmap("n", "gd", picker_or(vim.lsp.buf.definition, telescope_builtin.lsp_definitions), "Goto Definition")
 				bmap("n", "gr", picker_or(vim.lsp.buf.references, telescope_builtin.lsp_references), "References")
@@ -60,7 +89,6 @@ return {
 				bmap("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
 				bmap("n", "K", vim.lsp.buf.hover, "Hover")
 				bmap("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
-				bmap("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
 				-- Code actions / rename / source
 				bmap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
@@ -82,7 +110,7 @@ return {
 					vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} }, apply = true })
 				end, "Source Action")
 
-				-- “Rename File”
+				-- Rename file
 				bmap("n", "<leader>cR", function()
 					local old = vim.api.nvim_buf_get_name(0)
 					if old == "" then
@@ -131,7 +159,6 @@ return {
 					vim.notify("Renamed:\n" .. old .. "\n→ " .. new, vim.log.levels.INFO)
 				end, "Rename File")
 
-				-- References navigation (Illuminate if available; fallback to diagnostics)
 				local next_ref = function()
 					if has_illuminate then
 						illuminate.goto_next_reference(true)
@@ -151,7 +178,7 @@ return {
 				bmap("n", "<A-n>", next_ref, "Next Reference")
 				bmap("n", "<A-p>", prev_ref, "Prev Reference")
 
-				-- Symbols
+				-- Symbols / Calls / Info
 				bmap(
 					"n",
 					"<leader>ss",
@@ -168,8 +195,6 @@ return {
 					end, telescope_builtin.lsp_workspace_symbols),
 					"LSP Workspace Symbols"
 				)
-
-				-- Calls (incoming/outgoing)
 				bmap(
 					"n",
 					"gai",
@@ -182,8 +207,6 @@ return {
 					picker_or(vim.lsp.buf.outgoing_calls, telescope_builtin.lsp_outgoing_calls),
 					"C[a]lls Outgoing"
 				)
-
-				-- Lsp Info
 				bmap("n", "<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
 
 				if has_wk then
@@ -212,114 +235,95 @@ return {
 						{ "<leader>sS", desc = "LSP Workspace Symbols", mode = "n" },
 						{ "gai", desc = "C[a]lls Incoming", mode = "n" },
 						{ "gao", desc = "C[a]lls Outgoing", mode = "n" },
+						{ "<leader>uh", desc = "Toggle Inlay Hints", mode = "n" }, -- +++
 					})
 				end
 			end
 
-			-- Existing servers …
-			require("lspconfig").racket_langserver.setup({
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+			if ok_cmp then
+				capabilities = cmp_lsp.default_capabilities(capabilities)
+			end
+
+			-- Racket
+			lspconfig.racket_langserver.setup({
 				cmd = { "racket", "--lib", "racket-langserver" },
 				filetypes = { "racket", "scheme" },
 				root_dir = racket_root_dir,
-				on_attach = on_attach,
+				on_attach = on_attach, -- +++ attach so you get keymaps/hints here too
+				capabilities = capabilities,
 			})
 
 			lspconfig.nixd.setup({
 				cmd = { "nixd" },
 				settings = { nixd = { formatting = { command = { "alejandra" } } } },
-				on_attach = on_attach,
+				on_attach = on_attach, -- +++
+				capabilities = capabilities,
 			})
 
-			lspconfig.clangd.setup({ cmd = { "clangd" }, on_attach = on_attach })
+			-- C/C++
+			lspconfig.clangd.setup({
+				cmd = { "clangd" },
+				on_attach = on_attach, -- +++
+				capabilities = capabilities,
+			})
 
+			-- Lua
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
 				settings = {
 					Lua = {
 						runtime = { version = "LuaJIT" },
 						diagnostics = { globals = { "vim" } },
-						workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" } },
+						workspace = {
+							checkThirdParty = false,
+							library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" },
+						},
 						telemetry = { enable = false },
 					},
 				},
 			})
 
-			-- =========================
-			-- Java (JDTLS via nvim-jdtls)
-			-- =========================
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "java",
-				callback = function()
-					local jdtls = require("jdtls")
-					local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-					local root_dir = require("jdtls.setup").find_root(root_markers)
-					if not root_dir or root_dir == "" then
-						return
-					end
-
-					local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
-					local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspaces/" .. project_name
-
-					-- On NixOS with pkgs.jdtls, the 'jdtls' wrapper is on PATH.
-					local cmd = { "jdtls", "-data", workspace_dir }
-
-					local java_on_attach = function(client, bufnr)
-						on_attach(client, bufnr) -- your generic maps
-						jdtls.setup_dap({ hotcodereplace = "auto" })
-						jdtls.setup.add_commands()
-
-						-- Java-specific goodies
-						local bmap = function(mode, lhs, rhs, desc)
-							vim.keymap.set(
-								mode,
-								lhs,
-								rhs,
-								{ buffer = bufnr, noremap = true, silent = true, desc = desc }
-							)
-						end
-						bmap("n", "<leader>co", jdtls.organize_imports, "Organize Imports")
-						bmap("n", "<leader>ct", jdtls.test_class, "Test Class")
-						bmap("n", "<leader>cm", jdtls.test_nearest_method, "Test Method")
-						bmap("v", "<leader>ce", function()
-							jdtls.extract_variable(true)
-						end, "Extract Variable")
-						bmap("v", "<leader>cM", function()
-							jdtls.extract_method(true)
-						end, "Extract Method")
-
-						if has_wk then
-							wk.add({
-								{ "<leader>co", desc = "Organize Imports", mode = "n" },
-								{ "<leader>ct", desc = "Test Class", mode = "n" },
-								{ "<leader>cm", desc = "Test Method", mode = "n" },
-								{ "<leader>ce", desc = "Extract Variable", mode = "v" },
-								{ "<leader>cM", desc = "Extract Method", mode = "v" },
-							})
-						end
-					end
-
-					local config = {
-						cmd = cmd,
-						root_dir = root_dir,
-						on_attach = java_on_attach,
-						settings = {
-							java = {
-								signatureHelp = { enabled = true },
-								eclipse = { downloadSources = true },
-								configuration = { updateBuildConfiguration = "interactive" },
-								maven = { downloadSources = true },
-								references = { includeDecompiledSources = true },
-								format = { enabled = true },
-								contentProvider = { preferred = "fernflower" },
+			-- Python
+			lspconfig.pyright.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				settings = {
+					python = {
+						analysis = {
+							typeCheckingMode = "basic", -- or "strict"
+							autoImportCompletions = true,
+							diagnosticMode = "openFilesOnly",
+							inlayHints = {
+								variableTypes = true,
+								functionReturnTypes = true,
+								parameterNames = true,
+								parameterTypes = true,
+								callArgumentNames = "all",
 							},
 						},
-						init_options = {
-							bundles = {}, -- add debug/test bundles later if you want
-						},
-					}
+						-- If you need a specific venv:
+						-- venvPath = ".",
+						-- venv = ".venv",
+					},
+				},
+			})
 
-					jdtls.start_or_attach(config)
+			-- Ruff LSP
+			lspconfig.ruff_lsp.setup({
+				on_attach = function(client, bufnr)
+					-- Let Ruff do only diagnostics/fixes; not formatting (it doesn’t format anyway)
+					on_attach(client, bufnr)
+					-- Optional: if you also run ruff CLI with Conform, keep this for diagnostics only.
 				end,
+				capabilities = capabilities,
+				init_options = {
+					settings = {
+						args = {},
+					},
+				},
 			})
 		end,
 	},
