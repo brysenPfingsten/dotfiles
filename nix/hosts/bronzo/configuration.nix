@@ -172,12 +172,6 @@
     gcc
     cmake
     gnumake
-    spotify
-    (writeShellScriptBin "spotify" ''
-      exec ${pkgs.spotify}/bin/spotify \
-        --enable-features=UseOzonePlatform \
-        --ozone-platform=wayland "$@"
-    '')
   ];
 
   system.stateVersion = "25.05";

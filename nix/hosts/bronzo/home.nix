@@ -4,7 +4,18 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  spotify-wayland = pkgs.spotify.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+    postFixup =
+      (old.postFixup or "")
+      + ''
+        wrapProgram $out/bin/spotify \
+          --add-flags "--enable-features=UseOzonePlatform" \
+          --add-flags "--ozone-platform=wayland"
+      '';
+  });
+in {
   imports = [
     inputs.LazyVim.homeManagerModules.default
   ];
@@ -71,6 +82,7 @@
     wasistlos
 
     # GUIs
+    spotify-wayland
     pavucontrol
     rofi
     vlc
