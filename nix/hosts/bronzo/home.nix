@@ -56,6 +56,7 @@ in {
     pkg-config
     # SAT
     z3
+    graphviz
 
     # Development
     tree-sitter
