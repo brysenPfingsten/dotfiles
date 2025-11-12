@@ -54,6 +54,8 @@ in {
     clippy
     rustfmt
     pkg-config
+    # Javascript / Typescript
+    typescript-language-server
     # SAT
     z3
     graphviz
@@ -77,6 +79,8 @@ in {
     bat
     playerctl
     fastfetch
+    difftastic
+    wl-clipboard
 
     # Web Apps
     chromium
@@ -101,6 +105,7 @@ in {
     bluetui
     btop
     wiremix
+    clipse
 
     # File manager stuff
     nautilus
@@ -146,6 +151,7 @@ in {
         init.defaultBranch = "main";
         pull.rebase = true;
         credential.helper = "!/etc/profiles/per-user/${config.home.username}/bin/gh auth git-credential";
+        diff.tool = "difft";
       };
     };
     gh = {
@@ -209,6 +215,11 @@ in {
 
     "kitty" = {
       source = ../../../kitty;
+      recursive = true;
+    };
+
+    "rofi" = {
+      source = ../../../rofi;
       recursive = true;
     };
   };

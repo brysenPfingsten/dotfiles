@@ -5,6 +5,7 @@ alias lta='lt -a'
 alias ff='fzf --preview bat --style=numbers --color=always {}'
 alias cd='zd'
 alias cat='bat --color=always'
+alias please='sudo'
 
 alias ..='cd ..'
 alias ...='cd ../..'

@@ -325,6 +325,43 @@ return {
 					},
 				},
 			})
+
+			-- JavaScript / TypeScript
+			local tsserver = lspconfig.ts_ls or lspconfig.tsserver
+			if tsserver then
+				tsserver.setup({
+					on_attach = on_attach,
+					capabilities = capabilities,
+					root_dir = function(fname)
+						return util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git")(fname)
+					end,
+					single_file_support = true,
+					settings = {
+						typescript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+						},
+						javascript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+						},
+					},
+				})
+			end
 		end,
 	},
 }

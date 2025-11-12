@@ -99,6 +99,7 @@ layout {
 // spawn-at-startup "waybar"
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 spawn-sh-at-startup "swaybg --image ~/Pictures/planet.jpg --mode fill"
+spawn-sh-at-startup "clipse -listen"
 
 hotkey-overlay {
     skip-at-startup
@@ -303,8 +304,10 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+V { spawn-sh "kitty --class=popup-term -e clipse"; }
+    Mod+Return { spawn-sh "kitty --class=popup-term"; }
+    // Mod+V       { toggle-window-floating; }
+    // Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
     Mod+W { toggle-column-tabbed-display; }
 
