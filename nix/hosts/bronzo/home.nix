@@ -218,10 +218,10 @@ in {
       recursive = true;
     };
 
-    "rofi" = {
-      source = ../../../rofi;
-      recursive = true;
-    };
+    # "rofi" = {
+    #   source = ../../../rofi;
+    #   recursive = true;
+    # };
   };
 
   home.file = {
