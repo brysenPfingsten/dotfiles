@@ -89,8 +89,8 @@ in {
     # GUIs
     spotify-wayland
     pavucontrol
-    rofi
     vlc
+    fuzzel
 
     # PDFs
     papers
@@ -106,6 +106,7 @@ in {
     btop
     wiremix
     clipse
+    superfile
 
     # File manager stuff
     nautilus
@@ -163,6 +164,7 @@ in {
       enableBashIntegration = true;
       enableFishIntegration = true;
     };
+    starship.enable = true;
   };
   # Waybar as a user service bound to Niri
   systemd.user.services.waybar = {
@@ -222,6 +224,7 @@ in {
       source = ../../../dooit;
       recursive = true;
     };
+    "starship".source = ../../../starship/starship.toml;
 
     # "rofi" = {
     #   source = ../../../rofi;

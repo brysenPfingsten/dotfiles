@@ -19,6 +19,7 @@ alias ga='git commit -a --amend'
 alias rebuild='sudo nixos-rebuild switch --flake ~/.config/nix'
 alias t='nvim ~/todo.md'
 alias mkdir='mkdir -p'
+alias spf='superfile'
 
 zd() {
   if [ $# -eq 0 ]; then
@@ -35,4 +36,4 @@ open() {
 
 n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
 
-fastfetch
+eval "$(starship init bash)"
