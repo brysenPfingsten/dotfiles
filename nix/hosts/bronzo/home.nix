@@ -218,6 +218,11 @@ in {
       recursive = true;
     };
 
+    "dooit" = {
+      source = ../../../dooit;
+      recursive = true;
+    };
+
     # "rofi" = {
     #   source = ../../../rofi;
     #   recursive = true;

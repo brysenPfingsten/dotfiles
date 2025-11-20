@@ -11,6 +11,14 @@
       url = "github:matadaniel/LazyVim-module";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dooit = {
+      url = "github:brysenPfingsten/dooit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dooit-extras = {
+      url = "github:brysenPfingsten/dooit-extras";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -28,6 +36,7 @@
 
       modules = [
         ./hosts/bronzo/configuration.nix
+        ./dooit.nix
 
         {nixpkgs.config.allowUnfree = true;}
 

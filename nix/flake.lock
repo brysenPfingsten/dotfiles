@@ -23,6 +23,65 @@
         "type": "github"
       }
     },
+    "dooit": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763611440,
+        "narHash": "sha256-2LxP8BwlGpaYMz2DUOFj9BLGVRNHAcH5isyOpcuwffM=",
+        "owner": "brysenPfingsten",
+        "repo": "dooit",
+        "rev": "b7262ed8dbbad1b2b6a6162bcf66ce12703cabd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brysenPfingsten",
+        "repo": "dooit",
+        "type": "github"
+      }
+    },
+    "dooit-extras": {
+      "inputs": {
+        "dooit": "dooit_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758024842,
+        "narHash": "sha256-ZTZut4TN1le6rokxLOR3nuEzK+IjKh6Gy+xoUgcUXtI=",
+        "owner": "brysenPfingsten",
+        "repo": "dooit-extras",
+        "rev": "311bbcd9a11a3ab4520fe4bf9b84f6a5e06f6c18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brysenPfingsten",
+        "repo": "dooit-extras",
+        "type": "github"
+      }
+    },
+    "dooit_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1748666860,
+        "narHash": "sha256-Ux7cqxFcYEpPOfzVTem5IkuDGflh7UmIcdIW6ZPtovM=",
+        "owner": "dooit-org",
+        "repo": "dooit",
+        "rev": "d6e3ac12508b8bb1ec99847f3a2670b709ca54c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dooit-org",
+        "repo": "dooit",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -30,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762463325,
-        "narHash": "sha256-33YUsWpPyeBZEWrKQ2a1gkRZ7i0XCC/2MYpU6BVeQSU=",
+        "lastModified": 1763416652,
+        "narHash": "sha256-8EBEEvtzQ11LCxpQHMNEBQAGtQiCu/pqP9zSovDSbNM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0562fef070a1027325dd4ea10813d64d2c967b39",
+        "rev": "ea164b7c9ccdc2321379c2ff78fd4317b4c41312",
         "type": "github"
       },
       "original": {
@@ -45,11 +104,27 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1762363567,
-        "narHash": "sha256-YRqMDEtSMbitIMj+JLpheSz0pwEr0Rmy5mC7myl17xs=",
+        "lastModified": 1746904237,
+        "narHash": "sha256-3e+AVBczosP5dCLQmMoMEogM57gmZ2qrVSrmq9aResQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d89fc19e405cb2d55ce7cc114356846a0ee5e956",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1763421233,
+        "narHash": "sha256-Stk9ZYRkGrnnpyJ4eqt9eQtdFWRRIvMxpNRf4sIegnw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ae814fd3904b621d8ab97418f1d0f2eb0d3716f4",
+        "rev": "89c2b2330e733d6cdb5eae7b899326930c2c0648",
         "type": "github"
       },
       "original": {
@@ -96,8 +171,10 @@
     "root": {
       "inputs": {
         "LazyVim": "LazyVim",
+        "dooit": "dooit",
+        "dooit-extras": "dooit-extras",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {
