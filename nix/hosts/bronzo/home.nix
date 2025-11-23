@@ -26,6 +26,9 @@
       sha256 = "0nmmbchyjcrllk9ligg9714mjf5c0gv9f2xfb2aq1pnmpjl6rw46";
     };
   };
+  codelldb = pkgs.writeShellScriptBin "codelldb" ''
+    exec ${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
+  '';
 in {
   imports = [
     inputs.LazyVim.homeManagerModules.default
@@ -40,6 +43,8 @@ in {
     # Languages, Language Servers and Formatters
     # C
     clang-tools
+    lldb
+    codelldb
     # Nix
     nixd
     alejandra
@@ -152,6 +157,10 @@ in {
       rustaceanvim
       crates-nvim
       codex-nvim
+      nvim-dap
+      nvim-dap-ui
+      nvim-nio
+      nvim-dap-virtual-text
     ];
     waybar = {
       enable = true;
