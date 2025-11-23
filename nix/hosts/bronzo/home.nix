@@ -15,6 +15,17 @@
           --add-flags "--ozone-platform=wayland"
       '';
   });
+  codex-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "codex.nvim";
+    version = "git-2025-08-20";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "johnseth97";
+      repo = "codex.nvim";
+      rev = "main";
+      sha256 = "0nmmbchyjcrllk9ligg9714mjf5c0gv9f2xfb2aq1pnmpjl6rw46";
+    };
+  };
 in {
   imports = [
     inputs.LazyVim.homeManagerModules.default
@@ -81,6 +92,7 @@ in {
     fastfetch
     difftastic
     wl-clipboard
+    codex
 
     # Web Apps
     chromium
@@ -139,6 +151,7 @@ in {
       neotest-python
       rustaceanvim
       crates-nvim
+      codex-nvim
     ];
     waybar = {
       enable = true;
