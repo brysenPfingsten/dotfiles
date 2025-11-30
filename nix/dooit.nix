@@ -3,16 +3,15 @@
   pkgs,
   ...
 }: let
-  dooit-base = inputs.dooit.packages.${pkgs.system}.default.overrideAttrs (old: {
-    doCheck = false; # Skip tests
-  });
-
-  mydooit = dooit-base.override {
+  mydooit = pkgs.dooit.override {
     extraPackages = [
-      inputs.dooit-extras.packages.${pkgs.system}.default
+      pkgs.dooit-extras
     ];
   };
 in {
+  # this overlay allows you to use dooit from pkgs.dooit
+  nixpkgs.overlays = [inputs.dooit.overlay inputs.dooit-extras.overlay];
+
   environment.systemPackages = [
     mydooit
   ];

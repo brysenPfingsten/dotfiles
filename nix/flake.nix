@@ -12,11 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dooit = {
-      url = "github:brysenPfingsten/dooit";
+      url = "github:dooit-org/dooit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dooit-extras = {
-      url = "github:brysenPfingsten/dooit-extras";
+      url = "github:dooit-org/dooit-extras";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -29,7 +29,31 @@
     ...
   }: let
     system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
   in {
+    devShells.${system} = {
+      python = pkgs.mkShell {
+        packages = with pkgs; [
+          python311
+          python311Packages.pip
+        ];
+
+        shellHook = ''
+          if [ -d .venv ]; then
+            echo "Activating existing venv (.venv)…"
+            source .venv/bin/activate
+          else
+            echo "Creating venv in .venv…"
+            python -m venv .venv
+            source .venv/bin/activate
+            if [ -f requirements.txt ]; then
+              echo "Installing from requirements.txt…"
+              pip install -r requirements.txt
+            fi
+          fi
+        '';
+      };
+    };
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs LazyVim;};

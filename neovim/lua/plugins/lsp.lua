@@ -305,8 +305,8 @@ return {
 							},
 						},
 						-- If you need a specific venv:
-						-- venvPath = ".",
-						-- venv = ".venv",
+						venvPath = ".",
+						venv = ".venv",
 					},
 				},
 			})

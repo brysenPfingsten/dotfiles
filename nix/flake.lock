@@ -30,15 +30,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1763611440,
-        "narHash": "sha256-2LxP8BwlGpaYMz2DUOFj9BLGVRNHAcH5isyOpcuwffM=",
-        "owner": "brysenPfingsten",
+        "lastModified": 1763953042,
+        "narHash": "sha256-A3l+E9B2fWyNpDzMr8WRiiHD/fIcUzcIwtmur+2Mk0k=",
+        "owner": "dooit-org",
         "repo": "dooit",
-        "rev": "b7262ed8dbbad1b2b6a6162bcf66ce12703cabd9",
+        "rev": "ba2a7efdbb56297ee7ed9273232cce265e3254da",
         "type": "github"
       },
       "original": {
-        "owner": "brysenPfingsten",
+        "owner": "dooit-org",
         "repo": "dooit",
         "type": "github"
       }
@@ -53,13 +53,13 @@
       "locked": {
         "lastModified": 1758024842,
         "narHash": "sha256-ZTZut4TN1le6rokxLOR3nuEzK+IjKh6Gy+xoUgcUXtI=",
-        "owner": "brysenPfingsten",
+        "owner": "dooit-org",
         "repo": "dooit-extras",
         "rev": "311bbcd9a11a3ab4520fe4bf9b84f6a5e06f6c18",
         "type": "github"
       },
       "original": {
-        "owner": "brysenPfingsten",
+        "owner": "dooit-org",
         "repo": "dooit-extras",
         "type": "github"
       }
