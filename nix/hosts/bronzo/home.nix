@@ -161,6 +161,7 @@ in {
       nvim-dap-ui
       nvim-nio
       nvim-dap-virtual-text
+      csvview-nvim
     ];
     waybar = {
       enable = true;
