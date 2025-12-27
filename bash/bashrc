@@ -3,7 +3,6 @@ alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 alias ff='fzf --preview bat --style=numbers --color=always {}'
-alias cd='zd'
 alias cat='bat --color=always'
 alias please='sudo'
 
@@ -21,15 +20,6 @@ alias t='nvim ~/todo.md'
 alias mkdir='mkdir -p'
 alias spf='superfile'
 
-zd() {
-  if [ $# -eq 0 ]; then
-    builtin cd ~ && return
-  elif [ -d "$1" ]; then
-    builtin cd "$1"
-  else
-    z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
-  fi
-}
 open() {
   xdg-open "$@" >/dev/null 2>&1 &
 }
@@ -37,3 +27,4 @@ open() {
 n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
 
 eval "$(starship init bash)"
+eval "$(zoxide init --cmd cd bash)"
