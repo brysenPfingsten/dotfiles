@@ -10,13 +10,27 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    settings.General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+  networking = {
+    hostName = "nixos";
+
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [2273];
+      trustedInterfaces = ["tailscale0"];
+      interfaces.tailscale0.allowedTCPPorts = [2273];
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -93,6 +107,15 @@
 
     # Power Management
     tlp.enable = true;
+
+    # Tailscale
+    tailscale.enable = true;
+
+    # SSH
+    openssh = {
+      enable = true;
+      ports = [2273];
+    };
   };
 
   systemd.services.fprintd = {
@@ -125,7 +148,6 @@
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;
         "bluez5.enable-hw-volume" = true;
-        "bluez5.roles" = ["hsp_hs" "hsp_ag" "hfp_hf" "hfp_ag"];
       };
     };
     enable = true;
@@ -163,7 +185,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    texlive.combined.scheme-full
+    #
     xits-math
 
     fuzzel
