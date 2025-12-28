@@ -5,7 +5,10 @@ return {
 		vim.g.vimtex_view_method = "zathura"
 
 		vim.g.vimtex_compiler_method = "latexmk"
-		vim.g.vimtex_compiler_latexmk_engines = { ["_"] = "-lualatex" } -- or '-lualatex'
+		vim.g.vimtex_compiler_latexmk_engines = {
+			_ = "-lualatex='env FONTCONFIG_FILE=/etc/fonts/fonts.conf FONTCONFIG_PATH=/etc/fonts lualatex %O %S'",
+		}
+		-- vim.g.vimtex_compiler_latexmk_engines = { ["_"] = "-lualatex" } -- or '-lualatex'
 		vim.g.vimtex_compiler_latexmk = {
 			build_dir = "build",
 			-- aux_dir = "build",
@@ -13,6 +16,7 @@ return {
 			callback = 1,
 			executable = "latexmk",
 			options = {
+				"-pdf",
 				"-shell-escape",
 				"-interaction=nonstopmode",
 				"-synctex=1",

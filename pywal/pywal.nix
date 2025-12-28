@@ -13,21 +13,21 @@
 
     [ "''${#files[@]}" -gt 0 ] || exit 1
 
-    choice="$(printf '%s\n' "''${files[@]}" | ${pkgs.rofi-wayland}/bin/rofi -dmenu -i -p "Wallpaper")"
+    choice="$(printf '%s\n' "''${files[@]}" | ${pkgs.rofi}/bin/rofi -dmenu -i -p "Wallpaper")"
     [ -n "$choice" ] || exit 0
 
     ${pkgs.swww}/bin/swww img "$choice" --transition-type any --transition-duration 0.6
     ${pkgs.pywal16}/bin/wal -i "$choice" -n
-    ${pkgs.procps}/bin/pkill -USR1 kitty || true
+    kitty @ set-colors --all --configured ~/.cache/wal/colors-kitty.conf || true
   '';
 in {
   home.packages = with pkgs; [
     pywal16
     imagemagick
     swww
-    rofi
-    procps
     wallpick
+    rofi
+    nsxiv
   ];
 
   systemd.user.services.swww = {

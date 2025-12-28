@@ -29,6 +29,20 @@
   codelldb = pkgs.writeShellScriptBin "codelldb" ''
     exec ${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
   '';
+  pywal16-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "pywal16";
+    version = "git-2025-12-28";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "uZer";
+      repo = "pywal16.nvim";
+      rev = "main";
+      sha256 = "sha256-FDheT19Tl3rHTQDpAt2tSh3/YTEci9QDTzZspTG4xUw=";
+    };
+    nvimSkipModule = [
+      "pywal16.feline"
+    ];
+  };
 in {
   imports = [
     inputs.LazyVim.homeManagerModules.default
@@ -166,6 +180,7 @@ in {
       nvim-nio
       nvim-dap-virtual-text
       csvview-nvim
+      pywal16-nvim
     ];
     waybar = {
       enable = true;
@@ -263,6 +278,4 @@ in {
   home.file = {
     ".bashrc".source = ../../../bash/bashrc;
   };
-
-  # Tie swaybg to the niri session
 }
