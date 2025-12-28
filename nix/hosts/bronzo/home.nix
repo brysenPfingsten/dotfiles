@@ -32,6 +32,7 @@
 in {
   imports = [
     inputs.LazyVim.homeManagerModules.default
+    ../../../pywal/pywal.nix
   ];
   home = {
     username = "pfingsbr";
@@ -75,6 +76,9 @@ in {
     # SAT
     z3
     graphviz
+    # LaTeX
+    texlive.combined.scheme-full
+    fontconfig
 
     # Development
     tree-sitter
@@ -130,9 +134,9 @@ in {
     adwaita-icon-theme
     gnome.gvfs
 
-    # Wallpaper
-    swaybg
+    # Look and Feel
     brightnessctl
+    sunsetr
   ];
 
   programs = {
@@ -247,12 +251,13 @@ in {
       source = ../../../dooit;
       recursive = true;
     };
+
     "starship".source = ../../../starship/starship.toml;
 
-    # "rofi" = {
-    #   source = ../../../rofi;
-    #   recursive = true;
-    # };
+    "sunsetr" = {
+      source = ../../../sunsetr;
+      recursive = true;
+    };
   };
 
   home.file = {
