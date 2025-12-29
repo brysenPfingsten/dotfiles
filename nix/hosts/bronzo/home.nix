@@ -248,7 +248,10 @@ in {
       recursive = true;
     };
 
-    "niri/config.kdl".source = ../../../niri/config.kdl;
+    "niri" = {
+      source = ../../../niri;
+      recursive = true;
+    };
 
     "waybar" = {
       source = ../../../waybar;

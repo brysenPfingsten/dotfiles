@@ -1,3 +1,6 @@
+include "colors.default.kdl"
+include "colors.runtime.kdl"
+
 // Input device configuration.
 // https://yalter.github.io/niri/Configuration:-Input
 input {
@@ -65,20 +68,6 @@ layout {
 
     default-column-width { proportion 1.0; }
     // default-column-width {}
-
-    focus-ring {
-        width 4
-        active-color "#7fc8ff"
-        inactive-color "#505050"
-    }
-
-    border {
-        off
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-        urgent-color "#9b0000"
-    }
 
     shadow {
         // on
@@ -166,13 +155,10 @@ window-rule {
     draw-border-with-background false
 }
 
-overview {
-    backdrop-color "#000000"
-}
-
 binds {
     Super+W { spawn-sh "pkill -SIGUSR1 waybar"; }
     Super+B { spawn "firefox"; }
+    Super+Shift+Space { spawn-sh "wallpick"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }

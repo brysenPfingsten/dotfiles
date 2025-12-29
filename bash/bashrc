@@ -26,5 +26,7 @@ open() {
 
 n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
 
+export NVIM_LISTEN_ADDRESS="$XDG_RUNTIME_DIR/nvim.$USER.$PPID"
+
 eval "$(starship init bash)"
 eval "$(zoxide init --cmd cd bash)"
