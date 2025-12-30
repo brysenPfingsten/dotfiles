@@ -258,7 +258,6 @@ in {
       recursive = true;
     };
 
-    "electron-flags.conf".source = ../../../electron/electron-flags.conf;
 
     "kitty" = {
       source = ../../../kitty;
