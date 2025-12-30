@@ -15,38 +15,18 @@
           --add-flags "--ozone-platform=wayland"
       '';
   });
-  codex-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "codex.nvim";
-    version = "git-2025-08-20";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "johnseth97";
-      repo = "codex.nvim";
-      rev = "main";
-      sha256 = "0nmmbchyjcrllk9ligg9714mjf5c0gv9f2xfb2aq1pnmpjl6rw46";
-    };
-  };
   codelldb = pkgs.writeShellScriptBin "codelldb" ''
     exec ${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
   '';
-  pywal16-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "pywal16";
-    version = "git-2025-12-28";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "uZer";
-      repo = "pywal16.nvim";
-      rev = "main";
-      sha256 = "sha256-FDheT19Tl3rHTQDpAt2tSh3/YTEci9QDTzZspTG4xUw=";
-    };
-    nvimSkipModule = [
-      "pywal16.feline"
-    ];
-  };
 in {
   imports = [
     inputs.LazyVim.homeManagerModules.default
     ../../../pywal/pywal.nix
+    ../../../niri/niri.nix
+    ../../../git/git.nix
+    ../../../neovim/nvim.nix
+    ../../../kitty/kitty.nix
+    ../../../starship/starship.nix
   ];
   home = {
     username = "pfingsbr";
@@ -97,10 +77,7 @@ in {
     # Development
     tree-sitter
     xclip
-    lazygit
     lazydocker
-    git
-    gh
     docker
     docker-compose
 
@@ -134,7 +111,6 @@ in {
     foliate
 
     # Terminal and TUIs
-    kitty
     starship
     impala
     bluetui
@@ -147,81 +123,13 @@ in {
     nautilus
     adwaita-icon-theme
     gnome.gvfs
-
-    # Look and Feel
-    brightnessctl
-    sunsetr
   ];
 
   programs = {
     home-manager.enable = true;
-    lazyvim.enable = true;
-    neovim.plugins = with pkgs.vimPlugins; [
-      telescope-nvim
-      telescope-fzf-native-nvim
-      (nvim-treesitter.withAllGrammars)
-      compiler-nvim
-      nvim-autopairs
-      nvim-colorizer-lua
-      overseer-nvim
-      vimtex
-      nvim-ufo
-      onedark-nvim
-      luasnip
-      friendly-snippets
-      nvim-jdtls
-      neotest
-      neotest-python
-      rustaceanvim
-      crates-nvim
-      codex-nvim
-      nvim-dap
-      nvim-dap-ui
-      nvim-nio
-      nvim-dap-virtual-text
-      csvview-nvim
-      pywal16-nvim
-    ];
-    waybar = {
-      enable = true;
-      systemd.enable = false;
-    };
-    git = {
-      enable = true;
-      userName = "Brysen Pfingsten";
-      userEmail = "brysen.pfingsten@gmail.com";
-      extraConfig = {
-        init.defaultBranch = "main";
-        pull.rebase = true;
-        credential.helper = "!/etc/profiles/per-user/${config.home.username}/bin/gh auth git-credential";
-        diff.tool = "difft";
-      };
-    };
-    gh = {
-      enable = true;
-      gitCredentialHelper.enable = true;
-    };
     zoxide = {
       enable = true;
       enableBashIntegration = true;
-      enableFishIntegration = true;
-    };
-    starship.enable = true;
-  };
-  # Waybar as a user service bound to Niri
-  systemd.user.services.waybar = {
-    Unit = {
-      Description = "Waybar (bound to Niri)";
-      PartOf = ["niri.service"];
-      After = ["niri.service"];
-      ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
-    Service = {
-      ExecStart = "${pkgs.waybar}/bin/waybar";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = ["niri.service"];
     };
   };
 
@@ -243,33 +151,10 @@ in {
     pkgs.xdg-desktop-portal-wlr
   ];
   xdg.configFile = {
-    "nvim" = {
-      source = ../../../neovim;
-      recursive = true;
-    };
-
-    "niri" = {
-      source = ../../../niri;
-      recursive = true;
-    };
-
-    "waybar" = {
-      source = ../../../waybar;
-      recursive = true;
-    };
-
-
-    "kitty" = {
-      source = ../../../kitty;
-      recursive = true;
-    };
-
     "dooit" = {
       source = ../../../dooit;
       recursive = true;
     };
-
-    "starship".source = ../../../starship/starship.toml;
 
     "sunsetr" = {
       source = ../../../sunsetr;
