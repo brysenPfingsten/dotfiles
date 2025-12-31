@@ -3,12 +3,20 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     LazyVim = {
       url = "github:matadaniel/LazyVim-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dooit = {
@@ -31,29 +39,6 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
   in {
-    devShells.${system} = {
-      python = pkgs.mkShell {
-        packages = with pkgs; [
-          python311
-          python311Packages.pip
-        ];
-
-        shellHook = ''
-          if [ -d .venv ]; then
-            echo "Activating existing venv (.venv)…"
-            source .venv/bin/activate
-          else
-            echo "Creating venv in .venv…"
-            python -m venv .venv
-            source .venv/bin/activate
-            if [ -f requirements.txt ]; then
-              echo "Installing from requirements.txt…"
-              pip install -r requirements.txt
-            fi
-          fi
-        '';
-      };
-    };
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs LazyVim;};
@@ -63,6 +48,7 @@
         ./dooit.nix
 
         {nixpkgs.config.allowUnfree = true;}
+        {nixpkgs.overlays = [inputs.nur.overlays.default];}
 
         home-manager.nixosModules.home-manager
         {
@@ -70,7 +56,10 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs LazyVim;};
           home-manager.users.pfingsbr = {...}: {
-            imports = [./hosts/bronzo/home.nix];
+            imports = [
+              inputs.spicetify-nix.homeManagerModules.spicetify
+              ./hosts/bronzo/home.nix
+            ];
           };
           home-manager.users.root = {...}: {
             imports = [./root-home.nix];

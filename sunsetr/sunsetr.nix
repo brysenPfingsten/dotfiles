@@ -1,12 +1,8 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
-    brightnessctl
+    sunsetr
   ];
-  xdg.configFile."niri" = {
+  xdg.configFile."sunsetr" = {
     source = ./.;
     recursive = true;
   };

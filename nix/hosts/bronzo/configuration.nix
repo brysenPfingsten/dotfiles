@@ -1,11 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -59,8 +52,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  boot.kernelParams = ["usbcore.autosuspend=-1"];
-
   services = {
     # Enable the X11 windowing system.
     xserver = {
@@ -73,11 +64,6 @@
     };
 
     seatd.enable = true;
-
-    # Fprintd
-    fprintd.enable = true;
-    fprintd.tod.enable = true;
-    fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
     # Enable the GNOME Desktop Environment.
     # displayManager.gdm.enable = true;
@@ -129,13 +115,9 @@
   };
 
   programs = {
-    # Backlight control + permissions
-    light.enable = true;
-    # XWayland
+    light.enable = true; # Backlight control + permissions
     xwayland.enable = true;
-    # Niri
     niri.enable = true;
-    # Install firefox.
     firefox.enable = true;
   };
 
@@ -165,9 +147,6 @@
     isNormalUser = true;
     description = "Brysen";
     extraGroups = ["networkmanager" "wheel" "docker" "video" "input"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -185,9 +164,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    #
     xits-math
-
     fuzzel
 
     # toolchain for native-compiled plugins
