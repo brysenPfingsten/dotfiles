@@ -12,11 +12,10 @@ in {
       hidePodcasts
       shuffle
     ];
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
+    theme = spicePkgs.themes.dreary;
+    # colorScheme = "mocha";
   };
 
-  # Override the desktop entry to force Wayland flags (no package wrapping)
   xdg.desktopEntries.spotify = {
     name = "Spotify";
     genericName = "Music Player";

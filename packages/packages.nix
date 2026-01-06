@@ -25,6 +25,7 @@ in {
     pyright
     ruff
     black
+    uv
     # Javascript
     nodejs
     # Rust

@@ -119,6 +119,7 @@
     xwayland.enable = true;
     niri.enable = true;
     firefox.enable = true;
+    nix-ld.enable = true;
   };
 
   # Enable sound with pipewire.
