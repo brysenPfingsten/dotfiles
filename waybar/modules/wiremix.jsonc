@@ -1,0 +1,52 @@
+{
+	"group/wiremix": {
+		"orientation": "horizontal",
+		"modules": [
+			"wireplumber#output",
+			"wireplumber#input"
+		],
+		"drawer": {
+			// "transition-duration":
+			"transition-left-to-right": false
+			// "children-class":
+			// "click-to-reveal":
+		}
+	},
+
+	/*-------------------
+	    output device
+	-------------------*/
+
+	"wireplumber#output": {
+		"format": "{icon} {volume}%",
+		"format-muted": "{icon} {volume}%",
+		"format-icons": {
+			"default": [ "󰕿", "󰖀", "󰕾" ],
+			"default-muted": "󰝟",
+			"headphone": "󰋋",
+			"headphone-muted": "󰟎",
+			"headset": "󰋎",
+			"headset-muted": "󰋐"
+		},
+		"min-length": 7,
+		"max-length": 7,
+		"on-click": "kitty --class=popup-term -e wiremix",
+		"tooltip-format": "<b>Output Device</b>: {desc}",
+		"node-type": "Audio/Sink"
+	},
+
+	/*----------------
+	    microphone
+	----------------*/
+
+	"wireplumber#input": {
+		"format": "{format_source}",
+		"format-source": "󰍬 {volume}%",
+		"format-source-muted": "󰍭 {volume}%",
+		"min-length": 7,
+		"max-length": 7,
+		"on-click": "kitty --class=popup-term -e wiremix",
+		"tooltip-format": "<b>Input Device</b>: {desc}",
+		"node-type": "Audio/Source"
+	}
+}

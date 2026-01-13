@@ -1,14 +1,50 @@
 #!/usr/bin/env bash
+#
+# Launch a power menu
+#
+# Requirement: fzf
+#
+# Author:  Jesse Mirabel <sejjymvm@gmail.com>
+# Date:    August 19, 2025
+# License: MIT
 
-# Use -dmenu (one dash), not --dmenu
-picker() { rofi -dmenu -i -p "Power"; }
+# shellcheck disable=SC1090
+colors=()
+source ~/.config/waybar/scripts/fzf-colorizer.sh &> /dev/null || true
 
-choice="$(printf '%s\n' ' Lock' ' Suspend' ' Reboot' ' Shutdown' | picker)" || exit 0
+main() {
+	local list=(
+		"Lock"
+		"Shutdown"
+		"Reboot"
+		"Logout"
+		"Hibernate"
+		"Suspend"
+	)
 
-case "$choice" in
-" Lock") exec gtklock || exec swaylock ;;
-" Suspend") exec systemctl suspend ;;
-" Reboot") exec systemctl reboot ;;
-" Shutdown") exec systemctl poweroff ;;
-*) exit 0 ;;
-esac
+	local options=(
+		"--border=sharp"
+		"--border-label= Power Menu "
+		"--height=~100%"
+		"--highlight-line"
+		"--no-input"
+		"--pointer="
+		"--reverse"
+		"${colors[@]}"
+	)
+
+	local selected
+	selected=$(printf "%s\n" "${list[@]}" | fzf "${options[@]}")
+
+	case $selected in
+		"Lock") loginctl lock-session ;;
+		"Shutdown") systemctl poweroff ;;
+		"Reboot") systemctl reboot ;;
+		"Logout") loginctl terminate-session "$XDG_SESSION_ID" ;;
+		"Hibernate") systemctl hibernate ;;
+		"Suspend") systemctl suspend ;;
+		*) exit 1 ;;
+	esac
+}
+
+main

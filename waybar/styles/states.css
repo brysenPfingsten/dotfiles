@@ -1,0 +1,35 @@
+#custom-trigger:hover,
+#idle_inhibitor:hover,
+#clock.date:hover,
+#network:hover,
+#bluetooth:hover,
+#custom-system_update:hover,
+#custom-sunsetr:hover,
+#mpris:hover,
+#wireplumber:hover {
+	color: @hover-fg;
+}
+
+/* inactive state */
+#idle_inhibitor.deactivated,
+#mpris.paused,
+#wireplumber.muted {
+	color: @hover-fg;
+}
+
+#memory.warning,
+#cpu.warning,
+#battery.warning {
+	color: @warning;
+}
+
+#temperature.critical,
+#memory.critical,
+#cpu.critical,
+#battery.critical {
+	color: @critical;
+}
+
+#battery.charging {
+	color: @charging;
+}

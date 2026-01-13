@@ -1,0 +1,12 @@
+{
+	"custom/system_update": {
+		"exec": "echo '{\"text\":\"󰑐\",\"tooltip\":\"Run rebuild\"}'",
+		"return-type": "json",
+		"interval": 3600,
+		"signal": 1,
+		"format": "{}",
+		"min-length": 2,
+		"max-length": 2,
+		"on-click": "kitty --class=popup-term rebuild"
+	}
+}

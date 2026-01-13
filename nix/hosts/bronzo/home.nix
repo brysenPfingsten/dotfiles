@@ -18,6 +18,7 @@
     ../../../firefox/firefox.nix
     ../../../spotify/spotify.nix
     ../../../packages/packages.nix
+    ../../../sunsetr/sunsetr.nix
   ];
   home = {
     username = "pfingsbr";

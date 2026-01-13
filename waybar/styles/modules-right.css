@@ -1,0 +1,66 @@
+/*----------------
+    media info
+----------------*/
+
+#mpris {
+	padding: 0 12px;
+}
+
+/*------------
+    volume
+------------*/
+
+#custom-left_div.6 {
+	color: @volume;
+}
+#wireplumber {
+	background-color: @volume;
+}
+
+/*-------------
+    sunsetr
+-------------*/
+
+#custom-left_div.7 {
+	background-color: @volume;
+	color: @base;
+}
+#custom-sunsetr {
+	background-color: @surface0;
+	background-color: @base;
+	padding: 0 10px;
+}
+#custom-sunsetr.on {
+	color: @accent;
+}
+#custom-sunsetr.off {
+	color: @hover-fg;
+}
+
+/*-------------
+    battery
+-------------*/
+
+#custom-left_div.8 {
+	background-color: @base;
+	color: @battery;
+}
+#battery {
+	background-color: @battery;
+}
+#custom-left_inv.2 {
+	color: @battery;
+}
+
+/*----------------
+    power menu
+----------------*/
+
+#custom-power_menu {
+	border-radius: 16px;
+	padding: 0 19px 0 16px;
+	color: @accent;
+}
+#custom-power_menu:hover {
+	background-color: @hover-bg;
+}

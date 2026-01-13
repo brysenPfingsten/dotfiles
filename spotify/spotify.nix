@@ -20,7 +20,7 @@ in {
     name = "Spotify";
     genericName = "Music Player";
     exec = "spotify --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland %U";
-    icon = "spotify";
+    icon = "spotify-client";
     type = "Application";
     terminal = false;
     categories = ["Audio" "Music" "Player"];

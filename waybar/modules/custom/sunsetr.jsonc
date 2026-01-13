@@ -1,0 +1,11 @@
+{
+	"custom/sunsetr": {
+		"exec": "~/.config/waybar/scripts/sunsetr.sh",
+		"return-type": "json",
+		"interval": 60,
+		"signal": 5,
+		"format": "{text}",
+		"on-click": "~/.config/waybar/scripts/sunsetr.sh toggle; pkill -RTMIN+5 waybar",
+		"tooltip": false
+	}
+}

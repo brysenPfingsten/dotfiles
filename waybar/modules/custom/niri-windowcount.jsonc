@@ -1,0 +1,9 @@
+{
+	"custom/niri_windowcount": {
+		"exec": "~/.config/waybar/scripts/niri-windowcount.sh",
+		"interval": 2,
+		"return-type": "text",
+		"format": "[{}]",
+		"tooltip": false
+	}
+}

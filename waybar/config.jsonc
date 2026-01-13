@@ -1,160 +1,123 @@
 {
-  "layer": "top",
-  "position": "top",
-  "fixed-center": true,
-  "spacing": 6,
-  "margin-top": 0,
-  "margin-bottom": 0,
-  "margin-left": 0,
-  "margin-right": 0,
+	/*
+	"include": [
+		"~/.config/waybar/modules/*.jsonc",
+		"~/.config/waybar/modules/custom/*.jsonc",
+		"~/.config/waybar/modules/niri/*.jsonc"
 
-  "modules-left": [
-    "niri/workspaces",
-    "niri/window",
-    "mpris"
-  ],
+		// modules that are not included by default:
+		// "~/.config/waybar/modules/extras/*.jsonc"
+	],
+	*/
 
-  "modules-center": ["clock"],
+	"include": [
+		// modules-left
+		"~/.config/waybar/modules/custom/user.jsonc",
+		"~/.config/waybar/modules/niri/workspaces.jsonc",
+		"~/.config/waybar/modules/extras/taskbar.jsonc",
 
-  "modules-right": [
-    "battery",
-    "network",
-    "bluetooth",
-    "wireplumber",
-    "custom/btop",
-    "custom/docker",
-    "custom/power"
-  ],
+		// modules-center
+		"~/.config/waybar/modules/custom/niri-windowcount.jsonc",
+		"~/.config/waybar/modules/temperature.jsonc",
+		"~/.config/waybar/modules/memory.jsonc",
+		"~/.config/waybar/modules/cpu.jsonc",
+		"~/.config/waybar/modules/custom/distro.jsonc",
+		"~/.config/waybar/modules/idle_inhibitor.jsonc",
+		"~/.config/waybar/modules/clock.jsonc",
+		"~/.config/waybar/modules/network.jsonc",
+		"~/.config/waybar/modules/bluetooth.jsonc",
+		"~/.config/waybar/modules/custom/system_update.jsonc",
+		"~/.config/waybar/modules/custom/sunsetr.jsonc",
 
-  // ---------- Niri workspaces ----------
-  "niri/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "active": "",
-      "default": ""
-    }
-  },
+		// modules-right
+		"~/.config/waybar/modules/mpris.jsonc",
+		"~/.config/waybar/modules/wiremix.jsonc",
+		"~/.config/waybar/modules/battery.jsonc",
+		"~/.config/waybar/modules/custom/power_menu.jsonc",
 
-  // ---------- Niri focused window ----------
-  "niri/window": {
-    "format": "{title}",
-    "max-length": 60,
-    "ellipsis": true,
-    "rewrite": {
-      "(.*) — Mozilla Firefox": "$1",
-      "(.*) — Firefox": "$1",
-      "(.*) — nvim": " $1"
-    }
-  },
+		"~/.config/waybar/modules/custom/dividers.jsonc"
 
-  // ---------- MPRIS ----------
-  "mpris": {
-    "format": "{status_icon} {title} - {artist}",
-    "status-icons": {
-      "playing": "",
-      "paused": "",
-      "stopped": "■"
-    },
-    "truncate-hours": true,
-    "max-length": 60,
-    "ignored-players": ["firefox"],
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous",
-    "tooltip": true,
-    "tooltip-format": "{player_name}\n{title}\n{artist}"
-  },
+		// modules that are not included by default:
+		// "~/.config/waybar/modules/extras/taskbar.jsonc",
+		// "~/.config/waybar/modules/extras/tray.jsonc",
+		// "~/.config/waybar/modules/extras/wireplumber.jsonc"
+	],
 
-  // ---------- Clock ----------
-  "clock": {
-    "format": "{:%I:%M %p  %d %b}",
-    "format-alt": "{:%a, %b %d  %Y}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "mode": "month",
-      "weeks-pos": "right",
-      "on-scroll": 1,
-      "on-click-right": "mode",
-      "format": {
-        "months": "<span><b>{}</b></span>",
-        "weekdays": "<span>{}</span>",
-        "today": "<span><b><u>{}</u></b></span>"
-      }
-    },
-    "on-click-right": "mode",
-    "on-click": "date '+%Y-%m-%d %T'"
-  },
+	/*------------
+	    layout
+	------------*/
 
-  // ---------- Battery ----------
-  "battery": {
-    "states": { "good": 75, "warning": 35, "critical": 20 },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
-    "format-alt": "{time} {icon}",
-    "format-icons": [
-      "󰂎","󰁺","󰁻","󰁼","󰁽",
-      "󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"
-    ],
-    "hide-if-empty": true,
-    "tooltip": true,
-    "tooltip-format": "{capacity}% ({time})"
-  },
+	"modules-left": [
+		"group/user",
+		"custom/left_div#1",
+		"niri/workspaces",
+		"custom/right_div#1",
+		"wlr/taskbar"
+	],
+	"modules-center": [
+		"custom/niri_windowcount",
+		"custom/left_div#2",
+		"temperature",
+		"custom/left_div#3",
+		"memory",
+		"custom/left_div#4",
+		"cpu",
+		"custom/left_inv#1",
+		"custom/left_div#5",
+		"custom/distro",
+		"custom/right_div#2",
+		"custom/right_inv#1",
+		"idle_inhibitor",
+		"clock#time",
+		"custom/right_div#3",
+		"clock#date",
+		"custom/right_div#4",
+		"network",
+		"bluetooth",
+		"custom/system_update",
+		"custom/right_div#5"
+	],
+	"modules-right": [
+		"mpris",
+		"custom/left_div#6",
+		"group/wiremix",
+		"custom/left_div#7",
+		"custom/sunsetr",
+		"custom/left_div#8",
+		"battery",
+		"custom/left_inv#2",
+		"custom/power_menu"
+	],
 
-  // ---------- Network ----------
-  "network": {
-    "format-wifi": "",
-    "format-ethernet": "",
-    "format-disconnected": "",
-    "tooltip": true,
-    "tooltip-format-wifi": "{essid}\n{ipaddr}",
-    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
-    "tooltip-format-disconnected": "Disconnected",
-    "on-click": "kitty --class=popup-term -e impala"
-  },
+	/*-------------
+	    options
+	-------------*/
 
-  // ---------- Bluetooth ----------
-  "bluetooth": {
-    "format-connected": "󰂱  {device_alias}",
-    "format-connected-battery": "󰂱  {device_alias} {device_battery_percentage}%",
-    "format-off": "󰂲",
-    "format-on": "󰂯",
-    "tooltip": true,
-    "tooltip-format": "{controller_address}\n{num_connections} devices",
-    "on-click": "kitty --class=popup-term -e bluetui"
-  },
-
-  // ---------- Volume (PipeWire / WirePlumber) ----------
-  "wireplumber": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰖁 muted",
-    "format-icons": ["", "", ""],
-    "scroll-step": 2,
-    "on-click": "kitty --class=popup-term -e wiremix",
-    "tooltip": true,
-    "tooltip-format": "{node_name} ({volume}%)"
-  },
-
-  // ---------- Custom: btop ----------
-  "custom/btop": {
-    "format": "",
-    "on-click": "kitty --class=popup-term -e btop",
-    "interval": 0
-  },
-
-  // ---------- Custom: docker ----------
-  "custom/docker": {
-    "format": "",
-    "on-click": "kitty --class=popup-term -e lazydocker",
-    "interval": 0
-  },
-
-  // ---------- Custom: power menu ----------
-  "custom/power": {
-    "format": "⏻",
-    "on-click": "exec $HOME/.config/waybar/scripts/power-menu.sh",
-    "interval": "once"
-  }
+	// "expand-center":
+	// "expand-left":
+	// "expand-right":
+	"layer": "top",
+	// "output":
+	// "position":
+	"height": 0,
+	"width": 0,
+	"margin": 0,
+	// "margin-top":
+	// "margin-left":
+	// "margin-bottom":
+	// "margin-right":
+	// "no-center":
+	"spacing": 0,
+	// "name":
+	"mode": "dock",
+	// "start_hidden":
+	// "modifier-reset":
+	// "exclusive":
+	// "fixed-center":
+	// "passthrough":
+	// "ipc":
+	// "id":
+	"reload_style_on_change": true
+	// "on-sigusr1":
+	// "on-sigusr2":
 }
-
