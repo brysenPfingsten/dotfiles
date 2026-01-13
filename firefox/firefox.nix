@@ -55,6 +55,10 @@ in {
                 name = "Timesheet";
                 url = "https://bannerapps.shu.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod";
               }
+              {
+                name = "Chess";
+                url = "https://chess.com";
+              }
             ];
           }
         ];
