@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   # Build the config directory in the store so scripts keep execute bits.
   waybarConfig = pkgs.runCommandLocal "waybar-config" {src = ./.;} ''
     mkdir -p "$out"
@@ -16,5 +13,20 @@ in {
   xdg.configFile."waybar" = {
     source = waybarConfig;
     recursive = true;
+  };
+  systemd.user.services.waybar = {
+    Unit = {
+      Description = "Waybar (bound to Niri)";
+      PartOf = ["niri.service"];
+      After = ["niri.service"];
+      ConditionEnvironment = "WAYLAND_DISPLAY";
+    };
+    Service = {
+      ExecStart = "${pkgs.waybar}/bin/waybar";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["niri.service"];
+    };
   };
 }
