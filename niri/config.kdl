@@ -1,5 +1,6 @@
 include "colors.default.kdl"
-include optional=true "colors.runtime.kdl"
+// include optional=true "colors.runtime.kdl"
+include "colors.runtime.kdl"
 
 // Input device configuration.
 // https://yalter.github.io/niri/Configuration:-Input
@@ -159,6 +160,7 @@ binds {
     Super+W { spawn-sh "pkill -SIGUSR1 waybar"; }
     Super+B { spawn "firefox"; }
     Super+Shift+Space { spawn-sh "wallpick"; }
+    Super+D { spawn-sh "kitty --class=popup-term -e dooit"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
