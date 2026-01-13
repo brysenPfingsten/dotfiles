@@ -36,16 +36,24 @@ in {
                 url = "https://github.com";
               }
               {
-                name = "Home Manager Options";
-                url = "https://nix-community.github.io/home-manager/options.xhtml";
-              }
-              {
                 name = "Canvas";
                 url = "https://setonhall.instructure.com";
               }
               {
                 name = "Onedrive";
                 url = "https://studentshu-my.sharepoint.com";
+              }
+              {
+                name = "Outlook";
+                url = "https://outlook.office.com/mail";
+              }
+              {
+                name = "PirateNet";
+                url = "https://shu.okta.com/app/UserHome";
+              }
+              {
+                name = "Timesheet";
+                url = "https://bannerapps.shu.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod";
               }
             ];
           }

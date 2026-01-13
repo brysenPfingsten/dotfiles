@@ -1,5 +1,5 @@
 include "colors.default.kdl"
-include "colors.runtime.kdl"
+include optional=true "colors.runtime.kdl"
 
 // Input device configuration.
 // https://yalter.github.io/niri/Configuration:-Input
@@ -300,6 +300,7 @@ binds {
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+    Alt+P { screenshot;}
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
