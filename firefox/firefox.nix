@@ -59,6 +59,14 @@ in {
                 name = "Chess";
                 url = "https://chess.com";
               }
+              {
+                name = "Logic Site";
+                url = "https://jasonhemann.github.io/26SP-CS3204/";
+              }
+              {
+                name = "Logic Gradescope";
+                url = "https://www.gradescope.com/courses/1220170";
+              }
             ];
           }
         ];
