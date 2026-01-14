@@ -19,6 +19,7 @@
     ../../../spotify/spotify.nix
     ../../../packages/packages.nix
     ../../../sunsetr/sunsetr.nix
+    ../../../mako/mako.nix
   ];
   home = {
     username = "pfingsbr";
