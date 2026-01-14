@@ -8,14 +8,14 @@
 		// "interval":
 		// "restart-interval":
 		// "signal":
-		"format": "󰤄",
+		"format": "",
 		// "format-icons":
 		// "rotate":
 		// "min-length":
 		// "max-length":
 		// "align":
 		// "justify":
-		"on-click": "kitty -e --class=popup-term ~/.config/waybar/scripts/power-menu.sh",
+		"on-click": "swaync-client -t",
 		// "on-click-middle":
 		// "on-click-right":
 		// "on-update":
@@ -23,7 +23,7 @@
 		// "on-scroll-down":
 		// "smooth-scrolling-threshold":
 		// "tooltip":
-		"tooltip-format": "Power Menu"
+		"tooltip-format": "Notification Center"
 		// "escape":
 		// "menu":
 		// "menu-file":

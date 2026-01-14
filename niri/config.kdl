@@ -162,6 +162,10 @@ binds {
     Super+Shift+Space { spawn-sh "wallpick"; }
     Super+D { spawn-sh "kitty --class=popup-term -e dooit"; }
     Super+M { spawn-sh "spotify --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland %U"; }
+    Super+Shift+W { spawn-sh "kitty --class=popup-term -e impala"; }
+    Super+Shift+B { spawn-sh "kitty --class=popup-term -e bluetui"; }
+    Super+Shift+D { spawn-sh "kitty --class=popup-term -e lazydocker"; }
+    Super+N { spawn-sh "swaync-client -t"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
