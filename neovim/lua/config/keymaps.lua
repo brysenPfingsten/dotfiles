@@ -70,11 +70,11 @@ vim.keymap.set("v", "p", '"_dP', opts)
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", function()
-	vim.diagnostic.jump({ count = -1, float = true })
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Go to previous diagnostic message" })
 
 vim.keymap.set("n", "]d", function()
-	vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Go to next diagnostic message" })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
@@ -84,27 +84,27 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<leader>bc", "<cmd>update | bdelete<CR>", { desc = "Save & close buffer" })
 
 vim.keymap.set("n", "<leader>rr", function()
-	vim.cmd("w") -- Save file first
+  vim.cmd("w") -- Save file first
 
-	local file_path = vim.fn.expand("%:p")
+  local file_path = vim.fn.expand("%:p")
 
-	-- Open terminal split at the bottom
-	vim.cmd("botright split")
-	vim.cmd("resize 15")
+  -- Open terminal split at the bottom
+  vim.cmd("botright split")
+  vim.cmd("resize 15")
 
-	-- Start racket with a specific command to ensure clean exit
-	vim.cmd("terminal racket")
+  -- Start racket with a specific command to ensure clean exit
+  vim.cmd("terminal racket")
 
-	-- Set up terminal buffer options for better cleanup
-	vim.cmd([[setlocal bufhidden=wipe]]) -- Wipe buffer when hidden
-	vim.cmd([[setlocal nobuflisted]]) -- Don't show in buffer list
+  -- Set up terminal buffer options for better cleanup
+  vim.cmd([[setlocal bufhidden=wipe]]) -- Wipe buffer when hidden
+  vim.cmd([[setlocal nobuflisted]]) -- Don't show in buffer list
 
-	vim.defer_fn(function()
-		local chan = vim.b.terminal_job_id
-		if chan then
-			vim.fn.chansend(chan, string.format('(enter! (file "%s"))\n', file_path))
-		end
-	end, 500)
+  vim.defer_fn(function()
+    local chan = vim.b.terminal_job_id
+    if chan then
+      vim.fn.chansend(chan, string.format('(enter! (file "%s"))\n', file_path))
+    end
+  end, 500)
 end, { desc = "Start Racket REPL and enter current file" })
 
 -- Open compiler
@@ -112,11 +112,11 @@ vim.api.nvim_set_keymap("n", "<F6>", "<cmd>CompilerOpen<cr>", { noremap = true, 
 
 -- Redo last selected option
 vim.api.nvim_set_keymap(
-	"n",
-	"<S-F6>",
-	"<cmd>CompilerStop<cr>" -- (Optional, to dispose all tasks before redo)
-		.. "<cmd>CompilerRedo<cr>",
-	{ noremap = true, silent = true }
+  "n",
+  "<S-F6>",
+  "<cmd>CompilerStop<cr>" -- (Optional, to dispose all tasks before redo)
+    .. "<cmd>CompilerRedo<cr>",
+  { noremap = true, silent = true }
 )
 
 -- Toggle compiler results
