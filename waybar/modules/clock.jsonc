@@ -1,7 +1,7 @@
 {
 	"clock#time": {
 		// "interval":
-		"format": "{:%H:%M}",
+		"format": "{:%I:%M}",
 		// "timezone":
 		// "timezones":
 		// "locale":
