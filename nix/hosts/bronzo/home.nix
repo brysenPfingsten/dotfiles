@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    inputs.LazyVim.homeManagerModules.default
     ../../../pywal/pywal.nix
     ../../../niri/niri.nix
     ../../../git/git.nix

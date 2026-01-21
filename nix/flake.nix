@@ -11,10 +11,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    LazyVim = {
-      url = "github:matadaniel/LazyVim-module";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +29,6 @@
     self,
     nixpkgs,
     home-manager,
-    LazyVim,
     ...
   }: let
     system = "x86_64-linux";
@@ -41,7 +36,7 @@
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs LazyVim;};
+      specialArgs = {inherit inputs;};
 
       modules = [
         ./hosts/bronzo/configuration.nix
@@ -54,16 +49,16 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs LazyVim;};
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.pfingsbr = {...}: {
             imports = [
               inputs.spicetify-nix.homeManagerModules.spicetify
               ./hosts/bronzo/home.nix
             ];
           };
-          home-manager.users.root = {...}: {
-            imports = [./root-home.nix];
-          };
+          # home-manager.users.root = {...}: {
+          #   imports = [./root-home.nix];
+          # };
         }
       ];
     };
