@@ -48,12 +48,20 @@ in {
                 url = "https://outlook.office.com/mail";
               }
               {
+                name = "Teams";
+                url = "https://teams.microsoft.com/v2/";
+              }
+              {
                 name = "PirateNet";
                 url = "https://shu.okta.com/app/UserHome";
               }
               {
                 name = "Timesheet";
                 url = "https://bannerapps.shu.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod";
+              }
+              {
+                name = "Tutor Appointments";
+                url = "https://shu.campus.eab.com/home/staff#?tab-state=appointments_tab";
               }
               {
                 name = "Chess";
