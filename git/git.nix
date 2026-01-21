@@ -11,7 +11,7 @@
       extraConfig = {
         init.defaultBranch = "main";
         pull.rebase = true;
-        credential.helper = "!/etc/profiles/per-user/${config.home.username}/bin/gh auth git-credential";
+        credential.helper = "!${pkgs.gh} auth git-credential";
         diff.tool = "difft";
       };
     };
@@ -24,3 +24,7 @@
     lazygit
   ];
 }
+# user.name = "brysenPfingsten";
+# user.email = "brysen.pfingsten@gmail.com";
+# settings = {
+
