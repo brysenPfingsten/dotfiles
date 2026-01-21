@@ -47,7 +47,6 @@
         "buttons-grid"
       ];
 
-      # 2. Configure the specific widgets
       widget-config = {
         title = {
           text = "󰂚  :: Notifications";
@@ -71,10 +70,10 @@
               label = "";
               command = "systemctl reboot";
             }
-            {
-              label = "󰤄";
-              command = "systemctl suspend";
-            }
+            # {
+            #   label = "󰤄";
+            #   command = "systemctl suspend";
+            # }
             # {
             #   label = "󰗽";
             #   command = "hyprctl dispatch exit";
@@ -84,7 +83,6 @@
       };
     };
 
-    # written to ~/.config/swaync/style.css :contentReference[oaicite:4]{index=4}
     style = ''
       * {
         font-family: sans-serif;
