@@ -1,7 +1,3 @@
-include "colors.default.kdl"
-// include optional=true "colors.runtime.kdl"
-include "colors.runtime.kdl"
-
 // Input device configuration.
 // https://yalter.github.io/niri/Configuration:-Input
 input {
@@ -52,11 +48,15 @@ output "DP-3" {
     position x=1280 y=0
 }
 
+overview {
+    backdrop-color "#000000"
+}
+
 // Settings that influence how windows are positioned and sized.
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 2
+    gaps 1
 
     center-focused-column "never"
 
@@ -76,6 +76,20 @@ layout {
         spread 5
         offset x=0 y=5
         color "#0007"
+    }
+
+    focus-ring {
+        width 1
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+        // width 4
+        // active-color "#ffc87f"
+        // inactive-color "#505050"
+        // urgent-color "#9b0000"
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
