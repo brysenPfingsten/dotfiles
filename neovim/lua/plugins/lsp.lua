@@ -7,7 +7,7 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPost", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local lspconfig = require("lspconfig")
 			local util = require("lspconfig.util")
@@ -362,6 +362,13 @@ return {
 					},
 				})
 			end
+
+      lspconfig.tinymist.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        root_dir = util.root_pattern("typst.toml", ".git"),
+        single_file_support = true,
+      })
 		end,
 	},
 }
