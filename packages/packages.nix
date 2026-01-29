@@ -43,6 +43,7 @@ in {
     # LaTeX
     texlive.combined.scheme-full
     fontconfig
+    typst
 
     # Development
     tree-sitter
