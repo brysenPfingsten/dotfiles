@@ -74,7 +74,6 @@ in {
     fuzzel
 
     # PDFs
-    papers
     zathura
     pympress
     foliate
