@@ -121,3 +121,6 @@ vim.api.nvim_set_keymap(
 
 -- Toggle compiler results
 vim.api.nvim_set_keymap("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
+
+-- Exit terminal mode
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
