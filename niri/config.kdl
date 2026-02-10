@@ -180,6 +180,7 @@ binds {
     Super+Shift+B { spawn-sh "kitty --class=popup-term -e bluetui"; }
     Super+Shift+D { spawn-sh "kitty --class=popup-term -e lazydocker"; }
     Super+N { spawn-sh "swaync-client -t"; }
+    Super+P repeat=false { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
 
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
