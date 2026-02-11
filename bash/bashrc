@@ -1,3 +1,12 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/share"
+
+export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
+export VISUAL="nvim"
+
 alias ls='eza -lh --group-directories-first --icons=auto'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
@@ -16,7 +25,6 @@ alias ga='git commit -a -m'
 alias ga='git commit -a --amend'
 
 alias rebuild='sudo nixos-rebuild switch --flake ~/.config/nix'
-alias t='nvim ~/todo.md'
 alias mkdir='mkdir -p'
 alias spf='superfile'
 
