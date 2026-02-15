@@ -1,36 +1,20 @@
--- return {
---   "navarasu/onedark.nvim",
---   priority = 1000,
---   config = function()
---     require("onedark").setup({
---       style = "warmer",
---       transparent = true,
---     })
---     require("onedark").load()
---   end,
--- }
--- return {
--- 	"uZer/pywal16.nvim",
--- 	name = "pywal16",
--- 	config = function()
--- 		local pywal16 = require("pywal16")
--- 		pywal16.setup()
--- 		vim.cmd.colorscheme("pywal16")
--- 	end,
--- }
---
 return {
   "catppuccin/nvim",
   name = "catppuccin",
   priority = 1000,
-  flavour = "mocha",
+  lazy = false,
+  flavour = "frappe", -- latte, frappe, macchiato, mocha
   background = {
     light = "latte",
     dark = "mocha",
   },
   transparent_background = false,
+  float = {
+    transparent = false,
+    solid = false,
+  },
   show_end_of_buffer = false,
-  term_colors = true,
+  term_colors = false,
   dim_inactive = {
     enabled = false,
     shade = "dark",
@@ -41,7 +25,7 @@ return {
     conditionals = { "italic" },
     loops = {},
     functions = {},
-    keywords = { "italic" },
+    keywords = {},
     strings = {},
     variables = {},
     numbers = {},
@@ -49,30 +33,46 @@ return {
     properties = {},
     types = {},
     operators = {},
+    -- miscs = {}, -- Uncomment to turn off hard-coded styles
   },
+  lsp_styles = {
+    virtual_text = {
+      errors = { "bold" },
+      hints = { "italic" },
+      warnings = { "italic" },
+      information = { "italic" },
+      ok = { "italic" },
+    },
+    underlines = {
+      errors = { "underline" },
+      hints = { "underline" },
+      warnings = { "underline" },
+      information = { "underline" },
+      ok = { "underline" },
+    },
+    inlay_hints = {
+      background = true,
+    },
+  },
+  color_overrides = {},
+  custom_highlights = {},
+  default_integrations = true,
+  auto_integrations = true,
   integrations = {
     cmp = true,
     gitsigns = true,
     nvimtree = true,
-    treesitter = true,
-    telescope = true,
-    which_key = true,
-    lsp_trouble = true,
-    mason = true,
-    native_lsp = {
+    notify = false,
+    mini = {
       enabled = true,
-      virtual_text = {
-        errors = { "italic" },
-        hints = { "italic" },
-        warnings = { "italic" },
-        information = { "italic" },
-      },
-      underlines = {
-        errors = { "underline" },
-        hints = { "underline" },
-        warnings = { "underline" },
-        information = { "underline" },
-      },
+      indentscope_color = "",
     },
+    toggleterm = true,
+    neotree = true,
+    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
   },
+
+  config = function()
+    vim.cmd.colorscheme("catppuccin")
+  end,
 }
