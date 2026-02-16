@@ -98,6 +98,7 @@ return {
       local function enable_spell_if_needed()
         if spell_fts[vim.bo.filetype] then
           vim.opt_local.spell = true
+          vim.opt_local.wrap = true
           vim.opt_local.spelllang = { "en_us" }
         end
       end

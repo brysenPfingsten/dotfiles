@@ -1,52 +1,61 @@
 return {
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		cmd = { "ToggleTerm", "TermSelect", "ToggleTermSetName" },
-		keys = (function()
-			local function project_root()
-				---@diagnostic disable-next-line: deprecated
-				local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-				for _, c in ipairs(clients) do
-					local ws = c.config.workspace_folders
-					if ws and ws[1] and ws[1].name then
-						return ws[1].name
-					end
-				end
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    cmd = { "ToggleTerm", "TermSelect", "ToggleTermSetName" },
+    keys = (function()
+      local function project_root()
+        ---@diagnostic disable-next-line: deprecated
+        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        for _, c in ipairs(clients) do
+          local ws = c.config.workspace_folders
+          if ws and ws[1] and ws[1].name then
+            return ws[1].name
+          end
+        end
 
-				local buf = vim.api.nvim_buf_get_name(0)
-				local start = (buf ~= "" and vim.fs.dirname(buf)) or vim.uv.cwd()
-				local root = vim.fs.root(start, { ".git", "lua", "package.json", "pyproject.toml", "go.mod" })
-				return root or start
-			end
+        local buf = vim.api.nvim_buf_get_name(0)
+        local start = (buf ~= "" and vim.fs.dirname(buf)) or vim.uv.cwd()
+        local root = vim.fs.root(start, { ".git", "lua", "package.json", "pyproject.toml", "go.mod" })
+        return root or start
+      end
 
-			local function tt_toggle(direction, size, use_cwd)
-				return function()
-					local count = vim.v.count1
-					local dir = use_cwd and vim.uv.cwd() or project_root()
-					require("toggleterm").toggle(count, size, dir, direction)
-				end
-			end
+      local function tt_toggle(direction, size, use_cwd)
+        return function()
+          local count = vim.v.count1
+          local dir = use_cwd and vim.uv.cwd() or project_root()
+          require("toggleterm").toggle(count, size, dir, direction)
+        end
+      end
 
-			local function vsize()
-				return math.floor(vim.o.columns * 0.4)
-			end
+      local function vsize()
+        return math.floor(vim.o.columns * 0.4)
+      end
 
-			local lazygit_term ---@type any
+      local lazygit_term ---@type any
 
-			local function toggle_lazygit()
-				if not lazygit_term then
-					local Terminal = require("toggleterm.terminal").Terminal
-					lazygit_term = Terminal:new({
-						cmd = "lazygit",
-						dir = "git_dir",
-						direction = "float",
-						hidden = true,
-					})
-				end
-				lazygit_term:toggle()
-			end
+      local function toggle_lazygit()
+        if not lazygit_term then
+          local Terminal = require("toggleterm.terminal").Terminal
 
+          lazygit_term = Terminal:new({
+            cmd = "lazygit",
+            dir = "git_dir",
+            direction = "float",
+            hidden = true,
+
+            -- Map escape back to normal
+            on_open = function(term)
+              vim.keymap.set("t", "<Esc>", function()
+                return string.char(27)
+              end, { buffer = term.bufnr, expr = true, noremap = true, silent = true })
+              vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { buffer = term.bufnr, noremap = true, silent = true })
+            end,
+          })
+        end
+
+        lazygit_term:toggle()
+      end
       -- stylua: ignore
 			return {
 				{ "<leader>tf", tt_toggle("float", 0, false), desc = "ToggleTerm (float project root)" },
@@ -56,35 +65,35 @@ return {
 				{ "<leader>ts", "<cmd>TermSelect<cr>", desc = "Select term" },
         { "<leader>gg", toggle_lazygit, desc = "Toggle Lazygit" },
 			}
-		end)(),
-		opts = {
-			open_mapping = [[<c-\>]],
-			hide_numbers = true,
-			shade_filetypes = {},
-			shade_terminals = true,
-			start_in_insert = true,
-			insert_mappings = true,
-			terminal_mappings = true,
-			persist_size = true,
-			close_on_exit = true,
-			float_opts = {
-				border = "rounded",
-				width = function()
-					return math.floor(vim.o.columns * 0.9)
-				end,
-				height = function()
-					return math.floor(vim.o.lines * 0.85)
-				end,
-				winblend = 0,
-			},
+    end)(),
+    opts = {
+      open_mapping = [[<c-\>]],
+      hide_numbers = true,
+      shade_filetypes = {},
+      shade_terminals = true,
+      start_in_insert = true,
+      insert_mappings = true,
+      terminal_mappings = true,
+      persist_size = true,
+      close_on_exit = true,
+      float_opts = {
+        border = "rounded",
+        width = function()
+          return math.floor(vim.o.columns * 0.9)
+        end,
+        height = function()
+          return math.floor(vim.o.lines * 0.85)
+        end,
+        winblend = 0,
+      },
 
-			size = function(term)
-				if term.direction == "horizontal" then
-					return 15
-				elseif term.direction == "vertical" then
-					return math.floor(vim.o.columns * 0.4)
-				end
-			end,
-		},
-	},
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 15
+        elseif term.direction == "vertical" then
+          return math.floor(vim.o.columns * 0.4)
+        end
+      end,
+    },
+  },
 }

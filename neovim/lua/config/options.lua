@@ -23,7 +23,7 @@ vim.o.whichwrap = "bs<>[]hl" -- Which "horizontal" keys are allowed to travel to
 vim.o.numberwidth = 4 -- Set number column width to 2 {default 4} (default: 4)
 vim.o.swapfile = false -- Creates a swapfile (default: true)
 vim.o.smartindent = true -- Make indenting smarter again (default: false)
-vim.o.showtabline = 2 -- Always show tabs (default: 1)
+vim.o.showtabline = 1 -- Always show tabs (default: 1)
 vim.o.backspace = "indent,eol,start" -- Allow backspace on (default: 'indent,eol,start')
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)
 -- vim.o.conceallevel = 0 -- So that `` is visible in markdown files (default: 1)
@@ -42,10 +42,10 @@ vim.opt.iskeyword:append("-") -- Hyphenated words recognized by searches (defaul
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
 -- Virtual Text
 vim.diagnostic.config({
-	virtual_text = {
-		prefix = "●", -- Could be '■', '▎', 'x'
-		spacing = 4,
-	},
+  virtual_text = {
+    prefix = "●", -- Could be '■', '▎', 'x'
+    spacing = 4,
+  },
 })
 -- Transparency
 -- vim.opt.termguicolors = true
