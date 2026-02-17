@@ -11,7 +11,6 @@ return {
       ensure_installed = {
         "lua_ls",
         "tinymist",
-        "rust-analyzer",
       },
       automatic_installation = true,
     },
