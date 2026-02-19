@@ -75,6 +75,10 @@ in {
                 name = "Logic Gradescope";
                 url = "https://www.gradescope.com/courses/1220170";
               }
+              {
+                name = "FSM Docs";
+                url = "https://morazanm.github.io/fsm/fsm/index.html";
+              }
             ];
           }
         ];
