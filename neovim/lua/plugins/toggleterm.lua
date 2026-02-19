@@ -33,18 +33,18 @@ return {
       end
 
       local lazygit_term ---@type any
+      local yazi_term ---@type any
 
-      local function toggle_lazygit()
-        if not lazygit_term then
+      local function toggle_command_floating(term, command)
+        if not term then
           local Terminal = require("toggleterm.terminal").Terminal
 
-          lazygit_term = Terminal:new({
-            cmd = "lazygit",
+          term = Terminal:new({
+            cmd = command,
             dir = "git_dir",
             direction = "float",
             hidden = true,
 
-            -- Map escape back to normal
             on_open = function(term)
               vim.keymap.set("t", "<Esc>", function()
                 return string.char(27)
@@ -54,8 +54,17 @@ return {
           })
         end
 
-        lazygit_term:toggle()
+        term:toggle()
       end
+
+      local function toggle_lazygit()
+        toggle_command_floating(lazygit_term, "lazygit")
+      end
+
+      -- local function toggle_yazi()
+      --   toggle_command_floating(yazi_term, "yazi")
+      -- end
+
       -- stylua: ignore
 			return {
 				{ "<leader>tf", tt_toggle("float", 0, false), desc = "ToggleTerm (float project root)" },

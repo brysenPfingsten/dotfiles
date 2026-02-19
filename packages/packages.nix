@@ -86,7 +86,7 @@ in {
     btop
     wiremix
     clipse
-    superfile
+    yazi
 
     # File manager stuff
     nautilus
