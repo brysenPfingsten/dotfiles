@@ -62,7 +62,7 @@ return {
         },
         racket_langserver = {},
         tinymist = {},
-        nil_ls = {},
+        nixd = {},
       }
 
       for name, cfg in pairs(servers) do
