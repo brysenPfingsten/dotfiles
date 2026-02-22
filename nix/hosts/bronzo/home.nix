@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ../../../pywal/pywal.nix
     ../../../niri/niri.nix
     ../../../git/git.nix
     ../../../neovim/nvim.nix

@@ -21,7 +21,6 @@ in {
         vimium
         better-canvas
         ublock-origin
-        pywalfox
       ];
 
       bookmarks = {
@@ -85,9 +84,4 @@ in {
       };
     };
   };
-
-  home.packages = with pkgs; [
-    # NOTE: Make sure to run `pywalfox install` on fresh builds
-    pywalfox-native
-  ];
 }
