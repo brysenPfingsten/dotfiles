@@ -12,8 +12,8 @@ in {
       hidePodcasts
       shuffle
     ];
-    theme = spicePkgs.themes.dreary;
-    # colorScheme = "mocha";
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
   };
 
   xdg.desktopEntries.spotify = {
