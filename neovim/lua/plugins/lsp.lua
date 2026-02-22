@@ -62,7 +62,21 @@ return {
         },
         racket_langserver = {},
         tinymist = {},
-        nixd = {},
+        nixd = {
+          settings = {
+            nixd = {
+              nixpkgs = { expr = "import <nixpkgs> { }" },
+              options = {
+                nixos = {
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").nixosConfigurations."nixos".options',
+                },
+                ["home-manager"] = {
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").homeConfigurations."pfingsbr".options',
+                },
+              },
+            },
+          },
+        },
       }
 
       for name, cfg in pairs(servers) do

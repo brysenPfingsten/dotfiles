@@ -32,7 +32,14 @@
     ...
   }: let
     system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
+
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [
+        inputs.nur.overlays.default
+      ];
+    };
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -56,9 +63,22 @@
               ./hosts/bronzo/home.nix
             ];
           };
-          # home-manager.users.root = {...}: {
-          #   imports = [./root-home.nix];
-          # };
+        }
+      ];
+    };
+
+    homeConfigurations.pfingsbr = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+
+      extraSpecialArgs = {inherit inputs;};
+
+      modules = [
+        inputs.spicetify-nix.homeManagerModules.spicetify
+        ./hosts/bronzo/home.nix
+
+        {
+          home.username = "pfingsbr";
+          home.homeDirectory = "/home/pfingsbr";
         }
       ];
     };
