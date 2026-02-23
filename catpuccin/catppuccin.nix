@@ -1,5 +1,7 @@
 {...}: {
   programs.zathura.enable = true;
+  programs.fuzzel.enable = true;
+
   catppuccin = {
     flavor = "mocha";
     accent = "blue";

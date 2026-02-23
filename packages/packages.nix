@@ -12,6 +12,7 @@
     difftastic
     wl-clipboard
     codex
+    swww
 
     # Web Apps
     wasistlos
@@ -19,10 +20,8 @@
     # GUIs
     pavucontrol
     vlc
-    fuzzel
 
     # PDFs
-    zathura
     foliate
 
     # Terminal and TUIs
@@ -39,4 +38,5 @@
     adwaita-icon-theme
     gnome.gvfs
   ];
+  programs.fuzzel.enable = true;
 }
