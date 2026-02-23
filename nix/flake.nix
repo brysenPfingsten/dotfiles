@@ -23,6 +23,10 @@
       url = "github:dooit-org/dooit-extras";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -60,25 +64,10 @@
           home-manager.users.pfingsbr = {...}: {
             imports = [
               inputs.spicetify-nix.homeManagerModules.spicetify
+              inputs.catppuccin.homeModules.catppuccin
               ./hosts/bronzo/home.nix
             ];
           };
-        }
-      ];
-    };
-
-    homeConfigurations.pfingsbr = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      extraSpecialArgs = {inherit inputs;};
-
-      modules = [
-        inputs.spicetify-nix.homeManagerModules.spicetify
-        ./hosts/bronzo/home.nix
-
-        {
-          home.username = "pfingsbr";
-          home.homeDirectory = "/home/pfingsbr";
         }
       ];
     };

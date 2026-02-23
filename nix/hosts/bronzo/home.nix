@@ -18,6 +18,7 @@
     ../../../packages/packages.nix
     ../../../sunsetr/sunsetr.nix
     ../../../swaync/swaync.nix
+    ../../../catpuccin/catppuccin.nix
   ];
   home = {
     username = "pfingsbr";

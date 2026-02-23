@@ -15,13 +15,18 @@ in {
       settings = {
         "browser.startup.homepage" = "https://google.com";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "layout.css.prefers-color-scheme.content-override" = 0;
       };
 
-      extensions = with addons; [
-        vimium
-        better-canvas
-        ublock-origin
-      ];
+      extensions = {
+        force = true;
+        packages = with addons; [
+          firefox-color
+          vimium
+          better-canvas
+          ublock-origin
+        ];
+      };
 
       bookmarks = {
         force = true;
