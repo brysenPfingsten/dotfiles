@@ -1,14 +1,12 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs = {
     git = {
       enable = true;
-      userName = "Brysen Pfingsten";
-      userEmail = "brysen.pfingsten@gmail.com";
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Brysen Pfingsten";
+          email = "brysen.pfingsten@gmail.com";
+        };
         init.defaultBranch = "main";
         pull.rebase = true;
         credential.helper = "!${pkgs.gh} auth git-credential";
@@ -24,7 +22,3 @@
     lazygit
   ];
 }
-# user.name = "brysenPfingsten";
-# user.email = "brysen.pfingsten@gmail.com";
-# settings = {
-
