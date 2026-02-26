@@ -71,7 +71,7 @@ return {
                   expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").nixosConfigurations."nixos".options',
                 },
                 ["home-manager"] = {
-                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").homeConfigurations."pfingsbr".options',
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").nixosConfigurations."nixos".options.home-manager',
                 },
               },
             },
