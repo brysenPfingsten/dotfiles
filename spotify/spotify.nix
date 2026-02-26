@@ -11,6 +11,7 @@ in {
       adblockify
       hidePodcasts
       shuffle
+      keyboardShortcut
     ];
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
