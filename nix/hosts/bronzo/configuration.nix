@@ -122,6 +122,12 @@
     niri.enable = true;
     firefox.enable = true;
     nix-ld.enable = true;
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep 3";
+      flake = "/home/pfingsbr/dotfiles/nix";
+    };
   };
 
   # Enable sound with pipewire.
@@ -181,11 +187,6 @@
     settings = {
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete older-than 7d";
     };
   };
 }

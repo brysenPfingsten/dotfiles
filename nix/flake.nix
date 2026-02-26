@@ -53,8 +53,10 @@
         ./hosts/bronzo/configuration.nix
         ./dooit.nix
 
-        {nixpkgs.config.allowUnfree = true;}
-        {nixpkgs.overlays = [inputs.nur.overlays.default];}
+        {
+          nixpkgs.config.allowUnfree = true;
+          nixpkgs.overlays = [inputs.nur.overlays.default];
+        }
 
         home-manager.nixosModules.home-manager
         {
