@@ -25,8 +25,6 @@ in {
       ExecStart = "${pkgs.waybar}/bin/waybar";
       Restart = "on-failure";
     };
-    Install = {
-      WantedBy = ["niri.service"];
-    };
+    Install = {};
   };
 }

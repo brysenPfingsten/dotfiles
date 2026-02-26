@@ -27,6 +27,10 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -36,14 +40,6 @@
     ...
   }: let
     system = "x86_64-linux";
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [
-        inputs.nur.overlays.default
-      ];
-    };
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -55,7 +51,7 @@
 
         {
           nixpkgs.config.allowUnfree = true;
-          nixpkgs.overlays = [inputs.nur.overlays.default];
+          nixpkgs.overlays = [inputs.nur.overlays.default inputs.niri.overlays.niri];
         }
 
         home-manager.nixosModules.home-manager
@@ -67,6 +63,7 @@
             imports = [
               inputs.spicetify-nix.homeManagerModules.spicetify
               inputs.catppuccin.homeModules.catppuccin
+              inputs.niri.homeModules.niri
               ./hosts/bronzo/home.nix
             ];
           };

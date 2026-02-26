@@ -1,0 +1,5 @@
+{
+  overview = {
+    "backdrop-color" = "#000000";
+  };
+}
