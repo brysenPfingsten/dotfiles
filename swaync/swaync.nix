@@ -49,7 +49,7 @@
 
       widget-config = {
         title = {
-          text = "󰂚  :: Notifications";
+          text = "Notifications";
           clear-all-button = true;
           button-text = "Clear All";
         };
@@ -82,26 +82,5 @@
         };
       };
     };
-
-    style = ''
-      * {
-        font-family: sans-serif;
-        border-radius: 12px;
-      }
-
-      .control-center {
-        padding: 10px;
-      }
-
-      .notification {
-        margin: 6px 10px;
-        padding: 10px;
-      }
-
-      .notification-row:focus,
-      .notification-row:hover {
-        opacity: 0.92;
-      }
-    '';
   };
 }

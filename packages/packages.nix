@@ -25,13 +25,11 @@
     foliate
 
     # Terminal and TUIs
-    starship
     impala
     bluetui
     btop
     wiremix
     clipse
-    yazi
 
     # File manager stuff
     nautilus
