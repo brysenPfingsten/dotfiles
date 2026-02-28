@@ -53,12 +53,12 @@
       repeat = false;
     };
     # TUIs
-    "Mod+D".action.spawn = ["kitty"];
-    "Mod+Shift+W".action.spawn = ["kitty" "--class=popup-term" "-e impala"];
-    "Mod+Shift+B".action.spawn = ["kitty" "--class=popup-term" "-e bluetui"];
-    "Mod+Shift+D".action.spawn = ["kitty" "--class=popup-term" "-e lazydocker"];
+    "Mod+D".action.spawn = ["kitty" "--class=popup-term" "-e" "dooit"];
+    "Mod+Shift+W".action.spawn = ["kitty" "--class=popup-term" "-e" "impala"];
+    "Mod+Shift+B".action.spawn = ["kitty" "--class=popup-term" "-e" "bluetui"];
+    "Mod+Shift+D".action.spawn = ["kitty" "--class=popup-term" "-e" "lazydocker"];
     "Mod+V".action.spawn = ["kitty" "--class=popup-term" "-e" "clipse"];
-    "Mod+Shift+Return".action.spawn = ["kitty --class=popup-term"];
+    "Mod+Shift+Return".action.spawn = ["kitty" "--class=popup-term"];
 
     # Brightness
     "XF86MonBrightnessUp" = {
