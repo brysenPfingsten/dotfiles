@@ -8,8 +8,8 @@
     "Mod+L".action.focus-column-right = {};
     # Moving windows
     "Mod+Ctrl+H".action.move-column-left = {};
-    "Mod+Ctrl+J".action.move-workspace-down = {};
-    "Mod+Ctrl+K".action.move-workspace-up = {};
+    "Mod+Ctrl+J".action.move-window-to-workspace-down = {};
+    "Mod+Ctrl+K".action.move-window-to-workspace-up = {};
     "Mod+Ctrl+L".action.move-column-right = {};
     # Moving Monitors
     "Mod+Shift+H".action.focus-monitor-left = {};
