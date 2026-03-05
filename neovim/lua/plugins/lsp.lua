@@ -65,13 +65,24 @@ return {
         nixd = {
           settings = {
             nixd = {
-              nixpkgs = { expr = "import <nixpkgs> { }" },
+              nixpkgs = {
+                expr = [[
+                  let
+                    flake = builtins.getFlake "path:/home/pfingsbr/dotfiles/nix";
+                  in
+                    flake.inputs.nixpkgs.legacyPackages.${builtins.currentSystem}
+                ]],
+              },
               options = {
                 nixos = {
-                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").nixosConfigurations."nixos".options',
+                  expr = [[
+                    (builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.nixos.options
+                  ]],
                 },
                 ["home-manager"] = {
-                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles?dir=nix").nixosConfigurations."nixos".options.home-manager',
+                  expr = [[
+                    (builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.nixos.options.home-manager.users.type.getSubOptions []
+                  ]],
                 },
               },
             },
