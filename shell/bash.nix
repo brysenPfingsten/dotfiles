@@ -18,10 +18,6 @@
   ];
 
   home.sessionVariables = {
-    # XDG_CONFIG_HOME = "$HOME/.config";
-    # XDG_DATA_HOME = "$HOME/.local/share";
-    # XDG_CACHE_HOME = "$HOME/.cache";
-    # XDG_STATE_HOME = "$HOME/.local/share";
     EDITOR = "nvim";
     SUDO_EDITOR = "nvim";
     VISUAL = "nvim";
@@ -30,7 +26,6 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    shellOptions = ["vi"];
     shellAliases = {
       # Listing
       ls = "exa -lh --group-directories-first --icons=auto";
@@ -62,6 +57,9 @@
     initExtra = ''
       open() { xdg-open "$@" >/dev/null 2>&1 & }
       n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
+      set -o vi
+      eval "$(starship init bash)"
+      eval "$(zoxide init --cmd cd bash)"
     '';
   };
 }

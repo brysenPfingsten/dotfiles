@@ -15,7 +15,6 @@
     zathura.enable = true;
     fuzzel.enable = true;
     lazygit.enable = true;
-    starship.enable = true;
     yazi.enable = true;
     swaync.enable = true;
   };
