@@ -12,6 +12,10 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- save file without auto-formatting
 map("n", "<leader>wn", "<cmd>noautocmd w <CR>", opts)
 
+-- Move between wrapped lines like normal
+map("n", "j", "gj", opts)
+map("n", "k", "gk", opts)
+
 -- quit file
 map("n", "<C-q>", "<cmd> q <CR>", opts)
 
