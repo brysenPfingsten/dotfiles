@@ -8,11 +8,9 @@
     ../../../git/git.nix
     ../../../neovim/nvim.nix
     ../../../kitty/kitty.nix
-    ../../../bash/bash.nix
-    ../../../starship/starship.nix
+    ../../../shell/bash.nix
     ../../../dooit/dooit.nix
     ../../../waybar/waybar.nix
-    ../../../starship/starship.nix
     ../../../firefox/firefox.nix
     ../../../spotify/spotify.nix
     ../../../packages/packages.nix

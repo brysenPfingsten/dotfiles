@@ -1,5 +1,4 @@
 {pkgs, ...}: let
-  # Build the config directory in the store so scripts keep execute bits.
   waybarConfig = pkgs.runCommandLocal "waybar-config" {src = ./.;} ''
     mkdir -p "$out"
     cp -r --no-preserve=mode,ownership "$src"/. "$out"
@@ -9,22 +8,18 @@
   '';
 in {
   programs.waybar.enable = true;
+  home.packages = with pkgs; [
+    playerctl
+    swww
+    # Terminal and TUIs
+    impala
+    bluetui
+    btop
+    wiremix
+  ];
 
   xdg.configFile."waybar" = {
     source = waybarConfig;
     recursive = true;
-  };
-  systemd.user.services.waybar = {
-    Unit = {
-      Description = "Waybar (bound to Niri)";
-      PartOf = ["niri.service"];
-      After = ["niri.service"];
-      ConditionEnvironment = "WAYLAND_DISPLAY";
-    };
-    Service = {
-      ExecStart = "${pkgs.waybar}/bin/waybar";
-      Restart = "on-failure";
-    };
-    Install = {};
   };
 }

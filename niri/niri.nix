@@ -9,6 +9,8 @@
     # For screen mirroring
     wl-mirror
     jq
+    # Clipboard
+    clipse
   ];
   programs.niri.package = pkgs.niri-unstable;
   programs.niri.enable = true;

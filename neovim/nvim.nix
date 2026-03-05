@@ -45,6 +45,7 @@
     lazydocker
     docker
     docker-compose
+    codex
   ];
   programs.neovim.enable = true;
   xdg.configFile."nvim" = {
