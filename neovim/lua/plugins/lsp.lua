@@ -60,6 +60,7 @@ return {
             },
           },
         },
+        rust_analyzer = {},
         racket_langserver = {},
         tinymist = {},
         nixd = {
