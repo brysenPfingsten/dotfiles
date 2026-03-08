@@ -5,18 +5,7 @@ return {
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.config").setup({
-        ensure_installed = {
-          "c",
-          "lua",
-          "nix",
-          "racket",
-          "markdown",
-          "java",
-          "vimdoc",
-          "help",
-          "typst",
-          "latex",
-        },
+        install_dir = "",
         auto_install = false,
         highlight = { enable = true },
       })
@@ -29,6 +18,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("nvim-treesitter.config").setup({
+        install_dir = "",
         textobjects = {
           select = {
             enable = true,

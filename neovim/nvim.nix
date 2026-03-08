@@ -47,7 +47,10 @@
     docker-compose
     codex
   ];
-  programs.neovim.enable = true;
+  programs.neovim = {
+    enable = true;
+    plugins = [pkgs.vimPlugins.nvim-treesitter.withAllGrammars];
+  };
   xdg.configFile."nvim" = {
     source = ./.;
     recursive = true;
