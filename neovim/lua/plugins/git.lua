@@ -13,7 +13,7 @@ return {
       },
 
       signcolumn = true,
-      numhl = false,
+      numhl = true,
       linehl = false,
       word_diff = false,
 
@@ -63,48 +63,36 @@ return {
           return "<Ignore>"
         end, "Prev hunk")
 
-        map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage hunk")
-        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset hunk")
+        -- Hunks
+        map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "[G]it [H]unk [S]tage")
+        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "[G]it [H]unk [R]eset")
+        map("n", "<leader>ghus", gs.undo_stage_hunk, "[G]it [H]unk [U]ndo [S]tage")
+        map("n", "<leader>ghp", gs.preview_hunk_inline, "[G]it [H]unk [P]review")
 
-        map("n", "<leader>ghS", gs.stage_buffer, "Stage buffer")
-        map("n", "<leader>ghR", gs.reset_buffer, "Reset buffer")
+        -- Buffers
+        map("n", "<leader>gbs", gs.stage_buffer, "[G]it [B]uffer [S]tage")
+        map("n", "<leader>gbr", gs.reset_buffer, "[G]it [B]uffer [R]eset")
 
-        map("n", "<leader>ghus", gs.undo_stage_hunk, "Undo stage hunk")
-        map("n", "<leader>ghp", gs.preview_hunk, "Preview hunk")
-
-        -- stylua: ignore
-				map("n", "<leader>ghB", function() gs.blame_line({ full = true }) end, "Blame line (full)")
-        map("n", "<leader>ghb", gs.toggle_current_line_blame, "Toggle line blame")
-        -- stylua: ignore
-        map("n", "<leader>ghd", gs.diffthis, "Diff this (index)")
+        -- Diffing
+        map("n", "<leader>gbd", gs.diffthis, "[G]it [H]unk [D]iff")
         map("n", "<leader>ghD", function()
           gs.diffthis("~")
         end, "Diff this (last commit)")
 
-        map("n", "<leader>ghT", gs.toggle_deleted, "Toggle deleted")
+        -- Blaming
+        -- stylua: ignore
+        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "[G]it [H]unk [Blame]")
+        map("n", "<leader>glb", gs.toggle_current_line_blame, "[G]it [L]ine [B]lame")
+        map("n", "<leader>gb", gs.toggle_current_line_blame, "[G]it [B]lame")
 
+        -- Toggling
+        map("n", "<leader>gtd", gs.toggle_deleted, "[G]it [T]oggle [D]eleted")
+        map("n", "<leader>gtn", gs.toggle_numhl, "[G]it [T]oggle [N]umber Highlighting")
+        map("n", "<leader>gtwd", gs.toggle_word_diff, "[G]it [T]oggle [W]ord [D]iff")
+
+        -- Hunk Text Object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
       end,
     },
   },
-
-  -- {
-  -- 	"sindrets/diffview.nvim",
-  -- 	cmd = { "DiffviewOpen", "DiffviewFileHistory", "DiffviewClose", "DiffviewToggleFiles" },
-  -- 	keys = {
-  -- 		{ "<leader>go", "<cmd>DiffviewOpen<cr>", desc = "Diffview: open" },
-  -- 		{ "<leader>gq", "<cmd>DiffviewClose<cr>", desc = "Diffview: close" },
-  --
-  -- 		{ "<leader>gH", "<cmd>DiffviewFileHistory<cr>", desc = "Git: repo history" },
-  -- 		{ "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", desc = "Git: file history" },
-  -- 		{ "<leader>gH", ":DiffviewFileHistory<cr>", mode = "v", desc = "Git: history for selection" },
-  -- 	},
-  -- 	opts = {
-  -- 		enhanced_diff_hl = true,
-  -- 		view = {
-  -- 			default = { layout = "diff2_horizontal" },
-  -- 			file_history = { layout = "diff2_horizontal" },
-  -- 		},
-  -- 	},
-  -- },
 }
