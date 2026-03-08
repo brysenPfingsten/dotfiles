@@ -52,3 +52,16 @@ vim.diagnostic.config({
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.opt.foldmethod = "marker"
+vim.opt.foldmarker = "region,endregion"
+vim.opt.foldlevelstart = 0
+vim.opt.foldenable = true
+vim.opt.fillchars = {
+  eob = " ",
+  fold = " ",
+  foldopen = "",
+  foldclose = "",
+  foldsep = " ",
+}
+
+vim.opt.foldcolumn = "1"
