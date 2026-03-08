@@ -12,7 +12,7 @@ return {
 
       ls.add_snippets("racket", {
         s("thunk", {
-          t("(λ ()"),
+          t("(λ () "),
           i(1, "body"),
           t(")"),
         }),
@@ -39,8 +39,9 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-
       "f3fora/cmp-spell",
+
+      "onsails/lspkind.nvim",
     },
     config = function()
       local ok_cmp, cmp = pcall(require, "cmp")
@@ -53,11 +54,12 @@ return {
         return
       end
 
-      vim.o.completeopt = "menu,menuone,noselect"
+      local ok_lspkind, lspkind = pcall(require, "lspkind")
+      if not ok_lspkind then
+        return
+      end
 
-      pcall(function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end)
+      vim.o.completeopt = "menu,menuone,noselect"
 
       cmp.setup({
         snippet = {
@@ -67,8 +69,27 @@ return {
         },
 
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered({
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          }),
+          documentation = cmp.config.window.bordered({
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None",
+          }),
+        },
+
+        formatting = {
+          fields = { "abbr", "icon", "kind", "menu" },
+          format = lspkind.cmp_format({
+            maxwidth = 50,
+            ellipsis_char = "…",
+            menu = {
+              nvim_lsp = "[LSP]",
+              luasnip = "[Snip]",
+              buffer = "[Buf]",
+              path = "[Path]",
+              spell = "[Spell]",
+            },
+          }),
         },
 
         mapping = cmp.mapping.preset.insert({
@@ -80,7 +101,7 @@ return {
 
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             else
@@ -90,7 +111,7 @@ return {
 
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item()
+              cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
             elseif luasnip.jumpable(-1) then
               luasnip.jump(-1)
             else
@@ -105,6 +126,10 @@ return {
           { name = "path" },
           { name = "buffer" },
         }),
+
+        experimental = {
+          ghost_text = true,
+        },
       })
 
       local spell_fts = {
@@ -134,6 +159,7 @@ return {
       cmp.setup.filetype({ "markdown", "text", "gitcommit", "norg", "typst", "latex" }, {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = "luasnip" },
           {
             name = "spell",
             keyword_length = 2,
