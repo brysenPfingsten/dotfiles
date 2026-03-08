@@ -4,6 +4,29 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
+    config = function()
+      local ls = require("luasnip")
+      local s = ls.snippet
+      local t = ls.text_node
+      local i = ls.insert_node
+
+      ls.add_snippets("racket", {
+        s("thunk", {
+          t("(λ ()"),
+          i(1, "body"),
+          t(")"),
+        }),
+      })
+
+      ls.add_snippets("markdown", {
+        s("note", {
+          t("> [!NOTE]"),
+          i(1, " Note"),
+          t({ "", "> " }),
+          i(2, "..."),
+        }),
+      })
+    end,
   },
 
   {
