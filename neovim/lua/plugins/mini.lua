@@ -95,4 +95,31 @@ return {
       })
     end,
   },
+  {
+    "echasnovski/mini.animate",
+    version = false,
+    config = function()
+      local animate = require("mini.animate")
+
+      local fast = animate.gen_timing.quadratic({
+        duration = 80,
+        unit = "total",
+      })
+
+      local function with_fast_timing(extra)
+        return vim.tbl_extend("force", {
+          enable = true,
+          timing = fast,
+        }, extra or {})
+      end
+
+      animate.setup({
+        cursor = with_fast_timing(),
+        scroll = with_fast_timing(),
+        resize = with_fast_timing(),
+        open = with_fast_timing(),
+        close = with_fast_timing(),
+      })
+    end,
+  },
 }
