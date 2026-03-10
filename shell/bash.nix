@@ -17,12 +17,6 @@
     wl-clipboard
   ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    SUDO_EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
-
   programs.bash = {
     enable = true;
     enableCompletion = true;

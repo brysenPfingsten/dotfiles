@@ -47,6 +47,14 @@
     docker-compose
     codex
   ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    SUDO_EDITOR = "nvim";
+    VISUAL = "nvim";
+    RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+  };
+
   programs.neovim.enable = true;
   xdg.configFile."nvim" = {
     source = ./.;
