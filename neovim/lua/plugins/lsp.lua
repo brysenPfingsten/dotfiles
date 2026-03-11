@@ -104,8 +104,6 @@ return {
         vim.lsp.config(name, cfg)
         vim.lsp.enable(name)
       end
-
-      vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
     end,
   },
 }
