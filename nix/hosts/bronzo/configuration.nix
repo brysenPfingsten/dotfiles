@@ -106,10 +106,7 @@
     };
   };
 
-  systemd.services.fprintd = {
-    wantedBy = ["multi-user.target"];
-    serviceConfig.Type = "simple";
-  };
+  security.pam.services.hyprlock.fprintAuth = true;
 
   powerManagement = {
     cpuFreqGovernor = "powersave";
@@ -133,6 +130,7 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
   services.pipewire = {
     wireplumber.extraConfig.bluetoothEnhancements = {
       "monitor.bluez.properties" = {
