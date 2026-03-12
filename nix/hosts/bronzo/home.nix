@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../../niri/niri.nix
     ../../../git/git.nix
@@ -17,6 +13,8 @@
     ../../../sunsetr/sunsetr.nix
     ../../../swaync/swaync.nix
     ../../../catpuccin/catppuccin.nix
+    ../../../hypridle/hypridle.nix
+    ../../../hyprlock/hyprlock.nix
   ];
   home = {
     username = "pfingsbr";

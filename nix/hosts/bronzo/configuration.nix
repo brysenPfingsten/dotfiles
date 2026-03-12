@@ -106,9 +106,11 @@
     };
   };
 
-  systemd.services.fprintd = {
-    wantedBy = ["multi-user.target"];
-    serviceConfig.Type = "simple";
+  # Finger printing
+  services.fprintd.enable = true;
+  security = {
+    pam.services.hyprlock.fprintAuth = true;
+    polkit.enable = true;
   };
 
   powerManagement = {
@@ -133,6 +135,7 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
   services.pipewire = {
     wireplumber.extraConfig.bluetoothEnhancements = {
       "monitor.bluez.properties" = {
