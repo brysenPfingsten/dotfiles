@@ -4,7 +4,6 @@ return {
     event = "VeryLazy",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "SmiteshP/nvim-navic",
     },
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
@@ -17,8 +16,6 @@ return {
     end,
     opts = function()
       vim.o.laststatus = vim.g.lualine_laststatus
-
-      local navic = require("nvim-navic")
 
       local icons = {
         diagnostics = { Error = " ", Warn = " ", Info = " ", Hint = " " },
@@ -99,13 +96,6 @@ return {
         return is_loaded("lazy.status") and require("lazy.status").has_updates()
       end
 
-      local function navic_location()
-        if navic.is_available() then
-          return navic.get_location()
-        end
-        return ""
-      end
-
       return {
         options = {
           theme = "auto",
@@ -114,7 +104,6 @@ return {
             statusline = { "dashboard", "alpha", "ministarter" },
           },
         },
-
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch" },
@@ -173,34 +162,6 @@ return {
             end,
           },
         },
-
-        winbar = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {
-            {
-              navic_location,
-              cond = function()
-                return navic.is_available()
-              end,
-            },
-          },
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {},
-        },
-
-        inactive_winbar = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {
-            { pretty_path },
-          },
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {},
-        },
-
         extensions = { "neo-tree", "lazy", "fzf" },
       }
     end,
