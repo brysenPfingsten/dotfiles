@@ -10,9 +10,32 @@
     };
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = ["rings"];
+        })
+      ];
+    };
+
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
+      "usecore.autosuspend=-1" # Helps keep mouse awake
+    ];
+    loader.timeout = 0;
+  };
 
   networking = {
     hostName = "nixos";
@@ -24,12 +47,6 @@
       interfaces.tailscale0.allowedTCPPorts = [2273];
     };
   };
-
-  boot.kernelParams = ["usbcore.autosuspend=-1"];
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking with iwd
   networking.networkmanager.enable = true;
@@ -67,9 +84,6 @@
 
     seatd.enable = true;
 
-    # Enable the GNOME Desktop Environment.
-    # displayManager.gdm.enable = true;
-    # desktopManager.gnome.enable = true;
     displayManager.ly = {
       enable = true;
       x11Support = false;
@@ -114,7 +128,6 @@
   };
 
   programs = {
-    light.enable = true; # Backlight control + permissions
     xwayland.enable = true;
     niri.enable = true;
     firefox.enable = true;
@@ -143,12 +156,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   users.users.pfingsbr = {
     isNormalUser = true;
@@ -162,11 +170,12 @@
     enable = true;
   };
 
-  # Optional: enable fontconfig (helps apps like VSCode, terminals, etc.)
   fonts = {
     fontconfig.enable = true;
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      maple-mono.NF
     ];
   };
 
