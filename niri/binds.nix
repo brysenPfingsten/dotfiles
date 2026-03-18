@@ -49,7 +49,7 @@
     "Mod+Space".action.spawn = "fuzzel";
     "Mod+N".action.spawn = ["swaync-client" "-t"];
     "Mod+P" = {
-      action.spawn = ["wl-mirror" "$(niri" "msg" "--json focused-output" "|" "jq" "-r" ".name)"];
+      action.spawn-sh = "wl-mirror $(niri msg --json focused-output | jq -r .name)";
       repeat = false;
     };
     # TUIs
