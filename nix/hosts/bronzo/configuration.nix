@@ -32,7 +32,7 @@
       "quiet"
       "udev.log_level=3"
       "systemd.show_status=auto"
-      "usecore.autosuspend=-1" # Helps keep mouse awake
+      "usbcore.autosuspend=-1" # Helps keep mouse awake
     ];
     loader.timeout = 0;
   };
