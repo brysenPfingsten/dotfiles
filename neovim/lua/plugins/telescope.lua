@@ -20,10 +20,12 @@ return {
     end)
 
     -- Grep for words
-    vim.keymap.set("n", "<leader>fg", telescope.live_grep, {})
+    map("n", "<leader>fg", telescope.live_grep, {})
     -- Buffers
-    vim.keymap.set("n", "<leader>fb", telescope.buffers, {})
+    map("n", "<leader>fb", telescope.buffers, {})
     -- Git File History
-    vim.keymap.set("n", "<leader>fh", telescope.git_bcommits, {})
+    map("n", "<leader>fh", telescope.git_bcommits, {})
+    -- LSP Symbols
+    map("n", "<leader>fs", telescope.lsp_document_symbols, {})
   end,
 }
