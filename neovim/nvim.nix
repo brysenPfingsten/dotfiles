@@ -46,6 +46,7 @@
     docker
     docker-compose
     codex
+    claude-code
   ];
 
   home.sessionVariables = {
