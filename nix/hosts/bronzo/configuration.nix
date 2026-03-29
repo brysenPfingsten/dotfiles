@@ -116,7 +116,6 @@
     # SSH
     openssh = {
       enable = true;
-      ports = [2273];
     };
   };
 
