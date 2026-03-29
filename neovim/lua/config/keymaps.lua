@@ -110,3 +110,5 @@ map("n", "<leader>rr", function()
 end, { desc = "Start Racket REPL and enter current file" })
 
 map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+
+map("n", "<leader>s", "z=1<CR>", { desc = "Accept first spelling suggestion" })
