@@ -38,6 +38,7 @@
     # LaTeX
     texlive.combined.scheme-full
     fontconfig
+    texlab
 
     # Development
     tree-sitter

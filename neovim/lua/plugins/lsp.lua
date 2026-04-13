@@ -62,6 +62,7 @@ return {
         rust_analyzer = {},
         racket_langserver = {},
         tinymist = {},
+        texlab = {},
         lua_ls = {
           settings = {
             Lua = {
