@@ -3,12 +3,6 @@ return {
     "kaarmu/typst.vim",
     ft = "typst",
     lazy = true,
-    config = function()
-      vim.keymap.set("n", "<leader>rr", "<cmd>TypstWatch<CR>", {
-        buffer = true,
-        desc = "Typst Watch",
-      })
-    end,
   },
   {
     "lervag/vimtex",
