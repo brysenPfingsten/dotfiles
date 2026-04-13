@@ -4,6 +4,7 @@
     wasistlos
     # PDFs
     foliate
+    zotero
     # File manager stuff
     nautilus
     adwaita-icon-theme
