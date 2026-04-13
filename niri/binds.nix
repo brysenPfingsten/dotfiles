@@ -41,6 +41,20 @@
     "Mod+Ctrl+7".action.move-column-to-workspace = 7;
     "Mod+Ctrl+8".action.move-column-to-workspace = 8;
     "Mod+Ctrl+9".action.move-column-to-workspace = 9;
+    # Rotate Vertical and Back
+    "Mod+Shift+V" = {
+      action.spawn-sh = ''
+        output_json="$(niri msg --json focused-output)"
+        output_name="$(printf '%s' "$output_json" | jq -r '.name')"
+        output_transform="$(printf '%s' "$output_json" | jq -r '.logical.transform // "normal"')"
+        if [ "$output_transform" = "90" ]; then
+         niri msg output "$output_name" transform normal
+        else
+          niri msg output "$output_name" transform 90
+        fi
+      '';
+      repeat = false;
+    };
 
     # Applications
     "Mod+T".action.spawn = "kitty";
