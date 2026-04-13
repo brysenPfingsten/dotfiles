@@ -71,6 +71,7 @@
     "Mod+Shift+W".action.spawn = ["kitty" "--class=popup-term" "-e" "impala"];
     "Mod+Shift+B".action.spawn = ["kitty" "--class=popup-term" "-e" "bluetui"];
     "Mod+Shift+D".action.spawn = ["kitty" "--class=popup-term" "-e" "lazydocker"];
+    "Mod+Shift+A".action.spawn = ["kitty" "--class=popup-term" "-e" "wiremix"];
     "Mod+V".action.spawn = ["kitty" "--class=popup-term" "-e" "clipse"];
     "Mod+Shift+Return".action.spawn = ["kitty" "--class=popup-term"];
 
