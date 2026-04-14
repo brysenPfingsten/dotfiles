@@ -22,7 +22,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldmarker = "--region,--endregion"
   end,
 })
+--endregion
 
+--region Typst Compilation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "typst",
   callback = function()

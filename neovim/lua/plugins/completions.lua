@@ -11,10 +11,42 @@ return {
       local i = ls.insert_node
 
       ls.add_snippets("racket", {
+        -- thunk
         s("thunk", {
           t("(λ () "),
           i(1, "body"),
           t(")"),
+        }),
+        -- lambda
+        s("lambda", {
+          t("(λ ("),
+          i(1, "args"),
+          t(") "),
+          i(2, "body"),
+          t(")"),
+        }),
+        -- Block comments
+        s("block", {
+          t({ "#|", "" }),
+          i(1, ""),
+          t({ "", "|#" }),
+        }),
+        -- Functions
+        s("func", {
+          t("(define ("),
+          i(1, "name"),
+          i(2, "args)"),
+          t({ "  ", ")" }),
+        }),
+        -- syntax-rule
+        s("srule", {
+          t("(define-syntax-rule ("),
+          i(1, "name"),
+          t(" "),
+          i(2, "args"),
+          t({ ")", "  " }),
+          i(3, "template"),
+          t({ "", ")" }),
         }),
       })
 
@@ -26,6 +58,30 @@ return {
           i(2, "..."),
         }),
       })
+
+      vim.keymap.set({ "i", "s" }, "<C-k>", function()
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end, { silent = true, desc = "LuaSnip expand or jump" })
+
+      vim.keymap.set({ "i", "s" }, "<C-j>", function()
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
+      end, { silent = true, desc = "LuaSnip jump backward" })
+
+      vim.keymap.set({ "i", "s" }, "<C-l>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end, { silent = true, desc = "LuaSnip next choice" })
+
+      vim.keymap.set({ "i", "s" }, "<C-h>", function()
+        if ls.choice_active() then
+          ls.change_choice(-1)
+        end
+      end, { silent = true, desc = "LuaSnip previous choice" })
     end,
   },
 
