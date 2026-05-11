@@ -8,6 +8,10 @@ return {
         nix = { "alejandra" },
         typst = { "typstyle", "tinymist" },
         rust = { "rustfmt" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
       },
     })
 

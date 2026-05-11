@@ -24,6 +24,8 @@
     uv
     # Javascript / Typescript
     nodejs
+    nodePackages.typescript
+    nodePackages.prettier
     typescript-language-server
     # SAT
     z3

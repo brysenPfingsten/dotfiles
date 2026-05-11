@@ -63,6 +63,43 @@ return {
         racket_langserver = {},
         tinymist = {},
         texlab = {},
+        ts_ls = {
+          settings = {
+            completions = {
+              completeFunctionCalls = true,
+            },
+            typescript = {
+              preferences = {
+                importModuleSpecifierPreference = "relative",
+              },
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = false,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              },
+            },
+            javascript = {
+              preferences = {
+                importModuleSpecifierPreference = "relative",
+              },
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = false,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              },
+            },
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
