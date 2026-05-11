@@ -96,6 +96,34 @@ return {
         return is_loaded("lazy.status") and require("lazy.status").has_updates()
       end
 
+      local function lsp_clients()
+        local buf = vim.api.nvim_get_current_buf()
+        local clients = vim.lsp.get_clients({ bufnr = buf })
+        if #clients == 0 then
+          return ""
+        end
+
+        local names = {}
+        for _, client in ipairs(clients) do
+          if client.name and client.name ~= "" then
+            names[#names + 1] = client.name
+          end
+        end
+
+        table.sort(names)
+        if #names == 0 then
+          return "LSP"
+        end
+        if #names <= 2 then
+          return table.concat(names, ",")
+        end
+        return string.format("%s+%d", names[1], #names - 1)
+      end
+      local function lsp_clients_ok()
+        local buf = vim.api.nvim_get_current_buf()
+        return #vim.lsp.get_clients({ bufnr = buf }) > 0
+      end
+
       return {
         options = {
           theme = "auto",
@@ -131,6 +159,7 @@ return {
             { noice_mode, cond = noice_mode_ok },
             { dap_status, cond = dap_status_ok },
             { lazy_updates, cond = lazy_updates_ok },
+            { lsp_clients, cond = lsp_clients_ok, icon = " " },
             {
               "diff",
               symbols = {
