@@ -55,7 +55,7 @@
         staged = "+";
         renamed = "»";
         deleted = "✘";
-        stashed = "$";
+        stashed = "\$";
         ahead = "⇡";
         behind = "⇣";
         diverged = "⇕";
