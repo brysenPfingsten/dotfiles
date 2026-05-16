@@ -5,6 +5,7 @@
     # PDFs
     foliate
     zotero
+    poppler-utils
     # File manager stuff
     nautilus
     adwaita-icon-theme
