@@ -27,6 +27,10 @@
     nodePackages.typescript
     nodePackages.prettier
     typescript-language-server
+    # Java
+    jdt-language-server
+    google-java-format
+    jdk17
     # SAT
     z3
     graphviz

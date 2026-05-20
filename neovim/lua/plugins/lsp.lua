@@ -13,6 +13,88 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+    config = function()
+      local function start_jdtls()
+        local ok_jdtls, jdtls = pcall(require, "jdtls")
+        if not ok_jdtls then
+          return
+        end
+
+        local ok_setup, jdtls_setup = pcall(require, "jdtls.setup")
+        if not ok_setup then
+          return
+        end
+
+        local root_markers = {
+          ".git",
+          "mvnw",
+          "gradlew",
+          "pom.xml",
+          "build.gradle",
+          "build.gradle.kts",
+          "settings.gradle",
+          "settings.gradle.kts",
+        }
+
+        local root_dir = jdtls_setup.find_root(root_markers)
+        if not root_dir or root_dir == "" then
+          return
+        end
+
+        local project_name = vim.fn.fnamemodify(root_dir, ":t")
+        local workspace_dir = vim.fn.stdpath("cache") .. "/jdtls/" .. project_name
+
+        local function resolve_cmd()
+          if vim.fn.executable("jdtls") == 1 then
+            return { "jdtls", "-data", workspace_dir }
+          end
+          if vim.fn.executable("jdt-language-server") == 1 then
+            return { "jdt-language-server", "-data", workspace_dir }
+          end
+        end
+
+        local cmd = resolve_cmd()
+        if not cmd then
+          return
+        end
+
+        local capabilities
+        do
+          local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+          if ok_cmp then
+            capabilities = cmp_nvim_lsp.default_capabilities()
+          end
+        end
+
+        jdtls.start_or_attach({
+          cmd = cmd,
+          root_dir = root_dir,
+          capabilities = capabilities,
+          init_options = {
+            extendedClientCapabilities = jdtls.extendedClientCapabilities,
+          },
+          settings = {
+            java = {
+              signatureHelp = { enabled = true },
+              contentProvider = { preferred = "fernflower" },
+            },
+          },
+        })
+      end
+
+      local group = vim.api.nvim_create_augroup("JdtlsAutostart", { clear = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = group,
+        pattern = "java",
+        callback = start_jdtls,
+      })
+
+      start_jdtls()
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
