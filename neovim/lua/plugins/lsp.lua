@@ -40,6 +40,14 @@ return {
 
         local root_dir = jdtls_setup.find_root(root_markers)
         if not root_dir or root_dir == "" then
+          local bufname = vim.api.nvim_buf_get_name(0)
+          if bufname ~= "" then
+            root_dir = vim.fn.fnamemodify(bufname, ":p:h")
+          else
+            root_dir = vim.loop.cwd()
+          end
+        end
+        if not root_dir or root_dir == "" then
           return
         end
 
@@ -60,25 +68,65 @@ return {
           return
         end
 
-        local capabilities
-        do
-          local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-          if ok_cmp then
-            capabilities = cmp_nvim_lsp.default_capabilities()
-          end
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+        if ok_cmp then
+          capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
         end
+
+        local extendedClientCapabilities = jdtls.extendedClientCapabilities
+        extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
         jdtls.start_or_attach({
           cmd = cmd,
           root_dir = root_dir,
           capabilities = capabilities,
+          handlers = {
+            ["language/status"] = function() end,
+          },
           init_options = {
-            extendedClientCapabilities = jdtls.extendedClientCapabilities,
+            extendedClientCapabilities = extendedClientCapabilities,
           },
           settings = {
             java = {
+              configuration = {
+                updateBuildConfiguration = "automatic",
+              },
+              eclipse = {
+                downloadSources = true,
+              },
+              maven = {
+                downloadSources = true,
+              },
+              referencesCodeLens = { enabled = true },
+              implementationsCodeLens = { enabled = true },
+              format = {
+                settings = {
+                  url = vim.fn.stdpath("config") .. "/java-settings.prefs",
+                },
+              },
               signatureHelp = { enabled = true },
               contentProvider = { preferred = "fernflower" },
+              completion = {
+                favoriteStaticMembers = {
+                  "org.junit.jupiter.api.Assertions.*",
+                  "java.util.Objects.requireNonNull",
+                  "java.util.Objects.requireNonNullElse",
+                },
+                filteredTypes = {
+                  "com.sun.*",
+                  "io.micrometer.shaded.*",
+                  "java.awt.*",
+                  "jdk.*",
+                  "sun.*",
+                },
+              },
+              sources = {
+                organizeImports = {
+                  starThreshold = 9999,
+                  staticStarThreshold = 9999,
+                },
+              },
             },
           },
         })
