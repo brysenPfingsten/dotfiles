@@ -185,6 +185,8 @@ return {
           map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
           map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
           map("n", "<leader>e", vim.diagnostic.open_float, "Show diagnostics")
+          map("n", "<leader>cl", vim.lsp.codelens.run, "Run codelens")
+          map("n", "<leader>cL", function() vim.lsp.codelens.refresh({ bufnr = bufnr }) end, "Refresh codelens")
         end,
       })
 
