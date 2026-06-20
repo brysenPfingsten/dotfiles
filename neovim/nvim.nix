@@ -41,6 +41,8 @@
     clippy
     rustfmt
     pkg-config
+    # Lean
+    lean4
     # LaTeX
     texlive.combined.scheme-full
     fontconfig
