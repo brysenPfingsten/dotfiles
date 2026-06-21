@@ -2,7 +2,7 @@ return {
   "stevearc/conform.nvim",
   opts = {},
   config = function()
-    vim.g.format_on_save = false
+    vim.g.format_on_save = true
 
     require("conform").setup({
       formatters_by_ft = {
@@ -27,7 +27,7 @@ return {
       end,
     })
 
-    vim.keymap.set("n", "<leader>tf", function()
+    vim.keymap.set("n", "<leader>tF", function()
       vim.g.format_on_save = not vim.g.format_on_save
       vim.notify("Format on save: " .. (vim.g.format_on_save and "enabled" or "disabled"))
     end, { desc = "Toggle format on save" })
