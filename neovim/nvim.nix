@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  resyntax-bin = pkgs.writeShellScriptBin "resyntax" ''
+    exec ${pkgs.racket}/bin/racket -l- resyntax/cli.rkt "$@"
+  '';
+in {
   home.packages = with pkgs; [
     # Nix
     nixd
@@ -15,6 +19,7 @@
     lldb
     # Racket
     racket
+    resyntax-bin
     # Python
     python3
     python313Packages.pytest_7
