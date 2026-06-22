@@ -48,6 +48,11 @@ in {
     pkg-config
     # Lean
     lean4
+    # Rocq
+    coq
+    coqPackages.coq-lsp
+    coqPackages.stdpp
+    coqPackages.stdlib
     # LaTeX
     texlive.combined.scheme-full
     fontconfig
