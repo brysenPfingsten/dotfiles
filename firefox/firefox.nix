@@ -66,6 +66,14 @@ in {
                 name = "Chess";
                 url = "https://chess.com";
               }
+              {
+                name = "OPLSS Schedule";
+                url = "https://www.cs.uoregon.edu/research/summerschool/summer26/schedule.php";
+              }
+              {
+                name = "OPLSS Slack";
+                url = "https://app.slack.com/client/T0B93KKLY2J/C0B95MSKEBC";
+              }
             ];
           }
         ];
