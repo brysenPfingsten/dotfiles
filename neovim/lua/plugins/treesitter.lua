@@ -16,6 +16,7 @@ return {
           "help",
           "typst",
           "latex",
+          "haskell",
         },
         auto_install = false,
         highlight = { enable = true },

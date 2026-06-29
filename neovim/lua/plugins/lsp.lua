@@ -195,6 +195,7 @@ return {
         racket_langserver = {},
         tinymist = {},
         texlab = {},
+        hls = {},
         ts_ls = {
           settings = {
             completions = {

@@ -53,6 +53,11 @@ in {
     coqPackages.coq-lsp
     coqPackages.stdpp
     coqPackages.stdlib
+    # Haskell
+    ghc
+    cabal-install
+    haskell-language-server
+    fourmolu
     # LaTeX
     texlive.combined.scheme-full
     fontconfig

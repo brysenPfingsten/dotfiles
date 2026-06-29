@@ -15,6 +15,7 @@ return {
         javascriptreact = { "prettier" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
+        haskell = { "fourmolu" },
       },
     })
 
