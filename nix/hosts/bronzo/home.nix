@@ -12,6 +12,7 @@
     ../../../packages/packages.nix
     ../../../sunsetr/sunsetr.nix
     ../../../swaync/swaync.nix
+    ../../../batsignal/batsignal.nix
     ../../../catpuccin/catppuccin.nix
     ../../../hypridle/hypridle.nix
     ../../../hyprlock/hyprlock.nix
