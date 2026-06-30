@@ -62,6 +62,8 @@ in {
     texlive.combined.scheme-full
     fontconfig
     texlab
+    # Dafny
+    dafny
 
     # Development
     tree-sitter

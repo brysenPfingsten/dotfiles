@@ -17,6 +17,7 @@ return {
           "typst",
           "latex",
           "haskell",
+          "dafny",
         },
         auto_install = false,
         highlight = { enable = true },

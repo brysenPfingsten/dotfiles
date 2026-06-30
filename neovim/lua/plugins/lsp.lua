@@ -196,6 +196,7 @@ return {
         tinymist = {},
         texlab = {},
         hls = {},
+        dafny = {},
         ts_ls = {
           settings = {
             completions = {
