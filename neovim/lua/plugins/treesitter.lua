@@ -6,13 +6,9 @@ return {
     config = function()
       require("nvim-treesitter.config").setup({
         ensure_installed = {
-          "c",
-          "lua",
           "nix",
           "racket",
-          "markdown",
           "java",
-          "vimdoc",
           "typst",
           "latex",
           "haskell",
