@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Web Apps
-    wasistlos
+    karere
     # PDFs
     foliate
     zotero

@@ -13,7 +13,6 @@ return {
           "markdown",
           "java",
           "vimdoc",
-          "help",
           "typst",
           "latex",
           "haskell",

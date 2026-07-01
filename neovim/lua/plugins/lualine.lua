@@ -30,7 +30,7 @@ return {
         local buf = vim.api.nvim_get_current_buf()
         local fname = vim.api.nvim_buf_get_name(buf)
         if fname == "" then
-          return vim.fn.fnamemodify(vim.loop.cwd(), ":t")
+          return vim.fn.fnamemodify(vim.uv.cwd(), ":t")
         end
 
         -- 1) LSP root
@@ -51,7 +51,7 @@ return {
         end
 
         -- 3) cwd
-        return vim.fn.fnamemodify(vim.loop.cwd(), ":t")
+        return vim.fn.fnamemodify(vim.uv.cwd(), ":t")
       end
 
       local function pretty_path()

@@ -31,6 +31,10 @@ return {
 
       vim.g.rainbow_delimiters = {
         highlight = highlight,
+        condition = function(bufnr, lang)
+          local ok, parser = pcall(vim.treesitter.get_parser, bufnr, lang)
+          return ok and parser ~= nil
+        end,
       }
 
       require("ibl").setup({

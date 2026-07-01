@@ -44,7 +44,7 @@ return {
           if bufname ~= "" then
             root_dir = vim.fn.fnamemodify(bufname, ":p:h")
           else
-            root_dir = vim.loop.cwd()
+            root_dir = vim.uv.cwd()
           end
         end
         if not root_dir or root_dir == "" then

@@ -29,8 +29,8 @@ in {
     uv
     # Javascript / Typescript
     nodejs
-    nodePackages.typescript
-    nodePackages.prettier
+    typescript
+    prettier
     typescript-language-server
     # Java
     jdt-language-server
