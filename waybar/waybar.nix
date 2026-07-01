@@ -10,7 +10,7 @@ in {
   programs.waybar.enable = true;
   home.packages = with pkgs; [
     playerctl
-    swww
+    awww
     # Terminal and TUIs
     impala
     bluetui
