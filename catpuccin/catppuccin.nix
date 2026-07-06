@@ -4,6 +4,7 @@
   programs.yazi.enable = true;
 
   catppuccin = {
+    enable = true;
     flavor = "mocha";
     accent = "blue";
     firefox = {
@@ -17,5 +18,6 @@
     lazygit.enable = true;
     yazi.enable = true;
     swaync.enable = true;
+    hyprlock.enable = false;
   };
 }
