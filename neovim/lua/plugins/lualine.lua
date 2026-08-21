@@ -26,34 +26,6 @@ return {
         return package.loaded[name] ~= nil
       end
 
-      local function project_root()
-        local buf = vim.api.nvim_get_current_buf()
-        local fname = vim.api.nvim_buf_get_name(buf)
-        if fname == "" then
-          return vim.fn.fnamemodify(vim.uv.cwd(), ":t")
-        end
-
-        -- 1) LSP root
-        local clients = vim.lsp.get_clients({ bufnr = buf })
-        for _, c in ipairs(clients) do
-          local ws = c.config and c.config.workspace_folders
-          if ws and ws[1] and ws[1].name then
-            return vim.fn.fnamemodify(ws[1].name, ":t")
-          end
-        end
-
-        -- 2) git root
-        local dir = vim.fn.fnamemodify(fname, ":p:h")
-        local git = vim.fn.finddir(".git", dir .. ";")
-        if git ~= "" then
-          local root = vim.fn.fnamemodify(git, ":h")
-          return vim.fn.fnamemodify(root, ":t")
-        end
-
-        -- 3) cwd
-        return vim.fn.fnamemodify(vim.uv.cwd(), ":t")
-      end
-
       local function pretty_path()
         local buf = vim.api.nvim_get_current_buf()
         local name = vim.api.nvim_buf_get_name(buf)
@@ -138,10 +110,6 @@ return {
 
           lualine_c = {
             {
-              project_root,
-              icon = " ",
-            },
-            {
               "diagnostics",
               symbols = {
                 error = icons.diagnostics.Error,
@@ -155,10 +123,8 @@ return {
           },
 
           lualine_x = {
-            { noice_command, cond = noice_command_ok },
             { noice_mode, cond = noice_mode_ok },
             { dap_status, cond = dap_status_ok },
-            { lazy_updates, cond = lazy_updates_ok },
             { lsp_clients, cond = lsp_clients_ok, icon = " " },
             {
               "diff",

@@ -31,6 +31,10 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tuido = {
+      url = "path:/home/pfingsbr/Projects/tuido";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -64,6 +68,7 @@
               inputs.spicetify-nix.homeManagerModules.spicetify
               inputs.catppuccin.homeModules.catppuccin
               inputs.niri.homeModules.niri
+              inputs.tuido.homeManagerModules.default
               ./hosts/bronzo/home.nix
             ];
           };

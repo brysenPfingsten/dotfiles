@@ -256,7 +256,8 @@
         "niri": "niri",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify-nix": "spicetify-nix",
+        "tuido": "tuido"
       }
     },
     "spicetify-nix": {
@@ -293,6 +294,23 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "tuido": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787111827,
+        "narHash": "sha256-5APwzAv0TBUsast408hO7GRjYsoicHZdsLAFjkDVVtY=",
+        "path": "/home/pfingsbr/Projects/tuido",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/pfingsbr/Projects/tuido",
+        "type": "path"
       }
     },
     "xwayland-satellite-stable": {

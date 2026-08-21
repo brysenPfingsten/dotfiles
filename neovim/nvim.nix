@@ -2,6 +2,9 @@
   resyntax-bin = pkgs.writeShellScriptBin "resyntax" ''
     exec ${pkgs.racket}/bin/racket -l- resyntax/cli.rkt "$@"
   '';
+  codelldb-bin = pkgs.writeShellScriptBin "codelldb" ''
+    exec ${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
+  '';
 in {
   home.packages = with pkgs; [
     # Nix
@@ -46,6 +49,7 @@ in {
     clippy
     rustfmt
     pkg-config
+    codelldb-bin
     # Lean
     lean4
     # Rocq

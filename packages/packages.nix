@@ -11,5 +11,8 @@
     nautilus
     adwaita-icon-theme
     gnome.gvfs
+    # Games
+    prismlauncher
+    xwayland-satellite
   ];
 }
