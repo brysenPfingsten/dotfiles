@@ -69,9 +69,9 @@ return {
         end
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-        if ok_cmp then
-          capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+        local ok_blink, blink = pcall(require, "blink.cmp")
+        if ok_blink then
+          capabilities = blink.get_lsp_capabilities(capabilities)
         end
 
         local extendedClientCapabilities = jdtls.extendedClientCapabilities
@@ -145,10 +145,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
       local navic = require("nvim-navic")
 
       vim.api.nvim_create_autocmd("LspAttach", {
