@@ -34,12 +34,12 @@ in {
                 name = "GitHub";
                 url = "https://github.com";
               }
-              # {
-              #   name = "Canvas";
-              #   url = "https://setonhall.instructure.com";
-              # }
               {
-                name = "Onedrive";
+                name = "Canvas";
+                url = "https://setonhall.instructure.com";
+              }
+              {
+                name = "OneDrive";
                 url = "https://studentshu-my.sharepoint.com";
               }
               {
@@ -54,25 +54,17 @@ in {
                 name = "PirateNet";
                 url = "https://shu.okta.com/app/UserHome";
               }
-              # {
-              #   name = "Timesheet";
-              #   url = "https://bannerapps.shu.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod";
-              # }
-              # {
-              #   name = "Tutor Appointments";
-              #   url = "https://shu.campus.eab.com/home/staff#?tab-state=appointments_tab";
-              # }
+              {
+                name = "Timesheet";
+                url = "https://bannerapps.shu.edu/EmployeeSelfService/ssb/timeEntry#/teApp/timesheet/dashboard/payperiod";
+              }
+              {
+                name = "Tutor Appointments";
+                url = "https://shu.campus.eab.com/home/staff#?tab-state=appointments_tab";
+              }
               {
                 name = "Chess";
                 url = "https://chess.com";
-              }
-              {
-                name = "OPLSS Schedule";
-                url = "https://www.cs.uoregon.edu/research/summerschool/summer26/schedule.php";
-              }
-              {
-                name = "OPLSS Slack";
-                url = "https://app.slack.com/client/T0B93KKLY2J/C0B95MSKEBC";
               }
             ];
           }
