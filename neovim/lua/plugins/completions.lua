@@ -55,19 +55,27 @@ return {
       })
 
       vim.keymap.set({ "i", "s" }, "<M-k>", function()
-        if ls.expand_or_jumpable() then ls.expand_or_jump() end
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
       end, { silent = true, desc = "LuaSnip expand or jump" })
 
       vim.keymap.set({ "i", "s" }, "<M-j>", function()
-        if ls.jumpable(-1) then ls.jump(-1) end
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
       end, { silent = true, desc = "LuaSnip jump backward" })
 
       vim.keymap.set({ "i", "s" }, "<M-l>", function()
-        if ls.choice_active() then ls.change_choice(1) end
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
       end, { silent = true, desc = "LuaSnip next choice" })
 
       vim.keymap.set({ "i", "s" }, "<M-h>", function()
-        if ls.choice_active() then ls.change_choice(-1) end
+        if ls.choice_active() then
+          ls.change_choice(-1)
+        end
       end, { silent = true, desc = "LuaSnip previous choice" })
     end,
   },
@@ -84,14 +92,14 @@ return {
       keymap = {
         preset = "none",
         ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-e>"]     = { "hide", "fallback" },
-        ["<CR>"]      = { "accept", "fallback" },
-        ["<Tab>"]     = { "select_next", "snippet_forward", "fallback" },
-        ["<S-Tab>"]   = { "select_prev", "snippet_backward", "fallback" },
-        ["<C-b>"]     = { "scroll_documentation_up", "fallback" },
-        ["<C-f>"]     = { "scroll_documentation_down", "fallback" },
-        ["<Up>"]      = { "select_prev", "fallback" },
-        ["<Down>"]    = { "select_next", "fallback" },
+        ["<C-e>"] = { "hide", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
       },
 
       appearance = {
@@ -103,12 +111,12 @@ return {
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
         per_filetype = {
-          markdown  = { "lsp", "path", "snippets", "spell", "buffer" },
-          text      = { "lsp", "path", "snippets", "spell", "buffer" },
+          markdown = { "lsp", "path", "snippets", "spell", "buffer" },
+          text = { "lsp", "path", "snippets", "spell", "buffer" },
           gitcommit = { "lsp", "path", "snippets", "spell", "buffer" },
-          norg      = { "lsp", "path", "snippets", "spell", "buffer" },
-          typst     = { "lsp", "path", "snippets", "spell", "buffer" },
-          latex     = { "lsp", "path", "snippets", "spell", "buffer" },
+          norg = { "lsp", "path", "snippets", "spell", "buffer" },
+          typst = { "lsp", "path", "snippets", "spell", "buffer" },
+          latex = { "lsp", "path", "snippets", "spell", "buffer" },
         },
         providers = {
           spell = {
@@ -127,6 +135,10 @@ return {
           auto_show_delay_ms = 200,
           window = {
             border = "rounded",
+            direction_priority = {
+              menu_north = { "s", "e", "w", "n" },
+              menu_south = { "s", "e", "w", "n" },
+            },
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None",
           },
         },
@@ -155,11 +167,11 @@ return {
               source_name = {
                 text = function(ctx)
                   local labels = {
-                    LSP      = "[LSP]",
+                    LSP = "[LSP]",
                     Snippets = "[Snip]",
-                    Buffer   = "[Buf]",
-                    Path     = "[Path]",
-                    Spell    = "[Spell]",
+                    Buffer = "[Buf]",
+                    Path = "[Path]",
+                    Spell = "[Spell]",
                   }
                   return labels[ctx.source_name] or ("[" .. ctx.source_name .. "]")
                 end,
@@ -175,8 +187,12 @@ return {
       require("blink.cmp").setup(opts)
 
       local spell_fts = {
-        markdown = true, text = true, gitcommit = true,
-        norg = true, typst = true, latex = true,
+        markdown = true,
+        text = true,
+        gitcommit = true,
+        norg = true,
+        typst = true,
+        latex = true,
       }
 
       local aug = vim.api.nvim_create_augroup("BlinkSpellEnable", { clear = true })
