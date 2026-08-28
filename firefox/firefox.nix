@@ -1,4 +1,8 @@
-{pkgs, config, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   addons = pkgs.nur.repos.rycee.firefox-addons;
 in {
   programs.firefox = {
@@ -12,6 +16,10 @@ in {
         "browser.startup.homepage" = "https://google.com";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "layout.css.prefers-color-scheme.content-override" = 0;
+        "browser.newtabpage.activity-stream.feeds.topstories" = false;
+        "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+        "browser.newtabpage.activity-stream.showSponsored" = false;
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
       };
 
       extensions = {
