@@ -86,7 +86,11 @@ in {
     RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
   };
 
-  programs.neovim.enable = true;
+  programs.neovim = {
+    enable = true;
+    withRuby = false;
+    withPython3 = false;
+  };
   xdg.configFile."nvim" = {
     source = ./.;
     recursive = true;

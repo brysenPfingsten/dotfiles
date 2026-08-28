@@ -1,10 +1,14 @@
 {...}: {
   programs.zathura.enable = true;
   programs.fuzzel.enable = true;
-  programs.yazi.enable = true;
+  programs.yazi = {
+    enable = true;
+    shellWrapperName = "y";
+  };
 
   catppuccin = {
     enable = true;
+    autoEnable = true;
     flavor = "mocha";
     accent = "blue";
     firefox = {

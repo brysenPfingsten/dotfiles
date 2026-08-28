@@ -1,8 +1,9 @@
-{pkgs, ...}: let
+{pkgs, config, ...}: let
   addons = pkgs.nur.repos.rycee.firefox-addons;
 in {
   programs.firefox = {
     enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
 
     profiles."default" = {
       isDefault = true;
