@@ -146,6 +146,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "saghen/blink.cmp",
+      "aznhe21/actions-preview.nvim",
     },
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -183,7 +184,7 @@ return {
           map("n", "K", vim.lsp.buf.hover, "Hover documentation")
           map("n", "<M-K>", vim.lsp.buf.signature_help, "Signature help")
           map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
-          map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
+          map({ "n", "v" }, "<leader>ca", require("actions-preview").code_actions, "Code action")
           map("n", "<leader>e", vim.diagnostic.open_float, "Show diagnostics")
           map("n", "<leader>cl", vim.lsp.codelens.run, "Run codelens")
           map("n", "<leader>cL", function() vim.lsp.codelens.refresh({ bufnr = bufnr }) end, "Refresh codelens")
