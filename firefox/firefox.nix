@@ -72,6 +72,10 @@ in {
                 url = "https://shu.campus.eab.com/home/staff#?tab-state=appointments_tab";
               }
               {
+                name = "Tutor Checks";
+                url = "https://studentshu-my.sharepoint.com/:x:/r/personal/fieldsda_shu_edu/_layouts/15/Doc.aspx?sourcedoc=%7BDD55CAE7-6B53-4C1A-8DEB-71897A033DEC%7D&file=TutoringChecksFall26.xlsx&fromShare=true&action=default&mobileredirect=true";
+              }
+              {
                 name = "Chess";
                 url = "https://chess.com";
               }
