@@ -38,8 +38,7 @@
       g = "git";
       lg = "lazygit";
       # Nix
-      switch = "nh os switch";
-      test = "nh os test";
+      test = "nh os test -H $(hostnamectl --static)";
       rollback = "nh os rollback";
       list-gens = "nh os info";
       nix-clean = "nh clean all";
@@ -51,6 +50,7 @@
     initExtra = ''
       open() { xdg-open "$@" >/dev/null 2>&1 & }
       n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
+      switch() { nh os switch -H "$(hostnamectl --static)" "$@"; }
       set -o vi
       eval "$(starship init bash)"
       eval "$(zoxide init --cmd cd bash)"

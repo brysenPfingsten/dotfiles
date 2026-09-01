@@ -1,23 +1,22 @@
 {pkgs, ...}: {
   imports = [
-    ../../../niri/niri.nix
-    ../../../git/git.nix
-    ../../../neovim/nvim.nix
-    ../../../kitty/kitty.nix
-    ../../../shell/bash.nix
-    ../../../dooit/dooit.nix
-    ../../../waybar/waybar.nix
-    ../../../firefox/firefox.nix
-    ../../../spotify/spotify.nix
-    ../../../packages/packages.nix
-    ../../../sunsetr/sunsetr.nix
-    ../../../swaync/swaync.nix
-    ../../../batsignal/batsignal.nix
-    ../../../catpuccin/catppuccin.nix
-    ../../../hypridle/hypridle.nix
-    ../../../hyprlock/hyprlock.nix
-    ../../../tuido/tuido.nix
+    ../../niri/niri.nix
+    ../../git/git.nix
+    ../../neovim/nvim.nix
+    ../../kitty/kitty.nix
+    ../../shell/bash.nix
+    ../../dooit/dooit.nix
+    ../../waybar/waybar.nix
+    ../../firefox/firefox.nix
+    ../../spotify/spotify.nix
+    ../../packages/packages.nix
+    ../../sunsetr/sunsetr.nix
+    ../../swaync/swaync.nix
+    ../../catpuccin/catppuccin.nix
+    ../../hyprlock/hyprlock.nix
+    ../../tuido/tuido.nix
   ];
+
   home = {
     username = "pfingsbr";
     homeDirectory = "/home/pfingsbr";

@@ -42,35 +42,49 @@
     nixpkgs,
     home-manager,
     ...
-  }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+  }: let
+    commonModules = [
+      ./dooit.nix
+      {
+        nixpkgs.config.allowUnfree = true;
+        nixpkgs.overlays = [inputs.nur.overlays.default inputs.niri.overlays.niri];
+      }
+      home-manager.nixosModules.home-manager
+    ];
+
+    mkHome = homeFile: {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = {inherit inputs;};
+      home-manager.users.pfingsbr = {...}: {
+        imports = [
+          inputs.spicetify-nix.homeManagerModules.spicetify
+          inputs.catppuccin.homeModules.catppuccin
+          inputs.niri.homeModules.niri
+          inputs.tuido.homeManagerModules.default
+          homeFile
+        ];
+      };
+    };
+  in {
+    nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
+      modules =
+        commonModules
+        ++ [
+          ./hosts/thinkpad/configuration.nix
+          (mkHome ./hosts/thinkpad/home.nix)
+        ];
+    };
 
-      modules = [
-        ./hosts/bronzo/configuration.nix
-        ./dooit.nix
-
-        {
-          nixpkgs.config.allowUnfree = true;
-          nixpkgs.overlays = [inputs.nur.overlays.default inputs.niri.overlays.niri];
-        }
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.pfingsbr = {...}: {
-            imports = [
-              inputs.spicetify-nix.homeManagerModules.spicetify
-              inputs.catppuccin.homeModules.catppuccin
-              inputs.niri.homeModules.niri
-              inputs.tuido.homeManagerModules.default
-              ./hosts/bronzo/home.nix
-            ];
-          };
-        }
-      ];
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules =
+        commonModules
+        ++ [
+          ./hosts/desktop/configuration.nix
+          (mkHome ./hosts/desktop/home.nix)
+        ];
     };
   };
 }

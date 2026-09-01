@@ -15,9 +15,7 @@
   programs.niri.package = pkgs.niri-unstable;
   programs.niri.enable = true;
   programs.niri.settings = lib.mkMerge [
-    (import ./outputs.nix)
     (import ./binds.nix)
-    (import ./input.nix)
     (import ./layouts.nix)
     (import ./overview.nix)
     (import ./animations.nix)

@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
   hardware.bluetooth = {
     enable = true;
     settings.General = {
@@ -14,6 +10,7 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      timeout = 0;
     };
 
     plymouth = {
@@ -32,33 +29,25 @@
       "quiet"
       "udev.log_level=3"
       "systemd.show_status=auto"
-      "usbcore.autosuspend=-1" # Helps keep mouse awake
+      "usbcore.autosuspend=-1"
     ];
-    loader.timeout = 0;
   };
 
   networking = {
-    hostName = "nixos";
-
     firewall = {
       enable = true;
       allowedTCPPorts = [2273];
       trustedInterfaces = ["tailscale0"];
       interfaces.tailscale0.allowedTCPPorts = [2273];
     };
+    networkmanager.enable = true;
+    networkmanager.wifi.backend = "iwd";
+    wireless.iwd.enable = true;
   };
 
-  # Enable networking with iwd
-  networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
-  networking.wireless.iwd.enable = true;
-
-  # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -72,7 +61,6 @@
   };
 
   services = {
-    # Enable the X11 windowing system.
     xserver = {
       enable = true;
       xkb = {
@@ -100,31 +88,29 @@
       };
     };
 
-    # Enable CUPS to print documents.
     printing.enable = true;
-
-    # Trash/mounts for Nautilus
     udisks2.enable = true;
     gvfs.enable = true;
-
-    # Power Management
-    tlp.enable = true;
-
-    # Tailscale
     tailscale.enable = true;
+    openssh.enable = true;
 
-    # SSH
-    openssh = {
+    pulseaudio.enable = false;
+    pipewire = {
+      wireplumber.extraConfig.bluetoothEnhancements = {
+        "monitor.bluez.properties" = {
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = true;
+          "bluez5.enable-hw-volume" = true;
+        };
+      };
       enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
     };
   };
 
-  security.pam.services.hyprlock.fprintAuth = true;
-
-  powerManagement = {
-    cpuFreqGovernor = "powersave";
-    powertop.enable = true;
-  };
+  security.rtkit.enable = true;
 
   programs = {
     xwayland.enable = true;
@@ -139,35 +125,15 @@
     };
   };
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-
-  services.pipewire = {
-    wireplumber.extraConfig.bluetoothEnhancements = {
-      "monitor.bluez.properties" = {
-        "bluez5.enable-sbc-xq" = true;
-        "bluez5.enable-msbc" = true;
-        "bluez5.enable-hw-volume" = true;
-      };
-    };
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   users.users.pfingsbr = {
     isNormalUser = true;
     description = "Brysen";
-    extraGroups = ["networkmanager" "wheel" "docker" "video" "input"];
+    extraGroups = ["networkmanager" "wheel" "docker" "video" "input" "i2c"];
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  virtualisation.docker = {
-    enable = true;
-  };
+  virtualisation.docker.enable = true;
 
   fonts = {
     fontconfig.enable = true;
@@ -181,18 +147,22 @@
   environment.systemPackages = with pkgs; [
     xits-math
     fuzzel
-
-    # toolchain for native-compiled plugins
     gcc
     cmake
     gnumake
   ];
 
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+  hardware.i2c.enable = true;
+
+  services.udev.packages = [ pkgs.liquidctl ];
+
   system.stateVersion = "25.05";
-  nix = {
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      auto-optimise-store = true;
-    };
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    auto-optimise-store = true;
   };
 }
