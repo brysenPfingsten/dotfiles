@@ -5,7 +5,6 @@
     ../../neovim/nvim.nix
     ../../kitty/kitty.nix
     ../../shell/bash.nix
-    ../../dooit/dooit.nix
     ../../waybar/waybar.nix
     ../../firefox/firefox.nix
     ../../spotify/spotify.nix

@@ -60,7 +60,7 @@
 				"today": "<span alpha='100%'><b><u>{}</u></b></span>"
 			}
 		},
-    "on-click": "kitty -e --class=popup-term dooit",
+    "on-click": "kitty -e --class=popup-term tuido",
 		"actions": {
 			"on-click": "mode"
 			// "on-click-middle":

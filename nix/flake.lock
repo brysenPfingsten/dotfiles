@@ -20,65 +20,6 @@
         "type": "github"
       }
     },
-    "dooit": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1763953042,
-        "narHash": "sha256-A3l+E9B2fWyNpDzMr8WRiiHD/fIcUzcIwtmur+2Mk0k=",
-        "owner": "dooit-org",
-        "repo": "dooit",
-        "rev": "ba2a7efdbb56297ee7ed9273232cce265e3254da",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dooit-org",
-        "repo": "dooit",
-        "type": "github"
-      }
-    },
-    "dooit-extras": {
-      "inputs": {
-        "dooit": "dooit_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1758024842,
-        "narHash": "sha256-ZTZut4TN1le6rokxLOR3nuEzK+IjKh6Gy+xoUgcUXtI=",
-        "owner": "dooit-org",
-        "repo": "dooit-extras",
-        "rev": "311bbcd9a11a3ab4520fe4bf9b84f6a5e06f6c18",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dooit-org",
-        "repo": "dooit-extras",
-        "type": "github"
-      }
-    },
-    "dooit_2": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1748666860,
-        "narHash": "sha256-Ux7cqxFcYEpPOfzVTem5IkuDGflh7UmIcdIW6ZPtovM=",
-        "owner": "dooit-org",
-        "repo": "dooit",
-        "rev": "d6e3ac12508b8bb1ec99847f3a2670b709ca54c2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dooit-org",
-        "repo": "dooit",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -180,15 +121,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1746904237,
-        "narHash": "sha256-3e+AVBczosP5dCLQmMoMEogM57gmZ2qrVSrmq9aResQ=",
-        "owner": "nixos",
+        "lastModified": 1782723713,
+        "narHash": "sha256-oPXCU/SSUokcGaJREHibG1CBX3+s/W7orDWQOZDsEeQ=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d89fc19e405cb2d55ce7cc114356846a0ee5e956",
+        "rev": "b5aa0fbd538984f6e3d201be0005b4463d8b09f8",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -206,22 +147,6 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-25.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1782723713,
-        "narHash": "sha256-oPXCU/SSUokcGaJREHibG1CBX3+s/W7orDWQOZDsEeQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b5aa0fbd538984f6e3d201be0005b4463d8b09f8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -250,11 +175,9 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
-        "dooit": "dooit",
-        "dooit-extras": "dooit-extras",
         "home-manager": "home-manager",
         "niri": "niri",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nur": "nur",
         "spicetify-nix": "spicetify-nix",
         "tuido": "tuido"
@@ -268,11 +191,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1782633406,
-        "narHash": "sha256-JOSMk12GgnTLVlUSCuKkqyUF6cw82wl7t7e1WuFfg5s=",
+        "lastModified": 1788263070,
+        "narHash": "sha256-Mw163zYcjr59hB2JMC1iKU1Y69SNKZ2r/haXZ07UWQY=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "5ff9a6ca9dcbad7cccea2c97d30237468b16feda",
+        "rev": "27ff19b00338052e8a504e1d1a34efad82c4bb26",
         "type": "github"
       },
       "original": {

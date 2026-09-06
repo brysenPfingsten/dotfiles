@@ -15,14 +15,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dooit = {
-      url = "github:dooit-org/dooit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dooit-extras = {
-      url = "github:dooit-org/dooit-extras";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,7 +36,6 @@
     ...
   }: let
     commonModules = [
-      ./dooit.nix
       {
         nixpkgs.config.allowUnfree = true;
         nixpkgs.overlays = [inputs.nur.overlays.default inputs.niri.overlays.niri];

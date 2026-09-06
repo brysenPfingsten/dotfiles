@@ -17,7 +17,7 @@
     };
     btop.enable = true;
     kitty.enable = true;
-    zathura.enable = true;
+    # zathura.enable = true;
     fuzzel.enable = true;
     lazygit.enable = true;
     yazi.enable = true;
