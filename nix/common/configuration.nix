@@ -38,7 +38,7 @@
       enable = true;
       allowedTCPPorts = [2273];
       trustedInterfaces = ["tailscale0"];
-      interfaces.tailscale0.allowedTCPPorts = [2273];
+      interfaces.tailscale0.allowedTCPPorts = [2273 8096];
     };
     networkmanager.enable = true;
     networkmanager.wifi.backend = "iwd";

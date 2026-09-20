@@ -14,5 +14,7 @@
     # Games
     prismlauncher
     xwayland-satellite
+    # Media
+    jellyfin-media-player
   ];
 }
