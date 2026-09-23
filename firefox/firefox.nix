@@ -79,6 +79,10 @@ in {
                 name = "Chess";
                 url = "https://chess.com";
               }
+              {
+                name = "Duolingo";
+                url = "https://www.duolingo.com/learn";
+              }
             ];
           }
         ];
