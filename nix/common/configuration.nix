@@ -108,6 +108,20 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_18;
+      ensureUsers = [
+        {
+          name = "pfingsbr";
+          ensureClauses = {
+            login = true;
+            createdb = true;
+          };
+        }
+      ];
+    };
   };
 
   security.rtkit.enable = true;
@@ -158,7 +172,7 @@
   };
   hardware.i2c.enable = true;
 
-  services.udev.packages = [ pkgs.liquidctl ];
+  services.udev.packages = [pkgs.liquidctl];
 
   system.stateVersion = "25.05";
   nix.settings = {

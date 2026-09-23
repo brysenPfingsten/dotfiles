@@ -16,5 +16,9 @@
     xwayland-satellite
     # Media
     jellyfin-media-player
+    # Misc
+    termscp
+    gh-dash
+    beekeeper-studio
   ];
 }
