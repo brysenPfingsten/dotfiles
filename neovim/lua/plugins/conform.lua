@@ -16,6 +16,7 @@ return {
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
         haskell = { "fourmolu" },
+        sql = { "pg_format" },
       },
     })
 

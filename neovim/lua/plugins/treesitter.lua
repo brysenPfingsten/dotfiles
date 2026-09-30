@@ -13,6 +13,7 @@ return {
           "latex",
           "haskell",
           "dafny",
+          "sql",
         },
         auto_install = false,
         highlight = { enable = true },

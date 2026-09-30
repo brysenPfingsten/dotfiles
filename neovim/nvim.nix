@@ -69,6 +69,10 @@ in {
     # Dafny
     dafny
 
+    # PostgreSQL
+    sqls
+    pgformatter
+
     # Development
     tree-sitter
     xclip

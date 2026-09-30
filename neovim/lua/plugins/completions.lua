@@ -117,12 +117,17 @@ return {
           norg = { "lsp", "path", "snippets", "spell", "buffer" },
           typst = { "lsp", "path", "snippets", "spell", "buffer" },
           latex = { "lsp", "path", "snippets", "spell", "buffer" },
+          sql = { "dadbod", "lsp", "path", "snippets", "buffer" },
         },
         providers = {
           spell = {
             name = "Spell",
             module = "blink-cmp-spell",
             opts = { preselect_correct_word = true },
+          },
+          dadbod = {
+            name = "Dadbod",
+            module = "vim_dadbod_completion.blink",
           },
         },
       },

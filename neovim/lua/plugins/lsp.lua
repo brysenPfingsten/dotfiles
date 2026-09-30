@@ -192,6 +192,7 @@ return {
       })
 
       local servers = {
+        sqls = {},
         rust_analyzer = {},
         racket_langserver = {},
         tinymist = {},
