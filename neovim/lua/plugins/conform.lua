@@ -18,6 +18,11 @@ return {
         haskell = { "fourmolu" },
         sql = { "pg_format" },
       },
+      formatters = {
+        pg_format = {
+          args = { "-k", "2", "-f", "1", "-u", "2", "-w", "80", "-" },
+        },
+      },
     })
 
     vim.api.nvim_create_autocmd("BufWritePre", {
