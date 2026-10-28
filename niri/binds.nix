@@ -127,6 +127,12 @@
     "Mod+Shift+P".action.power-off-monitors = {};
     # "Super+Alt+L".action.spawn = "swaylock";
 
+    # Caffeine
+    "Mod+I" = {
+      repeat = false;
+      action.spawn-sh = "caffeine &";
+    };
+
     # Screenshotting
     "Print".action.screenshot = {};
     "Ctrl+Print".action.screenshot-screen = {};

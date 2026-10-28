@@ -11,6 +11,13 @@
     jq
     # Clipboard
     clipse
+    (writeShellScriptBin "caffeine" ''
+      notify-send "Caffeine" "Screen lock disabled for 30 minutes" -t 5000
+      systemctl --user stop hypridle
+      sleep 1800
+      systemctl --user start hypridle
+      notify-send "Caffeine" "Screen lock re-enabled" -t 5000
+    '')
   ];
   programs.niri.package = pkgs.niri-unstable;
   programs.niri.enable = true;
