@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     # Web Apps
     karere
+    slack
     # PDFs
     foliate
     zotero
