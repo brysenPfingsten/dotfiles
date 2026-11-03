@@ -21,5 +21,7 @@
     termscp
     gh-dash
     beekeeper-studio
+
+    libreoffice
   ];
 }
