@@ -24,7 +24,6 @@
     };
 
     consoleLogLevel = 3;
-    initrd.verbose = false;
     kernelParams = [
       "quiet"
       "udev.log_level=3"
@@ -146,6 +145,9 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "firefox-esr-140-bin-unwrapped-140.17.0esr"
+  ];
 
   virtualisation.docker.enable = true;
 

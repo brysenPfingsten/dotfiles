@@ -5,7 +5,6 @@
     slack
     # PDFs
     foliate
-    zotero
     poppler-utils
     pympress
     # File manager stuff
