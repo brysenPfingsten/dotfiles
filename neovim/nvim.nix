@@ -63,7 +63,7 @@ in {
     haskell-language-server
     fourmolu
     # LaTeX
-    texlive.combined.scheme-full
+    texliveFull
     fontconfig
     texlab
     # Dafny
