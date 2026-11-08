@@ -13,6 +13,12 @@
 
   users.users.pfingsbr.extraGroups = ["jellyfin"];
 
+  # Run AppImages directly
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   systemd.tmpfiles.rules = [
     "d /media         0775 pfingsbr jellyfin -"
     "d /media/movies  0775 pfingsbr jellyfin -"
