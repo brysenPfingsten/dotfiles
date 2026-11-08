@@ -17,5 +17,6 @@
     "d /media         0775 pfingsbr jellyfin -"
     "d /media/movies  0775 pfingsbr jellyfin -"
     "d /media/shows   0775 pfingsbr jellyfin -"
+    "d /media/books   0775 pfingsbr jellyfin -"
   ];
 }
