@@ -53,10 +53,10 @@ in {
     # Lean
     lean4
     # Rocq
-    coq
-    coqPackages.coq-lsp
-    coqPackages.stdpp
-    coqPackages.stdlib
+    rocqPackages.coq
+    rocqPackages.coq-lsp
+    rocqPackages.stdpp
+    rocqPackages.stdlib
     # Haskell
     ghc
     cabal-install
