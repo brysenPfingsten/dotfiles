@@ -1,25 +1,20 @@
 --region Region Folding
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust",
   callback = function()
-    vim.opt_local.foldmethod = "marker"
-    vim.opt_local.foldmarker = "//region,//endregion"
-  end,
-})
+    local comment = vim.bo.commentstring:match("^(.-)%%s")
+    if vim.bo.filetype == "cypher" and (not comment or comment == "") then
+      comment = "//"
+    end
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "racket",
-  callback = function()
-    vim.opt_local.foldmethod = "marker"
-    vim.opt_local.foldmarker = ";;region,;;endregion"
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  callback = function()
-    vim.opt_local.foldmethod = "marker"
-    vim.opt_local.foldmarker = "--region,--endregion"
+    if comment then
+      comment = vim.trim(comment)
+    end
+    if comment and comment ~= "" and not comment:find(",", 1, true) then
+      vim.opt_local.foldmethod = "marker"
+      vim.opt_local.foldmarker = comment .. "region," .. comment .. "endregion"
+    else
+      vim.opt_local.foldmethod = "manual"
+    end
   end,
 })
 --endregion
