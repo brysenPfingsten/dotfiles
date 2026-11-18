@@ -257,15 +257,17 @@ return {
                 ]],
               },
               options = {
-                nixos = {
-                  expr = [[
-                    (builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.nixos.options
-                  ]],
+                ["nixos-desktop"] = {
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.desktop.options',
                 },
-                ["home-manager"] = {
-                  expr = [[
-                    (builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.nixos.options.home-manager.users.type.getSubOptions []
-                  ]],
+                ["nixos-thinkpad"] = {
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.thinkpad.options',
+                },
+                ["home-manager-desktop"] = {
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.desktop.options.home-manager.users.type.getSubOptions []',
+                },
+                ["home-manager-thinkpad"] = {
+                  expr = '(builtins.getFlake "path:/home/pfingsbr/dotfiles/nix").nixosConfigurations.thinkpad.options.home-manager.users.type.getSubOptions []',
                 },
               },
             },

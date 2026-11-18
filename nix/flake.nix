@@ -47,14 +47,14 @@
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {inherit inputs;};
+      home-manager.sharedModules = [
+        inputs.spicetify-nix.homeManagerModules.spicetify
+        inputs.catppuccin.homeModules.catppuccin
+        inputs.niri.homeModules.niri
+        inputs.tuido.homeManagerModules.default
+      ];
       home-manager.users.pfingsbr = {...}: {
-        imports = [
-          inputs.spicetify-nix.homeManagerModules.spicetify
-          inputs.catppuccin.homeModules.catppuccin
-          inputs.niri.homeModules.niri
-          inputs.tuido.homeManagerModules.default
-          homeFile
-        ];
+        imports = [homeFile];
       };
     };
   in {
